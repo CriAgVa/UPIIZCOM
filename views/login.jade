@@ -20,28 +20,28 @@ block CONTENIDO_GENERAL
                             .card-body.pb-0
                                 form.text-start(role='form')
                                     .mb-3
-                                        input.form-control(type='email' placeholder='Boleta' aria-label='Email')
+                                        input.form-control#boleta(type='text' placeholder='Boleta' aria-label='Email')
                                     .mb-3
-                                        input.form-control(type='password' placeholder='Contraseña' aria-label='Password')
+                                        input.form-control#clave(type='password' placeholder='Contraseña' aria-label='Password')
                                     .form-check.form-switch
                                         input#rememberMe.form-check-input(type='checkbox')
                                         label.form-check-label(for='rememberMe') Recuérdame
                                     .text-center
-                                        button.btn.bg-gradient-info.w-100.my-3.mb-2(type='button' onclick="location.href='noticias.html'") Iniciar sesión
+                                        button.btn.bg-gradient-info.w-100.my-3.mb-2#enviarDatos(type='button') Iniciar sesión
                             .text-center.pt-3.pb-1
                                 p.text-xs
                                     | ¿Olvidaste tu contraseña?
                                     a.text-info.text-gradient.font-weight-bold(href='https://www.gesco.zacatecas.ipn.mx/index.php?r=user/recovery') Recuperar
-        // Fin contenido de la página
-        // -------- Inicio Footer -------
+        
+        
+        
+        script(src='/assets/js/login.js')
         iframe(src='../bases/footer.html' scrolling='no' noresize='noresize' width='100%')
-        // -------- Fin del footer -------
-        // Core JS Files
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/bootstrap.min.js')
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/perfect-scrollbar.min.js')
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/smooth-scrollbar.min.js')
-        // Kanban scripts
+        
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/dragula/dragula.min.js')
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/jkanban/jkanban.js')
         script.
@@ -52,7 +52,6 @@ block CONTENIDO_GENERAL
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
             }
-        // Github buttons
         script(async='' defer='' src='https://buttons.github.io/buttons.js')
-        // Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc
+        
         script(src='../../assets/js/soft-ui-dashboard.min.js?v=1.0.4')
