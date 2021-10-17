@@ -1,14 +1,21 @@
 /*
     autor: Cri
-    fecha: 16 de Octubre de 2021
+    fecha: 16 de octubre de 2021
 
     Se realizo la conexion OAUTH utilizando loopJ con una solicitud del metodo POST.
     A la fecha de hoy (16 de octubre) falta retornar el objeto de tipo JSON obtenido al iniciar sesion,
     asi como tambien retornar una variable que permita saber que se inicio satisfactoriamente la sesion
+
+    fecha: 17 de octubre de 2021
+
+    Se extrajeron los datos resultantes de la solicitud POST (estatus, nombre, boleta, carrera, mail, token)
+    y se guardaron dentro de un objeto de tipo Alumno con dichos atributos.
+    Queda pendiente encontrar la manera de retornar satisfactoriamente el objeto Alumno a la clase LoginActivity
  */
 package com.example.upiizcom;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -20,13 +27,17 @@ import com.loopj.android.http.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.Serializable;
+
 import cz.msebera.android.httpclient.Header;
 
-public class ConexionOAUTH {
+public class ConexionOAUTH{
     String direccion;
     AsyncHttpClient cliente;
     String parametros;
     boolean respuesta;
+    Alumno alumno;
 
     public ConexionOAUTH(){
         direccion = "http://148.204.142.2/pump/web/index.php/login";
@@ -42,30 +53,30 @@ public class ConexionOAUTH {
         return respuesta;
     }
 
-    public boolean metodoPOST(String username, String password){
+    public Alumno metodoPOST(String username, String password){
         RequestParams params = new RequestParams();
         params.put("username", username);
         params.put("password",password);
         cliente.addHeader("Authorization", "Bearer 202006080078033");
-        cliente.addHeader("username:", username);
-        cliente.addHeader("password:", password);
+
         cliente.post(direccion, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 if (statusCode == 200){
                     String rsps = new String(String.valueOf(response));
-                    String estatus = "";
                     try {
-                        estatus = response.getJSONObject("estatus").toString();
+                        JSONObject datos = response.getJSONObject("datos");
+                        alumno = new Alumno(datos.getString("Nombre"),datos.getInt("boleta"),
+                                            datos.getString("mail"),datos.getString("token"),
+                                            datos.getString("Carrera"), response.getBoolean("estatus"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     Log.e("INFO",rsps);
-                    System.out.println("Recieved event with data: "+response+" estatus: "+statusCode+"successsssss");
-                    System.out.println("username:"+username+" password:"+password);
+                    System.out.println("Recieved event with data: "+response+" estatus: "+statusCode);
                     respuesta = true;
-                    System.out.println("Respuesta seteada en true");
-                    System.out.println("estatus"+estatus);
+                    System.out.println("Nombre: "+alumno.getNombre()+"\nBoleta: "+alumno.getBoleta()+
+                                        "\nCarrera: "+alumno.getCarrera()+"\nmail: "+alumno.getMail());
                 }else{
                     System.out.println("No sirve tu mamada");
                 }
@@ -80,6 +91,8 @@ public class ConexionOAUTH {
             }
 
         });
-        return respuesta;
+        //System.out.println(alumno.getNombre());
+        return alumno;
     }
+
 }

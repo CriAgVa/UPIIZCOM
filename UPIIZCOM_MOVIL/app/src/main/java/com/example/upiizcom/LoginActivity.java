@@ -41,10 +41,13 @@ public class LoginActivity extends AppCompatActivity {
         }else if (password.equals("")){
             showError(et_password, "Ingrese la contrasena");
         }else{
-            ConexionOAUTH comp = new ConexionOAUTH();
+                ConexionOAUTH comp = new ConexionOAUTH();
 
-            comp.metodoPOST(username, password);
-            System.out.println(comp.getRespuesta());
+                comp.metodoPOST(username, password);
+
+
+            //System.out.println(aux.getNombre());
+            /*
             if (comp.getRespuesta() == true){
                 et_username.setText("");
                 et_password.setText("");
@@ -53,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             }else{
                 Toast.makeText(getApplicationContext(), "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
             }
+             */
         }
 
 
