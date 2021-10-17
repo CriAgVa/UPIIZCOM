@@ -36,7 +36,7 @@ router.post("/login", function(req, res, next){
         //El usuario se identificó correctamente con el servicio de GESCO
         _SESSION.ACTIVA = true;
         _SESSION.NOMBRE = respuesta.data.datos.Nombre;
-        _SESSION.BOLETA = respuesta.data.datos.boelta;
+        _SESSION.BOLETA = respuesta.data.datos.boleta;
         _SESSION.EMAIL  = respuesta.data.datos.mail;
         _SESSION.TOKEN  = respuesta.data.datos.token;
         _SESSION.CARRERA = respuesta.data.datos.Carrera;
