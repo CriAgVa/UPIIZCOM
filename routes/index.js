@@ -28,7 +28,7 @@ router.post("/login", function(req, res, next){
   {headers:{
      'Content-Type' : 'application/json',
      'Authorization' : 'Bearer 202006080078033'
-  }}).then(function(respuesta){
+  }}).then(function(respuesta){ 
     console.log(respuesta);
     var _SESSION;
     _SESSION = req.session;
