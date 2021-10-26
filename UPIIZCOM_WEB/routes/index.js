@@ -66,4 +66,8 @@ router.get('/navbar', function(req, res, next) {
   res.render('navbar', { title: 'Express'});
 });
 
+router.get('/grupos', function(req, res, next) {
+  res.render('grupos', { title: 'Express'});
+});
+
 module.exports = router;
