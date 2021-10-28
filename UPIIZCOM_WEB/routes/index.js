@@ -1,4 +1,6 @@
 var express = require('express');
+const session = require('express-session');
+var manejador_sesiones = require("./manejador_sesiones")
 var router = express.Router();
 
 /* GET home page. */
@@ -6,6 +8,36 @@ router.get('/login', function(req, res, next) {
   res.render('login', { title: 'Express', color: 'blue' });
 });
 
+router.get('/dashboard', manejador_sesiones(), function(req, res, next) {
+  console.log(req.session);
+  res.send("Hola " + req.session.BOLETA + " desde el dashboard");
+});
+
+/*PARAMETROS POR GET
+router.get('/parametros', function(req, res, next) {
+  console.log(req.query)
+  console.log(req.query.busqueda + " otro " + req.query.metodo  );
+  res.send("PARAMETROS POR GET");
+});
+
+//PARAMETROS POR POST
+router.post('/parametros', function(req, res, next) {
+  console.log(req.body);
+  console.log(req.body.username);
+  console.log(req.body.password);
+  res.send("PARAMETROS POR POST");
+});
+
+//PARAMETROS EN LA URL
+router.get('/parametros/:pais/:estado/:municipio', function(req, res, next) {
+  console.log(req.params);
+  console.log(req.params.pais);
+  console.log(req.params.estado);
+  console.log(req.params.municipio);
+  res.send("PARAMETROS POR URL");
+});
+
+*/
 
 /*
   Agarrar los parámetros desde el REQUEST
@@ -42,8 +74,8 @@ router.post("/login", function(req, res, next){
         _SESSION.CARRERA = respuesta.data.datos.Carrera;
         res.json({"acceso": true, datos : { nombre: _SESSION.NOMBRE, carrera: _SESSION.CARRERA }})
     }else{
-       //No son correctas las credenciales. 
-       res.json({"accesso": false})
+       //No son correctas las credenciales.  
+       res.json({"acceso": false})
     }
   }).catch(function(error){
     res.json(error)
@@ -54,7 +86,7 @@ router.get('/', function(req, res, next) {
   res.render('paginax', { title: 'Express', color: 'blue' });
 });
 
-router.get('/pagina', function(req, res, next) {
+router.get('/pagina',  function(req, res, next) {
   res.render('paginax', { title: 'Express', color: 'blue' });
 });
 
@@ -68,6 +100,18 @@ router.get('/navbar', function(req, res, next) {
 
 router.get('/grupos', function(req, res, next) {
   res.render('grupos', { title: 'Express'});
+});
+
+router.get("/logout", function(req, res){
+  var _SESSION = req.session;
+  _SESSION.ACTIVA = false;
+  _SESSION.destroy(function(err){
+     if(err){
+       console.error(err);
+     }else{
+       res.redirect("/login");
+     }
+  });
 });
 
 module.exports = router;
