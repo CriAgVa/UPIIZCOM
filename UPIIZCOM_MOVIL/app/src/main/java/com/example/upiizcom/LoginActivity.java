@@ -14,6 +14,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText et_username, et_password;
     String username, password;
     Button boton;
+    Alumno alumno;
+    boolean estado;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,12 +29,16 @@ public class LoginActivity extends AppCompatActivity {
         boton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                login(v);
+                try {
+                    login(v);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
-    public void login(View view){
+    public void login(View view) throws InterruptedException {
         username = et_username.getText().toString();
         password = et_password.getText().toString();
 
@@ -41,26 +47,44 @@ public class LoginActivity extends AppCompatActivity {
         }else if (password.equals("")){
             showError(et_password, "Ingrese la contrasena");
         }else{
-                ConexionOAUTH comp = new ConexionOAUTH();
+            Runnable run;
 
-                comp.metodoPOST(username, password);
+            Thread nT = new Thread (run = new Runnable(){
+                @Override
+                public void run() {
+                    ConexionOAUTH comp = new ConexionOAUTH(username, password);
+                    alumno = comp.metodoPOST(username, password);
+                    System.out.println("En loginActivity: "+alumno.getBoleta());
+                    setEstado(alumno.getEstado());
+                }
+            });
 
+            nT.start();
+            nT.join();
 
-            //System.out.println(aux.getNombre());
-            /*
-            if (comp.getRespuesta() == true){
+               System.out.println("sts"+getEstado());
+
+            if (getEstado() == true){
                 et_username.setText("");
                 et_password.setText("");
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                i.putExtra("Nombre",alumno.getNombre());
+                i.putExtra("Carrera",alumno.getCarrera());
+                i.putExtra("Boleta",alumno.getBoleta()+"");
+                startActivity(i);
                 finish();
             }else{
                 Toast.makeText(getApplicationContext(), "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
             }
-             */
         }
+    }
 
+    public void setEstado(boolean estado){
+        this.estado = estado;
+    }
 
-
+    public boolean getEstado(){
+        return estado;
     }
 
     public void showError(EditText input, String s){

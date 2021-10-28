@@ -15,6 +15,7 @@
 package com.example.upiizcom;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Toast;
@@ -29,20 +30,31 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.net.URL;
 
 import cz.msebera.android.httpclient.Header;
 
-public class ConexionOAUTH{
+public class ConexionOAUTH {
     String direccion;
-    AsyncHttpClient cliente;
-    String parametros;
+    SyncHttpClient cliente;
     boolean respuesta;
     Alumno alumno;
+    String username, password;
 
-    public ConexionOAUTH(){
+    public ConexionOAUTH(String username, String password) {
         direccion = "http://148.204.142.2/pump/web/index.php/login";
-        cliente = new AsyncHttpClient();
+        cliente = new SyncHttpClient();
         respuesta = false;
+        this.username = username;
+        this.password = password;
+    }
+
+    public void setAlumno(Alumno alumno){
+        this.alumno = alumno;
+    }
+
+    public Alumno getAlumno(){
+        return alumno;
     }
 
     public void setRespuesta(boolean respuesta) {
@@ -75,10 +87,8 @@ public class ConexionOAUTH{
                     Log.e("INFO",rsps);
                     System.out.println("Recieved event with data: "+response+" estatus: "+statusCode);
                     respuesta = true;
-                    System.out.println("Nombre: "+alumno.getNombre()+"\nBoleta: "+alumno.getBoleta()+
-                                        "\nCarrera: "+alumno.getCarrera()+"\nmail: "+alumno.getMail());
                 }else{
-                    System.out.println("No sirve tu mamada");
+                    System.out.println("No sirve");
                 }
             }
 
@@ -89,9 +99,7 @@ public class ConexionOAUTH{
                 System.out.println("Fail");
                 setRespuesta(false);
             }
-
         });
-        //System.out.println(alumno.getNombre());
         return alumno;
     }
 
