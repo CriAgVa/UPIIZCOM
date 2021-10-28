@@ -68,7 +68,7 @@ public class ConexionOAUTH {
     public Alumno metodoPOST(String username, String password){
         RequestParams params = new RequestParams();
         params.put("username", username);
-        params.put("password",password);
+        params.put("password", password);
         cliente.addHeader("Authorization", "Bearer 202006080078033");
 
         cliente.post(direccion, params, new JsonHttpResponseHandler() {
@@ -85,8 +85,6 @@ public class ConexionOAUTH {
                         e.printStackTrace();
                     }
                     Log.e("INFO",rsps);
-                    System.out.println("Recieved event with data: "+response+" estatus: "+statusCode);
-                    respuesta = true;
                 }else{
                     System.out.println("No sirve");
                 }
