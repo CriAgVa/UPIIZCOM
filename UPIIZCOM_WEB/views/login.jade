@@ -1,7 +1,10 @@
 extends layout
 
+block SCRIPTS 
+    script(src="/assets/js/angular/A_login.js"); 
+
 block CONTENIDO_GENERAL
-    main.main-content.mt-0
+    main.main-content.mt-0(ng-controller="LoginCtrl")
             // Imagen de fondo
             .page-header.align-items-start.min-vh-50.pb-11.m-3.border-radius-lg(style="background-image: url('https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/img/curved-images/curved11.jpg');")
                 span.mask.bg-gradient-dark.opacity-6
@@ -20,14 +23,14 @@ block CONTENIDO_GENERAL
                             .card-body.pb-0
                                 form.text-start(role='form')
                                     .mb-3
-                                        input.form-control#boleta(type='text' placeholder='Boleta' aria-label='Email')
+                                        input.form-control#boleta(type='text' placeholder='Boleta' aria-label='Email' ng-model="username")
                                     .mb-3
-                                        input.form-control#clave(type='password' placeholder='Contraseña' aria-label='Password')
+                                        input.form-control#clave(type='password' placeholder='Contraseña' aria-label='Password' ng-model="password")
                                     .form-check.form-switch
                                         input#rememberMe.form-check-input(type='checkbox')
                                         label.form-check-label(for='rememberMe') Recuérdame
                                     .text-center
-                                        button.btn.bg-gradient-info.w-100.my-3.mb-2#enviarDatos(type='button') Iniciar sesión
+                                        button.btn.bg-gradient-info.w-100.my-3.mb-2#enviarDatos(type='button' ng-click="makeLogin()") Iniciar sesión
                             .text-center.pt-3.pb-1
                                 p.text-xs
                                     | ¿Olvidaste tu contraseña?

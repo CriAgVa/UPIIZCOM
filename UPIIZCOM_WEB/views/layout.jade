@@ -16,10 +16,11 @@ html
     link(href='/assets/css/nucleo-svg.css' rel='stylesheet')
     // CSS Files
     link#pagestyle(href='/assets/css/soft-ui-dashboard.css?v=1.0.3' rel='stylesheet')
-    script(src='https://code.jquery.com/jquery-3.6.0.min.js' integrity='sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=' crossorigin='anonymous')
+    //-script(src='https://code.jquery.com/jquery-3.6.0.min.js' integrity='sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=' crossorigin='anonymous')
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js")
 
 
-  body
+  body(ng-app="UPIIZCOM")
     block CONTENIDO_GENERAL
       aside#sidenav-main.sidenav.navbar.navbar-vertical.navbar-expand-xs.border-0.border-radius-xl.my-3.fixed-start.ms-3
         include sidebar
