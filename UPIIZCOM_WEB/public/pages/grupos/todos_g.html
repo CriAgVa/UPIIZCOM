@@ -57,6 +57,10 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/css/soft-ui-dashboard.min.css?v=1.0.4" rel="stylesheet" />
   <!-- Anti-flicker snippet (recommended)  -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="../../assets/js/A_EjemploTabla.js"></script>
+
   <style>
     .async-hide {
       opacity: 0 !important
@@ -122,7 +126,7 @@
   <!-- End Google Tag Manager -->
 </head>
 
-<body class="g-sidenav-show bg-gray-100">
+<body class="g-sidenav-show bg-gray-100" ng-app="UPIIZCOM">
   <!-- Extra details for Live View on GitHub Pages -->
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -1202,6 +1206,39 @@
             <p> Aqui se muestran los grupos a los cuales se encuentra unido en este momento.</p>
           </div>
         </div>
+<!-- ESTE COMPONETE ES DE PRUEBA -->        
+        <div id="COMPONENTE" class="container-fluid" ng-controller="TablaCtrl">
+          <h1>{{hola}} </h1>
+          <input type="button" value="Ocultar/Mostrar Tabla" ng-click="ocultaMuestra()">
+          <!-- {{ grupos | json }} -->
+          <table class="table" ng-show="mostrar">
+             <th>Nombre</th>
+             <th>Descripción</th>
+             <th>Número de participantes</th>
+             <th>Acci&oacute;n</th>
+             <th>&nbsp;</th>
+             <tr>
+               <td><input type="text" ng-model="grupo.nombre"></td>
+               <td><input type="text" ng-model="grupo.descripcion"></td>
+               <td><input type="number" ng-model="grupo.participantes"></td>
+               <td><input type="button" class="btn-dark" value="Agregar" ng-click="addGrupo()"></td>
+               <td><input type="button" class="btn-info" value="Actualizar" ng-click="updateGrupo()"></td>
+             </tr>
+             <tr ng-repeat="g in grupos">
+               <td> {{g.nombre}} </td>
+               <td> {{g.descripcion}} </td>
+               <td> {{g.participantes}} </td>
+               <!-- <td> <img src="{{g.imagen}}"/> </td>-->
+               <td>
+                 <input type="button" value="Eliminar" class="btn-danger" ng-click="delGrupo($index)">
+               </td>
+               <td>
+                <input type="button" value="Editar" class="btn-link" ng-click="editGrupo($index)">
+              </td>
+             </tr>
+           </table>
+        </div>
+<!-- ESTE COMPONETE ES DE PRUEBA -->                
         <div class="row mt-lg-4 mt-2">
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card">
