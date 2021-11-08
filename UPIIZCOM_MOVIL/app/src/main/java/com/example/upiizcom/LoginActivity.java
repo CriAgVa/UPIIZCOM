@@ -54,15 +54,12 @@ public class LoginActivity extends AppCompatActivity {
                 public void run() {
                     ConexionOAUTH comp = new ConexionOAUTH(username, password);
                     alumno = comp.metodoPOST(username, password);
-                    System.out.println("En loginActivity: "+alumno.getBoleta());
                     setEstado(alumno.getEstado());
                 }
             });
 
             nT.start();
             nT.join();
-
-               System.out.println("sts"+getEstado());
 
             if (getEstado() == true){
                 et_username.setText("");
