@@ -1,9 +1,10 @@
 extends layoutLogin
 
 block SCRIPTS 
-    script(src="../assets/js/A_Validaciones.js"); 
+    //- script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js')
+    //- script(src="../assets/js/A_Validaciones.js"); 
     script(src="../assets/js/angular/A_login.js"); 
-    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js')
+    
 
 block CONTENIDO_GENERAL
     main.main-content.mt-0(ng-controller="LoginCtrl")
@@ -25,13 +26,13 @@ block CONTENIDO_GENERAL
                                 h5 Inicio de sesión
                             .card-body.pb-0
                                 
-                                form.text-start(ng-app='myApp' ng-controller='validateCtrl' name='myForm' novalidate='')
+                                form.text-start(ng-controller='LoginCtrl' name='myForm' novalidate='')
                                     .mb-3
-                                        input.form-control(type='text' placeholder='Boleta' aria-label='Usuario' ng-model='usuario' name='usuario' required='')
+                                        input.form-control(type='text' placeholder='Boleta' aria-label='Usuario' ng-model='username' name='usuario' required='')
                                         span(style='color:red' ng-show='myForm.usuario.$dirty && myForm.usuario.$invalid')
                                         span(ng-show='myForm.usuario.$error.required') El usuario es requerido
                                     .mb-3
-                                        input.form-control(type='text' placeholder='Boleta' aria-label='Password' ng-model='password' name='password' required='') 
+                                        input.form-control(type='password' placeholder='Boleta' aria-label='Password' ng-model='password' name='password' required='') 
                                         span(style='color:red' ng-show='myForm.password.$dirty && myForm.password.$invalid')
                                         span(ng-show='myForm.password.$error.required') La contraseña es requerida
                                     .form-check.form-switch
@@ -47,7 +48,7 @@ block CONTENIDO_GENERAL
        
  
 
-        script(src='../assets/js/login.js')
+        //- script(src='../assets/js/login.js')
         iframe(src='../bases/footer.html' scrolling='no' noresize='noresize' width='100%')                                          
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/bootstrap.min.js')

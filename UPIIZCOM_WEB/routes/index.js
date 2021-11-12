@@ -11,7 +11,8 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/dashboard', manejador_sesiones(), function(req, res, next) {
-  res.render('layout', { title: 'Timeline', message: 'Timeline'});
+  var _SESSION = req.session;
+  res.render('index', { nombre: _SESSION.NOMBRE,  title: 'Timeline', message: 'Timeline'});
 });
 
 /*PARAMETROS POR GET
@@ -106,6 +107,7 @@ router.get('/navbar', manejador_sesiones(), function(req, res, next) {
 
 router.get('/grupos', manejador_sesiones(), function(req, res, next) {
   //res.redirect('/vista_grupos.js' + datos);
+  res.render("grupos/vistaGrupos.jade", {nombre: req.session.NOMBRE } );
 });
 
 router.get("/logout", function(req, res){
