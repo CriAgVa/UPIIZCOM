@@ -1,7 +1,9 @@
 extends layoutLogin
 
 block SCRIPTS 
+    script(src="../assets/js/A_Validaciones.js"); 
     script(src="../assets/js/angular/A_login.js"); 
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js')
 
 block CONTENIDO_GENERAL
     main.main-content.mt-0(ng-controller="LoginCtrl")
@@ -15,17 +17,23 @@ block CONTENIDO_GENERAL
                             h1.text-white.mb-2.mt-5 UPIIZCOM!
                             p.text-lead.text-white Ingrese su número de boleta y contraseña para iniciar sesión
             .container
+               
                 .row.mt-lg-n10.mt-md-n11.mt-n10.justify-content-center
                     .col-xl-4.col-lg-5.col-md-7.mx-auto
                         .card.z-index-0
                             .card-header.text-center.pt-4.pb-0
                                 h5 Inicio de sesión
                             .card-body.pb-0
-                                form.text-start(role='form')
+                                
+                                form.text-start(ng-app='myApp' ng-controller='validateCtrl' name='myForm' novalidate='')
                                     .mb-3
-                                        input.form-control(type='text' placeholder='Boleta' aria-label='Email' ng-model="username")
+                                        input.form-control(type='text' placeholder='Boleta' aria-label='Usuario' ng-model='usuario' name='usuario' required='')
+                                        span(style='color:red' ng-show='myForm.usuario.$dirty && myForm.usuario.$invalid')
+                                        span(ng-show='myForm.usuario.$error.required') El usuario es requerido
                                     .mb-3
-                                        input.form-control(type='password' placeholder='Contraseña' aria-label='Password' ng-model="password")
+                                        input.form-control(type='text' placeholder='Boleta' aria-label='Password' ng-model='password' name='password' required='') 
+                                        span(style='color:red' ng-show='myForm.password.$dirty && myForm.password.$invalid')
+                                        span(ng-show='myForm.password.$error.required') La contraseña es requerida
                                     .form-check.form-switch
                                         input#rememberMe.form-check-input(type='checkbox')
                                         label.form-check-label(for='rememberMe') Recuérdame
@@ -35,11 +43,12 @@ block CONTENIDO_GENERAL
                                 p.text-xs
                                     | ¿Olvidaste tu contraseña?
                                     a.text-info.text-gradient.font-weight-bold(href='https://www.gesco.zacatecas.ipn.mx/index.php?r=user/recovery') Recuperar
-        
-        
-        
+
+       
+ 
+
         script(src='../assets/js/login.js')
-        iframe(src='../bases/footer.html' scrolling='no' noresize='noresize' width='100%')
+        iframe(src='../bases/footer.html' scrolling='no' noresize='noresize' width='100%')                                          
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/bootstrap.min.js')
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/perfect-scrollbar.min.js')
@@ -55,6 +64,8 @@ block CONTENIDO_GENERAL
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
             }
+
         script(async='' defer='' src='https://buttons.github.io/buttons.js')
         
         script(src='../../assets/js/soft-ui-dashboard.min.js?v=1.0.4')
+        
