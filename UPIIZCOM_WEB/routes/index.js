@@ -12,7 +12,14 @@ router.get('/login', function(req, res, next) {
 
 router.get('/dashboard', manejador_sesiones(), function(req, res, next) {
   var _SESSION = req.session;
-  res.render('index', { nombre: _SESSION.NOMBRE,  title: 'Timeline', message: 'Timeline'});
+  /*
+    var datos  = Grupo.find()...
+   datos ...
+   */
+  console.log("HOLA QUE TAL") 
+  var objeto = { nombre : _SESSION.NOMBRE, boleta : _SESSION.BOLETA, email : _SESSION.EMAIL }
+  console.log(objeto)
+  res.render('index', { nombre: _SESSION.NOMBRE,  email: _SESSION.EMAIL, objeto: objeto  , title: 'Timeline', message: 'Timeline'});
 });
 
 /*PARAMETROS POR GET

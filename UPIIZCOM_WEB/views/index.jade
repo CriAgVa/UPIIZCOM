@@ -1,4 +1,10 @@
 extends layout
 
+block SCRIPTS 
+    script(src="../assets/js/angular/A_Dashboard.js"); 
+
 block CONTENIDO
-  h1 Hola #{nombre}
+  div(ng-controller="DashboardCtrl" ng-init="correo='#{objeto.email}';") 
+    h1 Hola #{email} #{nombre} #{nombre} #{nombre} #{nombre} #{nombre}
+    h1 {{username}}
+    h1 {{correo}}
