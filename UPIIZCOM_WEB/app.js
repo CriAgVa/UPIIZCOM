@@ -7,7 +7,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var grupoRouter = require("./routes/grupos");
+var gruposRouter = require('./routes/vista_grupos');
+var grupoRouter = require('./routes/grupos')
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/grupos', gruposRouter);
 app.use('/grupo', grupoRouter);
 
 // catch 404 and forward to error handler

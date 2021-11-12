@@ -1,7 +1,7 @@
-extends layout
+extends layoutLogin
 
 block SCRIPTS 
-    script(src="/assets/js/angular/A_login.js"); 
+    script(src="../assets/js/angular/A_login.js"); 
 
 block CONTENIDO_GENERAL
     main.main-content.mt-0(ng-controller="LoginCtrl")
@@ -23,14 +23,14 @@ block CONTENIDO_GENERAL
                             .card-body.pb-0
                                 form.text-start(role='form')
                                     .mb-3
-                                        input.form-control#boleta(type='text' placeholder='Boleta' aria-label='Email' ng-model="username")
+                                        input.form-control(type='text' placeholder='Boleta' aria-label='Email' ng-model="username")
                                     .mb-3
-                                        input.form-control#clave(type='password' placeholder='Contraseña' aria-label='Password' ng-model="password")
+                                        input.form-control(type='password' placeholder='Contraseña' aria-label='Password' ng-model="password")
                                     .form-check.form-switch
                                         input#rememberMe.form-check-input(type='checkbox')
                                         label.form-check-label(for='rememberMe') Recuérdame
                                     .text-center
-                                        button.btn.bg-gradient-info.w-100.my-3.mb-2#enviarDatos(type='button' ng-click="makeLogin()") Iniciar sesión
+                                        button.btn.bg-gradient-info.w-100.my-3.mb-2(type='button' ng-click="makeLogin()") Iniciar sesión
                             .text-center.pt-3.pb-1
                                 p.text-xs
                                     | ¿Olvidaste tu contraseña?
@@ -38,7 +38,7 @@ block CONTENIDO_GENERAL
         
         
         
-        script(src='/assets/js/login.js')
+        script(src='../assets/js/login.js')
         iframe(src='../bases/footer.html' scrolling='no' noresize='noresize' width='100%')
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/bootstrap.min.js')

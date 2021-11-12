@@ -1,5 +1,4 @@
 (function(){
-
     var app = angular.module("UPIIZCOM", []);
 
     app.controller("TablaCtrl", function( $scope, $http ){
@@ -62,8 +61,8 @@
         $scope.updateGrupo = function(){
             $http.put("/grupo/" + $scope.grupos[ $scope.registro_activo ]._id , $scope.grupo )
                  .then(function(respuesta){
-                     console.log(respuesta);
-                    if (respuesta.data.error != undefined){
+                     console.log(respuesta.status);
+                    if (respuesta.status != 200){
                         alert("Ocurrió un error");
                     }else{
                         $scope.grupos[ $scope.registro_activo ] = angular.copy ( $scope.grupo );
