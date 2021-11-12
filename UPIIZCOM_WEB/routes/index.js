@@ -3,14 +3,15 @@ const session = require('express-session');
 var manejador_sesiones = require("./manejador_sesiones")
 var router = express.Router();
 
+var datos = {nombre: '', boleta:'', email:'', carrera:''};
+
 /* GET home page. */
 router.get('/login', function(req, res, next) {
   res.render('login', { title: 'Express', color: 'blue' });
 });
 
 router.get('/dashboard', manejador_sesiones(), function(req, res, next) {
-  console.log(req.session);
-  res.send("Hola " + req.session.BOLETA + " desde el dashboard");
+  res.render('layout', { title: 'Timeline', message: 'Timeline'});
 });
 
 /*PARAMETROS POR GET
@@ -72,7 +73,12 @@ router.post("/login", function(req, res, next){
         _SESSION.EMAIL  = respuesta.data.datos.mail;
         _SESSION.TOKEN  = respuesta.data.datos.token;
         _SESSION.CARRERA = respuesta.data.datos.Carrera;
+        console.log(_SESSION);
         res.json({"acceso": true, datos : { nombre: _SESSION.NOMBRE, carrera: _SESSION.CARRERA }})
+        datos.nombre = respuesta.data.datos.Nombre;
+        datos.boleta = respuesta.data.datos.boleta;
+        datos.email = respuesta.data.datos.mail;
+        datos.carrera = respuesta.data.datos.Carrera;
     }else{
        //No son correctas las credenciales.  
        res.json({"acceso": false})
@@ -82,24 +88,24 @@ router.post("/login", function(req, res, next){
   })
 });
 
-router.get('/', function(req, res, next) {
+router.get('/', manejador_sesiones(), function(req, res, next) {
+  res.render('layoutLogin', { title: 'Express', color: 'blue' });
+});
+
+router.get('/pagina',  manejador_sesiones(), function(req, res, next) {
   res.render('paginax', { title: 'Express', color: 'blue' });
 });
 
-router.get('/pagina',  function(req, res, next) {
-  res.render('paginax', { title: 'Express', color: 'blue' });
-});
-
-router.get('/sidebar', function(req, res, next) {
+router.get('/sidebar', manejador_sesiones(), function(req, res, next) {
   res.render('sidebar', { title: 'Express'});
 });
 
-router.get('/navbar', function(req, res, next) {
+router.get('/navbar', manejador_sesiones(), function(req, res, next) {
   res.render('navbar', { title: 'Express'});
 });
 
-router.get('/grupos', function(req, res, next) {
-  res.render('grupos', { title: 'Express'});
+router.get('/grupos', manejador_sesiones(), function(req, res, next) {
+  //res.redirect('/vista_grupos.js' + datos);
 });
 
 router.get("/logout", function(req, res){

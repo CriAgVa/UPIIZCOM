@@ -16,9 +16,8 @@ var Grupo = mongoose.model("M_Grupo");
   delete() // Elimina uno
   modify() // Modifica uno
   add()    // Agrega uno
-*/
 
-router.get("/", function( req, res ){
+  router.get("/", function( req, res ){
    Grupo.find({})
         .sort( { nombre : -1 })
         .exec( function (error , resultado ){
@@ -29,7 +28,19 @@ router.get("/", function( req, res ){
             }
         });
 });
+*/
 
+router.get("/", function(req, res, next) {
+   Grupo.find({})
+        .sort( { nombre : -1 })
+        .exec( function (error , resultado ){
+            if ( error === null ){
+               res.json( resultado );
+            }else{
+               res.json( { status: false , error : error } );
+            }
+        });
+});
 
 router.post("/", function( req, res ){
   var grupo = new Grupo( req.body );
@@ -60,7 +71,7 @@ router.put("/:id", function(req, res){
       }else{
          res.json( { status: false , error : error } );
       }   
-   });
+   });   
 });
 
 
