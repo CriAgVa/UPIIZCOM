@@ -3,7 +3,7 @@ const session = require('express-session');
 var manejador_sesiones = require("./manejador_sesiones")
 var router = express.Router();
 
-var datos = {nombre: '', boleta:'', email:'', carrera:''};
+var sesion = new Object();
 
 /* GET home page. */
 router.get('/login', function(req, res, next) {
@@ -11,56 +11,9 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/dashboard', manejador_sesiones(), function(req, res, next) {
-  var _SESSION = req.session;
-  /*
-    var datos  = Grupo.find()...
-   datos ...
-   */
-  console.log("HOLA QUE TAL") 
-  var objeto = { nombre : _SESSION.NOMBRE, boleta : _SESSION.BOLETA, email : _SESSION.EMAIL }
-  console.log(objeto)
-  res.render('index', { nombre: _SESSION.NOMBRE,  email: _SESSION.EMAIL, objeto: objeto  , title: 'Timeline', message: 'Timeline'});
+  res.render('index', {datos: sesion, title: 'Timeline' });
 });
 
-/*PARAMETROS POR GET
-router.get('/parametros', function(req, res, next) {
-  console.log(req.query)
-  console.log(req.query.busqueda + " otro " + req.query.metodo  );
-  res.send("PARAMETROS POR GET");
-});
-
-//PARAMETROS POR POST
-router.post('/parametros', function(req, res, next) {
-  console.log(req.body);
-  console.log(req.body.username);
-  console.log(req.body.password);
-  res.send("PARAMETROS POR POST");
-});
-
-//PARAMETROS EN LA URL
-router.get('/parametros/:pais/:estado/:municipio', function(req, res, next) {
-  console.log(req.params);
-  console.log(req.params.pais);
-  console.log(req.params.estado);
-  console.log(req.params.municipio);
-  res.send("PARAMETROS POR URL");
-});
-
-*/
-
-/*
-  Agarrar los parámetros desde el REQUEST
-  Todos los parámetros vienen en JSON
-  - Parámetros por POST : req.body
-  - Parámetros por GET (query) : req.query
-  - Parámetros por Params : req.params
-  - Endpoints 
-    /getEstados/:pais  --> localhost:3000/getEstados/Mexico
-     {
-       pais: "México",
-       estados : ["Zacatecas", "Colima"...]
-     }
-*/
 router.post("/login", function(req, res, next){
   console.log("ENTRANDO");
   console.log(req.body);
@@ -83,10 +36,14 @@ router.post("/login", function(req, res, next){
         _SESSION.CARRERA = respuesta.data.datos.Carrera;
         console.log(_SESSION);
         res.json({"acceso": true, datos : { nombre: _SESSION.NOMBRE, carrera: _SESSION.CARRERA }})
-        datos.nombre = respuesta.data.datos.Nombre;
-        datos.boleta = respuesta.data.datos.boleta;
-        datos.email = respuesta.data.datos.mail;
-        datos.carrera = respuesta.data.datos.Carrera;
+        sesion = {
+          nombre  : req.session.NOMBRE,
+          boleta  : req.session.BOLETA, 
+          programa: req.session.CARRERA,
+          email   : req.session.EMAIL
+        };
+        
+
     }else{
        //No son correctas las credenciales.  
        res.json({"acceso": false})
@@ -113,8 +70,24 @@ router.get('/navbar', manejador_sesiones(), function(req, res, next) {
 });
 
 router.get('/grupos', manejador_sesiones(), function(req, res, next) {
-  //res.redirect('/vista_grupos.js' + datos);
-  res.render("grupos/vistaGrupos.jade", {nombre: req.session.NOMBRE } );
+  res.render("grupos/vistaGrupos.jade", {datos: sesion, title: "Grupos"} );
+});
+
+router.get('/nuevoGrupo', manejador_sesiones(), function(req, res, next) {
+  res.render("grupos/nuevoGrupo.jade", {datos: sesion, title: "Creacion grupo"} );
+});
+
+router.get('/editarGrupo', manejador_sesiones(), function(req, res, next) {
+  res.render("grupos/editarGrupo", {datos: sesion, title: "Creacion grupo"} );
+});
+
+router.get('/perfilGrupo/:id', manejador_sesiones(), function(req, res, next) {
+  id = req.params.id;
+  res.render("grupos/perfilGrupo", {datos: sesion, numero: id, title: "Grupos"} );
+});
+
+router.get('/perfil', manejador_sesiones(), function(req, res, next) {
+  res.render("perfil/verPerfil.jade", {datos: sesion, title: "Perfil"} );
 });
 
 router.get("/logout", function(req, res){

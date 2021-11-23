@@ -5,10 +5,29 @@ var cookieParser = require('cookie-parser');
 var session = require("express-session"); //Para manejo de sesiones
 var logger = require('morgan');
 
+var mongoose = require("mongoose");
+mongoose.connect("mongodb://127.0.0.1/UPIIZCOM");
+
+/**
+INCLUSIÓN MASIVA DE MODELOS
+ */
+var fs = require("fs"); //Para hacer una inclusión masiva a la carpeta de modelos
+
+fs.readdirSync( __dirname + '/modelos' ).forEach(function( filename ){
+  if (~filename.indexOf('.js')){
+      require ( __dirname + '/modelos/' + filename );
+  }
+});
+
+/**
+ FIN INCLUSIÓN MASIVA DE MODELOS
+ */
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var gruposRouter = require('./routes/vista_grupos');
-var grupoRouter = require('./routes/grupos')
+var grupoRouter = require('./routes/grupos');
+var usuarioRouter = require('./routes/usuarios');
 
 var app = express();
 
@@ -27,6 +46,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/grupos', gruposRouter);
 app.use('/grupo', grupoRouter);
+app.use('/usuario', usuarioRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

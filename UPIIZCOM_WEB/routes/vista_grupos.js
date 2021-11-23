@@ -10,9 +10,7 @@ require("../modelos/M_Grupo.js");
 var Grupo = mongoose.model("M_Grupo");
 
 router.get("/", function(req, res, next) {
-    var passedVar = req.query.valid;
-
-    res.render('grupos/vistaGrupos', {nombre: passedVar.datos.nombre});
+    res.render('grupos/vistaGrupos');
 });
 
 module.exports = router;

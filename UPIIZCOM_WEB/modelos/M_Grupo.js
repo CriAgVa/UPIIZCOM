@@ -1,13 +1,17 @@
-var mongoose = require("mongoose");
-var schema   = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema   = mongoose.Schema;
 
-var GruposSchema = new schema({
-    nombre         : { type:String , default:"-"},
-    descripcion    : { type:String , default:"no desc"},
-    //imagen         : { type:String , default:"/assets/img/grupos//default_grupo.png"},
-    participantes  : { type:Number , default:1}
+var GrupoSchema = new Schema({
+    nombre         : {type:String , default:"-"},
+    descripcion    : {type:String , default:"no desc"},
+    tipo           : {type:String , default:"no espec"},
+    imagen         : {type:String , default:"/assets/img/grupos/default_logo.png"},
+    integrantes    : [{type:String, ref: 'Usuario'}],
+    noIntegrantes  : {type:Number , default:0}
 });
 
-mongoose.model("M_Grupo", GruposSchema, "Grupo");
-            //nombre del modelo, variable de estructura, Colección de mongo 
+//module.exports = mongoose.model('Grupo', GrupoSchema);
+//const Story = mongoose.model('Grupo', GrupoSchema);
 
+mongoose.model("M_Grupo", GrupoSchema, "Grupo");
+            //nombre del modelo, variable de estructura, Colección de mongo 
