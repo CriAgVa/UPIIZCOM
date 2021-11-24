@@ -10,6 +10,7 @@ var Grupo = mongoose.model("M_Grupo");
 router.get("/", function( req, res ){
    Grupo.find({})
         .sort( { nombre : -1 })
+        .populate( "integrantes" )
         .exec( function (error , resultado ){
             if ( error === null ){
                res.json( resultado );
