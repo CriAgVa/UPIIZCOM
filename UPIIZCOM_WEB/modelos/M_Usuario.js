@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var UsuarioSchema = Schema({
+var UsuarioSchema = new Schema({
     tipo            : {type:String, default:"unknown"},
     username        : {type:String, default:"user"},
     clave           : {type:String, default:"-"},
@@ -15,7 +15,7 @@ var UsuarioSchema = Schema({
         },
     },
     listaNegra      : [{type:String, default:"-"}],
-    grupos          : [{type:'ObjectId', ref: "Grupo"}]
+    grupos          : [{type:Schema.Types.ObjectId, ref:'Grupo'}]
   });
 
   mongoose.model("M_Usuario", UsuarioSchema, "Usuario");

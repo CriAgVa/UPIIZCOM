@@ -10,7 +10,19 @@ var Grupo = mongoose.model("M_Grupo");
 router.get("/", function( req, res ){
    Grupo.find({})
         .sort( { nombre : -1 })
-        .populate( "integrantes" )
+        //.populate("integrantes")
+        .exec( function (error , resultado ){
+            if ( error === null ){
+               res.json( resultado );
+            }else{
+               res.json( { status: false , error : error } );
+            }
+        });
+});
+
+router.get("/ppl", function( req, res ){
+   Grupo.findOne({ _id :"619dc60b0649ab1170f30b70"})
+        .populate('integrantes')
         .exec( function (error , resultado ){
             if ( error === null ){
                res.json( resultado );
