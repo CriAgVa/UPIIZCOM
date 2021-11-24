@@ -1,11 +1,12 @@
 extends layout
 
-block SCRIPTS 
-script(src="../assets/js/angular/A_Dashboard.js"); 
-
 block CONTENIDO
   div(ng-controller="DashboardCtrl") 
     h1 Hola #{datos.nombre}
     h1 con usuario #{datos.boleta}
     h1 correo #{datos.email}
     h1 y carrera #{datos.programa}
+
+block SCRIPTS 
+  script(src="../assets/js/angular/A_Dashboard.js")
+  script(src="../assets/js/angular/A_Usuarios.js")

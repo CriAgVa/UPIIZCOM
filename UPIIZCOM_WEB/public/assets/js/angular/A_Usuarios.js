@@ -28,7 +28,8 @@
             $http.get("/usuario/")
                  .then(function(respuesta){
                     if (respuesta.data.error != undefined){
-                        alert("Ocurrió un error");
+                        alert("Ocurrió un error ");
+                        console.log(respuesta)
                     }else{
                        $scope.usuarios = respuesta.data;
                     }   

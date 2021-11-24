@@ -100,7 +100,7 @@ block CONTENIDO
                                                     img(src='../assets/img/grupos/default_logo.png' alt='slack_logo')
                                                 .ms-3.my-auto
                                                     h6 
-                                                        a(href="perfilGrupo/1") {{g.nombre}}
+                                                        a(href="perfilGrupo/={{g._id}}") {{g.nombre}}
                                                     .avatar-group
                                                         a.avatar.avatar-xs.rounded-circle(href='javascript:;' data-bs-toggle='tooltip' data-original-title='Jessica Rowland')
                                                             img(alt='Image placeholder' src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/img/team-3.jpg')
@@ -118,7 +118,7 @@ block CONTENIDO
                                                             i.fa.fa-ellipsis-v.text-lg
                                                         .dropdown-menu.dropdown-menu-end.me-sm-n4.me-n3(aria-labelledby='navbarDropdownMenuLink')
                                                             a.dropdown-item(ng-click='delGrupo($index)') Eliminar
-                                                            a.dropdown-item(ng-click='editGrupo()' href='editarGrupo') Editar
+                                                            a.dropdown-item(ng-click='editGrupo($index)' href="editarGrupo/={{g._id}}") Editar
                                             p.text-sm.mt-3  {{g.descripcion}} 
                                             hr.horizontal.dark
                                             .row

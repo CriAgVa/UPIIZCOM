@@ -70,7 +70,7 @@ block CONTENIDO
                                         .row.mt-3
                                             .col-12.col-sm-6
                                                 label Nombre
-                                                input.multisteps-form__input.form-control(type='text' placeholder='Nombre' ng-model='grupo.nombre')
+                                                input.multisteps-form__input.form-control(type='text' placeholder='#{id}' ng-model='grupo.nombre')
                                             .col-12.col-sm-6.mt-3.mt-sm-0
                                                 label Tipo
                                                 select#choices-category.form-control(name='choices-category' ng-model='grupo.tipo')
@@ -83,6 +83,7 @@ block CONTENIDO
                                                 p.form-text.text-muted.text-xs.ms-1.d-inline (opcional)
                                                 input.multisteps-form__input.form-control(type="text" ng-model = 'grupo.descripcion')
                                         .button-row.d-flex.mt-4
+                                            button.btn.bg-gradient-dark.ms-auto.mb-0.js-btn-next(type='button' title='Next' ng-click='findGrupo()') find
                                             button.btn.bg-gradient-dark.ms-auto.mb-0.js-btn-next(type='button' title='Next') Siguiente
                                 .card.multisteps-form__panel.p-3.border-radius-xl.bg-white(data-animation='FadeIn')
                                     h5.font-weight-bolder Imagen

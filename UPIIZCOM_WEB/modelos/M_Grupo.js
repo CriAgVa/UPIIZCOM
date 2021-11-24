@@ -6,7 +6,7 @@ var GrupoSchema = new Schema({
     descripcion    : {type:String , default:"no desc"},
     tipo           : {type:String , default:"no espec"},
     imagen         : {type:String , default:"/assets/img/grupos/default_logo.png"},
-    integrantes    : [{type:String, ref: 'Usuario'}],
+    integrantes    : [{type:'ObjectId', ref: "Usuario"}],
     noIntegrantes  : {type:Number , default:0}
 });
 

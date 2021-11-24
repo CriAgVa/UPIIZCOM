@@ -30,6 +30,7 @@
                     if (respuesta.data.error != undefined){
                         alert("Ocurrió un error");
                     }else{
+                        console.log(respuesta)
                        $scope.grupos = respuesta.data;
                     }   
                  });
@@ -54,7 +55,7 @@
 
         $scope.editGrupo = function(id){
             $scope.registro_activo = id;
-            $scope.grupo           = angular.copy ($scope.grupos[id]);     
+            $scope.grupo           = angular.copy ($scope.grupos[id]);  
         }
 
 
@@ -69,6 +70,27 @@
                         $scope.grupo = {};
                     }   
                  });
+        }
+
+        $scope.findGrupo = function(id){
+            console.log("Activo:" + $scope.registro_activo);
+        }
+
+        $scope.actualizacionGrupo = function(id){
+            $http.get("/grupo/")
+                           .then(function(respuesta){
+                                if (respuesta.data.error != undefined){
+                                    alert("Ocurrió un error");
+                                }else{
+                                    $scope.grupos = respuesta.data;
+                                }   
+                            });
+            
+            var arrGrupos = $scope.grupos;
+            
+            var resultado = arrGrupos.filter(grupo => grupo._id == id); 
+
+            console.log(resultado);
         }
 
         $scope.getGrupo();

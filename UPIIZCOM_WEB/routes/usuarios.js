@@ -10,6 +10,7 @@ var Usuario = mongoose.model("M_Usuario");
 router.get("/", function( req, res ){
    Usuario.find({})
         .sort( { nombre : -1 })
+        .populate( "grupos" )
         .exec( function (error , resultado ){
             if ( error === null ){
                res.json( resultado );

@@ -1,6 +1,7 @@
 var express = require('express');
 const session = require('express-session');
 var manejador_sesiones = require("./manejador_sesiones")
+var registroDB = require("./registroDB");
 var router = express.Router();
 
 var sesion = new Object();
@@ -40,10 +41,19 @@ router.post("/login", function(req, res, next){
           nombre  : req.session.NOMBRE,
           boleta  : req.session.BOLETA, 
           programa: req.session.CARRERA,
+          semestre: req.session.SEMESTRE,
           email   : req.session.EMAIL
         };
+        /*
+        {{usuario.tipo}}
+        {{usuario.username}}
+        {{usuario.clave}}
+        {{usuario.datos.nombre}}
+        {{usuario.datos.email}}
+        {{usuario.datos.noTelefono}}
+        {{usuario.datos.programa.carrera}}
+        */
         
-
     }else{
        //No son correctas las credenciales.  
        res.json({"acceso": false})
@@ -77,11 +87,12 @@ router.get('/nuevoGrupo', manejador_sesiones(), function(req, res, next) {
   res.render("grupos/nuevoGrupo.jade", {datos: sesion, title: "Creacion grupo"} );
 });
 
-router.get('/editarGrupo', manejador_sesiones(), function(req, res, next) {
-  res.render("grupos/editarGrupo", {datos: sesion, title: "Creacion grupo"} );
+router.get('/editarGrupo/=:id', manejador_sesiones(), function(req, res, next) {
+  id = req.params.id;
+  res.render("grupos/editarGrupo", {datos: sesion, numero: id, title: "Edicion grupo"} );
 });
 
-router.get('/perfilGrupo/:id', manejador_sesiones(), function(req, res, next) {
+router.get('/perfilGrupo/=:id', manejador_sesiones(), function(req, res, next) {
   id = req.params.id;
   res.render("grupos/perfilGrupo", {datos: sesion, numero: id, title: "Grupos"} );
 });

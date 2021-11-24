@@ -15,7 +15,7 @@ var UsuarioSchema = Schema({
         },
     },
     listaNegra      : [{type:String, default:"-"}],
-    grupos          : [{type: Schema.Types.ObjectId, ref: 'Grupo'}]
+    grupos          : [{type:'ObjectId', ref: "Grupo"}]
   });
 
   mongoose.model("M_Usuario", UsuarioSchema, "Usuario");
