@@ -56,7 +56,20 @@ router.delete("/:id", function(req, res){
 });
 
 router.put("/:id", function(req, res){
+   console.log("================");
+   console.log(req.body)
+   console.log("================");
    Grupo.updateOne( {_id : req.params.id} , req.body, function(error, respuesta){
+      if ( error === null ){
+         res.json(  respuesta );
+      }else{
+         res.json( { status: false , error : error } );
+      }   
+   });   
+});
+
+router.put("/push/:id", function(req, res){
+   Grupo.updateOne( {_id : req.params.id} , {$push: req.body}, function(error, respuesta){
       if ( error === null ){
          res.json(  respuesta );
       }else{

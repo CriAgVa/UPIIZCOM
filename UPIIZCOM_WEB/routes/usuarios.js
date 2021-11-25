@@ -20,6 +20,16 @@ router.get("/", function( req, res ){
         });
 });
 
+router.get("/:id", function(req, res){
+   Usuario.findOne({ username : req.params.id }, function (error, resultado){
+             if (error === null){
+                res.json( resultado);
+             }else{
+                res.json( {status:false, error:error});
+             }
+          });
+});
+
 router.post("/", function( req, res ){
     var usuario = new Usuario( req.body );
     usuario.save(function (error , resultado ){

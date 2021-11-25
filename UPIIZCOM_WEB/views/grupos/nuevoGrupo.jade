@@ -81,7 +81,7 @@ block CONTENIDO
                                             .col-sm-12
                                                 label.mt-4 Descripción
                                                 p.form-text.text-muted.text-xs.ms-1.d-inline (opcional)
-                                                input.multisteps-form__input.form-control(type="text" ng-model = 'grupo.descripcion')
+                                                input.multisteps-form__input.form-control(type="text"  placeholder='Descripcion' ng-model = 'grupo.descripcion')
                                         .button-row.d-flex.mt-4
                                             button.btn.bg-gradient-dark.ms-auto.mb-0.js-btn-next(type='button' title='Next') Siguiente
                                 .card.multisteps-form__panel.p-3.border-radius-xl.bg-white(data-animation='FadeIn')
@@ -99,18 +99,14 @@ block CONTENIDO
                                     .multisteps-form__content
                                         .row.mt-3
                                             .col-12
-                                                label Nombre
-                                                input.multisteps-form__input.form-control(type='text' placeholder='Nombre')
-                                            .col-12.mt-3
                                                 label Boleta
-                                                input.multisteps-form__input.form-control(type='text' placeholder='201...')
+                                                input.multisteps-form__input.form-control(type='text' id='boleta' placeholder='Boleta' ng-model='grupo.integrantes')    
                                         .row
                                             .button-row.d-flex.mt-4.col-12
                                                 button.btn.bg-gradient-secondary.mb-0.js-btn-prev(type='button' title='Prev') Volver
-                                                button.btn.bg-gradient-secondary.ms-auto.mb-0(type='button' title='Prev') Limpiar
-                                                button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' title='Prev') Agregar
-                                                a(href="/grupos")
-                                                    button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar' ng-click='addGrupo()') Terminar
+                                                button.btn.bg-gradient-secondary.ms-auto.mb-0(type='reset' title='Prev') Limpiar
+                                                button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' title='Prev' ng-click='addUser()') Agregar
+                                                button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar' ng-click='addGrupo()') Terminar
 block SCRIPTS
     script(src='../assets/js/A_EjemploTabla.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')

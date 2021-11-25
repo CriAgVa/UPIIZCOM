@@ -1,13 +1,13 @@
 (function(){
     var app = angular.module("UPIIZCOM", []);
 
-    app.controller("TablaCtrl", function( $scope, $http ){
+    app.controller("TablaCtrl", function( $scope, $http , $window){
         $scope.hola="Ejemplo de Catálogo en Tabla";
         $scope.grupos = [];
         $scope.grupo  = {};
         $scope.registro_activo = -1;
         $scope.mostrar = 1;
-        
+
         $scope.ocultaMuestra = function(){
             $scope.mostrar = ( $scope.mostrar == 1 ) ? 0 : 1;
         }
@@ -21,6 +21,28 @@
                         $scope.grupos.push( angular.copy( $scope.grupo ) );
                         $scope.grupo = {};
                      }   
+                 });
+        }
+
+        $scope.addUser = function(idx){
+            console.log($scope.grupo);
+            var bol = document.getElementById("boleta").value;
+            $http.get("/usuario/"+bol)
+                 .then(function(respuesta){
+                     if (respuesta.data.error != undefined){
+                        alert("Ocurrio un error");
+                     }else{
+                        id = respuesta.data._id;
+                        $scope.grupo.integrantes = id;
+                        console.log(id);
+                            $http.put("/grupo/"+$scope.grupo._id, $scope.grupo )
+                                 .then(function(respuesta){
+                                    console.log("id"+$scope.grupo._id);
+                                   // $window.location.href = '/grupos';
+                                });
+
+                        console.log(respuesta);
+                     }
                  });
         }
 
@@ -76,22 +98,15 @@
             console.log("Activo:" + $scope.registro_activo);
         }
 
-        $scope.actualizacionGrupo = function(id){
-            $http.get("/grupo/")
-                           .then(function(respuesta){
-                                if (respuesta.data.error != undefined){
-                                    alert("Ocurrió un error");
-                                }else{
-                                    $scope.grupos = respuesta.data;
-                                }   
-                            });
-            
-            var arrGrupos = $scope.grupos;
-            
-            var resultado = arrGrupos.filter(grupo => grupo._id == id); 
-
-            console.log(resultado);
+        $scope.actualizacionGrupo = function(){
+            console.log($scope.grupo);
+            $http.put("/grupo/"+ $scope.grupo._id, $scope.grupo ).then(function(respuesta){
+                console.log($scope.grupo._id);
+                //$window.location.href = '/grupos';
+            });
         }
+
+
 
         $scope.getGrupo();
     });

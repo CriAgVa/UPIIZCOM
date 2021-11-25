@@ -3,6 +3,7 @@ const session = require('express-session');
 var manejador_sesiones = require("./manejador_sesiones")
 var registroDB = require("./registroDB");
 var router = express.Router();
+var mongoose = require("mongoose");
 
 var sesion = new Object();
 
@@ -87,9 +88,36 @@ router.get('/nuevoGrupo', manejador_sesiones(), function(req, res, next) {
   res.render("grupos/nuevoGrupo.jade", {datos: sesion, title: "Creacion grupo"} );
 });
 
-router.get('/editarGrupo/=:id', manejador_sesiones(), function(req, res, next) {
+router.get('/editarGrupo/:id', manejador_sesiones(), function(req, res, next) {
   id = req.params.id;
-  res.render("grupos/editarGrupo", {datos: sesion, numero: id, title: "Edicion grupo"} );
+  //Utilizando un Modelo
+  var Grupo = mongoose.model("M_Grupo");
+  Grupo.findOne({_id : id})
+      .exec( function (error , resultado ){
+          console.log(resultado);
+          if ( error === null ){
+            res.render("grupos/editarGrupo", {datos: sesion, numero: id, grupo: resultado, title: "Edicion grupo"} );
+          }else{
+            res.json( { status: false , error : error } );
+          }
+      });
+  
+});
+
+router.get('/anadirMiembros/:id', manejador_sesiones(), function(req, res, next) {
+  id = req.params.id;
+  //Utilizando un Modelo
+  var Grupo = mongoose.model("M_Grupo");
+  Grupo.findOne({_id : id})
+      .exec( function (error , resultado ){
+          console.log(resultado);
+          if ( error === null ){
+            res.render("grupos/anadirMiembros", {datos: sesion, numero: id, grupo: resultado, title: "Edicion grupo"} );
+          }else{
+            res.json( { status: false , error : error } );
+          }
+      });
+  
 });
 
 router.get('/perfilGrupo/=:id', manejador_sesiones(), function(req, res, next) {

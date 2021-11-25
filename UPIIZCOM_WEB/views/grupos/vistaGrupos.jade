@@ -117,9 +117,14 @@ block CONTENIDO
                                                         button#navbarDropdownMenuLink.btn.btn-link.text-secondary.ps-0.pe-2(data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                                                             i.fa.fa-ellipsis-v.text-lg
                                                         .dropdown-menu.dropdown-menu-end.me-sm-n4.me-n3(aria-labelledby='navbarDropdownMenuLink')
+                                                            //
                                                             a.dropdown-item(ng-click='delGrupo($index)') Eliminar
                                                             a.dropdown-item(ng-click='editGrupo($index)' href="editarGrupo/={{g._id}}") Editar
-                                            p.text-sm.mt-3  {{g.descripcion}} 
+                                            p.text-sm.mt-3 {{g.descripcion}}
+                                                p
+                                                    a(href="editarGrupo/{{g._id}}") Editar
+                                                    a(href="" ng-click='delGrupo($index)') Eliminar
+                                                    a(href="anadirMiembros/{{g._id}}") Anadir miembros
                                             hr.horizontal.dark
                                             .row
                                                 .col-6
