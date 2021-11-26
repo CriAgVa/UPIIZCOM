@@ -14,8 +14,8 @@ var UsuarioSchema = new Schema({
             semestre: {type:String, dafault:"0"}
         },
     },
-    listaNegra      : [{type:String, default:"-"}],
-    grupos          : [{type:Schema.Types.ObjectId, ref:'Grupo'}]
+    listaNegra      : {type:Array},
+    grupos          : {type:Array}
   });
 
   mongoose.model("M_Usuario", UsuarioSchema, "Usuario");

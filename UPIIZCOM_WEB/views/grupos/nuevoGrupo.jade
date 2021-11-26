@@ -60,7 +60,6 @@ block CONTENIDO
                             .multisteps-form__progress
                                 button.multisteps-form__progress-btn.js-active(type='button' title='Product Info') 1. Información
                                 button.multisteps-form__progress-btn(type='button' title='Media') 2. Imagen
-                                button.multisteps-form__progress-btn(type='button' title='Media') 3. Anadir miembros
                     .row
                         .col-12.col-lg-8.m-auto
                             form.multisteps-form__form.mb-8
@@ -93,20 +92,7 @@ block CONTENIDO
                                                 #productImg.form-control.dropzone(action='https://demos.creative-tim.com/file-upload' ng-model = 'grupo.imagen')
                                         .button-row.d-flex.mt-4
                                             button.btn.bg-gradient-secondary.mb-0.js-btn-prev(type='button' title='Prev') Volver
-                                            button.btn.bg-gradient-dark.ms-auto.mb-0.js-btn-next(type='button' title='Next') Siguiente
-                                .card.multisteps-form__panel.p-3.border-radius-xl.bg-white(data-animation='FadeIn')
-                                    h5.font-weight-bolder Anadir miembros
-                                    .multisteps-form__content
-                                        .row.mt-3
-                                            .col-12
-                                                label Boleta
-                                                input.multisteps-form__input.form-control(type='text' id='boleta' placeholder='Boleta' ng-model='grupo.integrantes')    
-                                        .row
-                                            .button-row.d-flex.mt-4.col-12
-                                                button.btn.bg-gradient-secondary.mb-0.js-btn-prev(type='button' title='Prev') Volver
-                                                button.btn.bg-gradient-secondary.ms-auto.mb-0(type='reset' title='Prev') Limpiar
-                                                button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' title='Prev' ng-click='addUser()') Agregar
-                                                button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar' ng-click='addGrupo()') Terminar
+                                            button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar' ng-click='addGrupo()') Terminar
 block SCRIPTS
     script(src='../assets/js/A_EjemploTabla.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')

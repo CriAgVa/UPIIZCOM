@@ -20,14 +20,37 @@ router.get("/", function( req, res ){
         });
 });
 
-router.get("/:id", function(req, res){
+router.get("/fo:id", function(req, res){
    Usuario.findOne({ username : req.params.id }, function (error, resultado){
              if (error === null){
                 res.json( resultado);
-             }else{
+                console.log("RES")
+                console.log(resultado);
+               }else{
                 res.json( {status:false, error:error});
              }
           });
+});
+
+router.get("/nu:id", function(req, res){
+   Usuario.findOne({ _id : req.params.id }, function (error, resultado){
+             if (error === null){
+                res.json( resultado);
+               }else{
+                res.json( {status:false, error:error});
+             }
+          });
+});
+
+
+router.get("/blt:id", function( req, res ){
+   Usuario.find({username : {$regex : req.params.id}},{username:1, _id:1}).sort({username:1}).exec( function (error , resultado ){
+            if ( error === null ){
+               res.json( resultado );
+            }else{
+               res.json( { status: false , error : error } );
+            }
+        });
 });
 
 router.post("/", function( req, res ){

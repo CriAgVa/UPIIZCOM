@@ -107,11 +107,13 @@ router.get('/editarGrupo/:id', manejador_sesiones(), function(req, res, next) {
 router.get('/anadirMiembros/:id', manejador_sesiones(), function(req, res, next) {
   id = req.params.id;
   //Utilizando un Modelo
-  var Grupo = mongoose.model("M_Grupo");
+  var Grupo = mongoose.model("M_Grupo_Editar");
   Grupo.findOne({_id : id})
+      //.populate("integrantes")
       .exec( function (error , resultado ){
-          console.log(resultado);
+          console.log(resultado.integrantes);
           if ( error === null ){
+            console.log(resultado);
             res.render("grupos/anadirMiembros", {datos: sesion, numero: id, grupo: resultado, title: "Edicion grupo"} );
           }else{
             res.json( { status: false , error : error } );

@@ -56,45 +56,44 @@ block CONTENIDO
         .container-fluid.py-4
             .row
                 .col-12
-                    .multisteps-form
-                        .row
-                            .col-12.col-lg-8.mx-auto.mt-4.mb-sm-5.mb-3
-                                .multisteps-form__progress
-                                    button.multisteps-form__progress-btn.js-active(type='button' title='Product Info') 1. Información
-                                    button.multisteps-form__progress-btn(type='button' title='Media') 2. Imagen
-                        .row
-                            .col-12.col-lg-8.m-auto
-                                form.multisteps-form__form.mb-8
-                                    .card.multisteps-form__panel.p-3.border-radius-xl.bg-white.js-active(data-animation='FadeIn')
-                                        h5.font-weight-bolder Información de Grupo
-                                        .multisteps-form__content
-                                            .row.mt-3
-                                                .col-12.col-sm-6
-                                                    label Nombre
-                                                    input.multisteps-form__input.form-control(type='text' ng-model="grupo.nombre")
-                                                .col-12.col-sm-6.mt-3.mt-sm-0
-                                                    label Tipo
-                                                    select#choices-category.form-control(name='choices-category' ng-model='grupo.tipo')
-                                                        option(value='Institucional') Institucional
-                                                        option(value='Administrativo') Administrativo 
-                                                        option(value='Social') Social
-                                            .row
-                                                .col-sm-12
-                                                    label.mt-4 Descripción
-                                                    p.form-text.text-muted.text-xs.ms-1.d-inline (opcional)
-                                                    input.multisteps-form__input.form-control(type="text" ng-model = 'grupo.descripcion')
-                                            .button-row.d-flex.mt-4
-                                                button.btn.bg-gradient-dark.ms-auto.mb-0.js-btn-next(type='button' title='Next') Siguiente
-                                    .card.multisteps-form__panel.p-3.border-radius-xl.bg-white(data-animation='FadeIn')
-                                        h5.font-weight-bolder Imagen
-                                        .multisteps-form__content
-                                            .row.mt-3
-                                                .col-12
-                                                    label Foto de perfil del grupo
-                                                    #productImg.form-control.dropzone(action='https://demos.creative-tim.com/file-upload' ng-model = 'grupo.imagen')
-                                            .button-row.d-flex.mt-4
-                                                button.btn.bg-gradient-secondary.mb-0.js-btn-prev(type='button' title='Prev') Volver
-                                                button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar' ng-click='actualizacionGrupo()') Actualizar
+                    .row
+                        .col-12.col-lg-8.mx-auto.mt-4.mb-sm-5.mb-3
+                            .multisteps-form__progress
+                                button.multisteps-form__progress-btn.js-active(type='button' title='Product Info') 1. Información
+                                button.multisteps-form__progress-btn(type='button' title='Media') 2. Imagen
+                    .row
+                        .col-12.col-lg-8.m-auto
+                            form.multisteps-form__form.mb-8
+                                .card.multisteps-form__panel.p-3.border-radius-xl.bg-white.js-active(data-animation='FadeIn')
+                                    h5.font-weight-bolder Información de Grupo
+                                    .multisteps-form__content
+                                        .row.mt-3
+                                            .col-12.col-sm-6
+                                                label Nombre
+                                                input.multisteps-form__input.form-control(type='text' ng-model="grupo.nombre")
+                                            .col-12.col-sm-6.mt-3.mt-sm-0
+                                                label Tipo
+                                                select#choices-category.form-control(name='choices-category' ng-model='grupo.tipo')
+                                                    option(value='Institucional') Institucional
+                                                    option(value='Administrativo') Administrativo 
+                                                    option(value='Social') Social
+                                        .row
+                                            .col-sm-12
+                                                label.mt-4 Descripción
+                                                p.form-text.text-muted.text-xs.ms-1.d-inline (opcional)
+                                                input.multisteps-form__input.form-control(type="text" ng-model = 'grupo.descripcion')
+                                        .button-row.d-flex.mt-4
+                                            button.btn.bg-gradient-dark.ms-auto.mb-0.js-btn-next(type='button' title='Next') Siguiente
+                                .card.multisteps-form__panel.p-3.border-radius-xl.bg-white(data-animation='FadeIn')
+                                    h5.font-weight-bolder Imagen
+                                    .multisteps-form__content
+                                        .row.mt-3
+                                            .col-12
+                                                label Foto de perfil del grupo
+                                                #productImg.form-control.dropzone(action='https://demos.creative-tim.com/file-upload' ng-model = 'grupo.imagen')
+                                        .button-row.d-flex.mt-4
+                                            button.btn.bg-gradient-secondary.mb-0.js-btn-prev(type='button' title='Prev') Volver
+                                            button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar' ng-click='actualizacionGrupo()') Actualizar
                                                     
 block SCRIPTS
     script(src='../assets/js/A_EjemploTabla.js')

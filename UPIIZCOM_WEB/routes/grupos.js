@@ -21,7 +21,7 @@ router.get("/", function( req, res ){
 });
 
 router.get("/ppl", function( req, res ){
-   Grupo.findOne({ _id :"619dc60b0649ab1170f30b70"})
+   Grupo.findOne({ _id :"619ec9a692a913eed1c20891"})
         .populate('integrantes')
         .exec( function (error , resultado ){
             if ( error === null ){
@@ -56,10 +56,21 @@ router.delete("/:id", function(req, res){
 });
 
 router.put("/:id", function(req, res){
-   console.log("================");
-   console.log(req.body)
-   console.log("================");
-   Grupo.updateOne( {_id : req.params.id} , req.body, function(error, respuesta){
+   var GrupoE = mongoose.model("M_Grupo_Editar");
+   
+   GrupoE.updateOne( {_id : req.params.id} , req.body, function(error, respuesta){
+      if ( error === null ){
+         res.json(  respuesta );
+      }else{
+         console.log(error)
+         res.json( { status: false , error : error } );
+      }   
+   });   
+});
+
+router.put("/push/:id", function(req, res){
+   console.log("_id: "+_id+" req.params.id: "+req.params.id+" req.body: "+req.body);
+   Grupo.updateOne( {_id : req.params.id} , {$push: req.body}, function(error, respuesta){
       if ( error === null ){
          res.json(  respuesta );
       }else{
@@ -68,14 +79,14 @@ router.put("/:id", function(req, res){
    });   
 });
 
-router.put("/push/:id", function(req, res){
-   Grupo.updateOne( {_id : req.params.id} , {$push: req.body}, function(error, respuesta){
+router.put("/agg/:id", function(req, res){
+   Grupo.aggregate( {$match: {_id : req.params.id}} [ function(error, respuesta){
       if ( error === null ){
          res.json(  respuesta );
       }else{
          res.json( { status: false , error : error } );
       }   
-   });   
+   }]);   
 });
 
 module.exports = router;
