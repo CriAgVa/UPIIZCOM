@@ -1,15 +1,22 @@
 (function(){
     var app = angular.module("UPIIZCOM", []);
 
-    app.controller("UsersCtrl", function( $scope, $http ){
-        $scope.saludo = "Tabla usuario";
+    app.controller("UsersCtrl", function( $scope, $http , $window){
+        $scope.saludo = "Tabla usuarios";
         $scope.usuarios = [];
         $scope.usuario  = {};
         $scope.registro_activo = -1;
-        $scope.mostrar = 1;
+        $scope.mostrar = 0;
+        $scope.mostrar1 = 1;
+
+        $scope.grupos = [];
 
         $scope.ocultaMuestra = function(){
             $scope.mostrar = ( $scope.mostrar == 1 ) ? 0 : 1;
+        }
+
+        $scope.ocultaMuestra1 = function(){
+            $scope.mostrar1 = ( $scope.mostrar1 == 1 ) ? 0 : 1;
         }
 
         $scope.addUser = function(){
@@ -72,8 +79,9 @@
                  });
         }
 
+        /*
         $scope.getBoletas = function(){
-            $http.get("/usuario/blt")
+            $http.get("/usuario/blt"+"")
                  .then(function(respuesta){
                 if (respuesta.data.error != undefined){
                     alert("Ocurrió un error ");
@@ -83,6 +91,21 @@
                 }   
              });
         } 
+        */
+
+        $window.onload = function(idx){
+            $scope.getGrupos = function(){
+                $http.get("/grupo/id"+idx)
+                 .then(function(respuesta){
+                    if (respuesta.data.error != undefined){
+                        console.log(respuesta);
+                        //$scope.grupos = respuesta;
+                    }else{
+                        console.log(respuesta);
+                    }
+                 });
+            }  
+        }
 
             // Fetch data
         $scope.fetchUsers = function(){   
@@ -90,7 +113,7 @@
 
             // Check search text length
             if(searchText_len > 0){
-            $http.get("/usuario/blt")
+            $http.get("/usuario/blt"+searchText)
                 .then(function successCallback(respuesta){
                     $scope.searchResult = response.data;
                 });
@@ -114,7 +137,7 @@
             $scope.searchResult = {};
         }
     
-        $scope.getBoletas();
+        //$scope.getBoletas();
         $scope.getUsuario();
     });
 

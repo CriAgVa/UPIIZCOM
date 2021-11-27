@@ -1,5 +1,17 @@
 extends ../layout
 
-
 block CONTENIDO
-    h6 la url tiene #{id}
+    div(ng-controller='TablaCtrl' ng-init=" id='#{grupo._id}' ")
+        h6 Bienvenido al grupo #{grupo.nombre}
+        p es de tipo #{grupo.tipo} y su descripcion es #{grupo.descripcion}.
+        p El grupo tiene actualmente #{grupo.noIntegrantes} 
+            a(href="#" ng-click='getGrupoPpl( id )') integrantes
+        table(ng-show='mostrar')
+            tbody 
+                tr 
+                    th Nombre 
+                tr(ng-repeat="m in miembros")
+                    td {{m}}
+
+block SCRIPTS
+    script(src='../assets/js/A_EjemploTabla.js')

@@ -122,13 +122,34 @@ router.get('/anadirMiembros/:id', manejador_sesiones(), function(req, res, next)
   
 });
 
-router.get('/perfilGrupo/=:id', manejador_sesiones(), function(req, res, next) {
+router.get('/perfilGrupo/:id', manejador_sesiones(), function(req, res, next) {
   id = req.params.id;
-  res.render("grupos/perfilGrupo", {datos: sesion, numero: id, title: "Grupos"} );
+console.log("ID")
+console.log(req.params.id)
+  var Grupo = mongoose.model("M_Grupo");
+  Grupo.findOne({_id : id})
+       .exec(function (error, resultado){
+        if(error === null){
+          res.render("grupos/perfilGrupo", {datos: sesion, grupo: resultado, numero: id, title: "Grupos"} );
+        }else{
+          alert("Ocurrio un error")
+        }
+       });
+
+  
 });
 
 router.get('/perfil', manejador_sesiones(), function(req, res, next) {
-  res.render("perfil/verPerfil.jade", {datos: sesion, title: "Perfil"} );
+  var Usuario = mongoose.model("M_Usuario");
+  Usuario.findOne({ username : sesion.boleta })
+         .exec( function (error, resultado){
+            if (error === null){
+              console.log(resultado)
+              res.render("perfil/verPerfil", {datos: sesion, title: "Perfil", usuario: resultado} );
+            }else{
+              res.json( {status:false, error:error});
+            }
+    });
 });
 
 router.get("/logout", function(req, res){

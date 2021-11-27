@@ -14,7 +14,7 @@ block CONTENIDO
                     .h-100
                         h5.mb-1 #{datos.nombre}
                         p.mb-0.font-weight-bold.text-sm #{datos.programa} / #{datos.boleta}
-                .col-lg-4.col-md-6.my-sm-auto.ms-sm-auto.me-sm-0.mx-auto.mt-3
+                //.col-lg-4.col-md-6.my-sm-auto.ms-sm-auto.me-sm-0.mx-auto.mt-3
                     .nav-wrapper.position-relative.end-0
                         ul.nav.nav-pills.nav-fill.p-1.bg-transparent(role='tablist')
                             li.nav-item
@@ -61,7 +61,6 @@ block CONTENIDO
                     #COMPONENTE.container-fluid(ng-controller='TablaCtrl')
                         h1 {{hola}} 
                         input(type='button' value='Ocultar/Mostrar Tabla' ng-click='ocultaMuestra()')
-                        // {{ grupos | json }}
                         table.table(ng-show='mostrar')
                             tbody
                                 tr
@@ -100,7 +99,7 @@ block CONTENIDO
                                                     img(src='../assets/img/grupos/default_logo.png' alt='slack_logo')
                                                 .ms-3.my-auto
                                                     h6 
-                                                        a(href="perfilGrupo/={{g._id}}") {{g.nombre}}
+                                                        a(href="perfilGrupo/{{g._id}}") {{g.nombre}}
                                                     .avatar-group
                                                         a.avatar.avatar-xs.rounded-circle(href='javascript:;' data-bs-toggle='tooltip' data-original-title='Jessica Rowland')
                                                             img(alt='Image placeholder' src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/img/team-3.jpg')
@@ -123,7 +122,7 @@ block CONTENIDO
                                             p.text-sm.mt-3 {{g.descripcion}}
                                                 p
                                                     a(href="editarGrupo/{{g._id}}") Editar
-                                                    a(href="" ng-click='delGrupo($index)') Eliminar
+                                                    a(href="" ng-click='borrarGrupo($index)') Eliminar
                                                     a(href="anadirMiembros/{{g._id}}") Anadir miembros
                                             hr.horizontal.dark
                                             .row

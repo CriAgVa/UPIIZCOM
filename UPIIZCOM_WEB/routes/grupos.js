@@ -20,9 +20,21 @@ router.get("/", function( req, res ){
         });
 });
 
-router.get("/ppl", function( req, res ){
-   Grupo.findOne({ _id :"619ec9a692a913eed1c20891"})
+router.get("/ppl:id", function( req, res ){
+   Grupo.findOne({ _id : req.params.id })
         .populate('integrantes')
+        .exec( function (error , resultado ){
+            if ( error === null ){
+               console.log(resultado)
+               res.json( resultado );
+            }else{
+               res.json( { status: false , error : error } );
+            }
+        });
+});
+
+router.get("/id:id", function( req, res ){
+   Grupo.findOne({ _id : {$regex : req.params.id}},{nombre:1, _id:1})
         .exec( function (error , resultado ){
             if ( error === null ){
                res.json( resultado );

@@ -7,6 +7,7 @@ var mongoose = require("mongoose");
 //Utilizando un Modelo
 var Usuario = mongoose.model("M_Usuario");
 
+//retorna todos los usuarios con todos sus atributos
 router.get("/", function( req, res ){
    Usuario.find({})
         .sort( { nombre : -1 })
@@ -20,18 +21,18 @@ router.get("/", function( req, res ){
         });
 });
 
+//retorna un usuario (con todos sus atributos) el cual se consulta por boleta
 router.get("/fo:id", function(req, res){
    Usuario.findOne({ username : req.params.id }, function (error, resultado){
              if (error === null){
                 res.json( resultado);
-                console.log("RES")
-                console.log(resultado);
                }else{
                 res.json( {status:false, error:error});
              }
           });
 });
 
+//retorna un usuario (con todos sus atributos) el cual se consulta por id
 router.get("/nu:id", function(req, res){
    Usuario.findOne({ _id : req.params.id }, function (error, resultado){
              if (error === null){
@@ -42,7 +43,7 @@ router.get("/nu:id", function(req, res){
           });
 });
 
-
+//retorna todos los usuarios (boleta e id) los cuales se consultan por boleta 
 router.get("/blt:id", function( req, res ){
    Usuario.find({username : {$regex : req.params.id}},{username:1, _id:1}).sort({username:1}).exec( function (error , resultado ){
             if ( error === null ){
@@ -53,6 +54,7 @@ router.get("/blt:id", function( req, res ){
         });
 });
 
+//registro de un nuevo usuario
 router.post("/", function( req, res ){
     var usuario = new Usuario( req.body );
     usuario.save(function (error , resultado ){
@@ -65,6 +67,7 @@ router.post("/", function( req, res ){
     });
 });
 
+//eliminacion por id de un usuario en la base de datos  
 router.delete("/:id", function(req, res){
     Usuario.remove( {_id : req.params.id } , function(error, resultado){
      if ( error === null ){
@@ -75,6 +78,7 @@ router.delete("/:id", function(req, res){
     })
 });
   
+//actualizacion por id de un usuario en la base de datos
 router.put("/:id", function(req, res){
     Usuario.updateOne( {_id : req.params.id} , req.body, function(error, respuesta){
         if ( error === null ){
@@ -84,6 +88,5 @@ router.put("/:id", function(req, res){
         }   
     });   
 });
-
 
 module.exports = router;

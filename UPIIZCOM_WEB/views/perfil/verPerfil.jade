@@ -14,7 +14,8 @@ block CONTENIDO
                     .h-100
                         h5.mb-1 #{datos.nombre}
                         p.mb-0.font-weight-bold.text-sm #{datos.programa} / #{datos.boleta}
-                .col-lg-4.col-md-6.my-sm-auto.ms-sm-auto.me-sm-0.mx-auto.mt-3
+
+                //.col-lg-4.col-md-6.my-sm-auto.ms-sm-auto.me-sm-0.mx-auto.mt-3
                     .nav-wrapper.position-relative.end-0
                         ul.nav.nav-pills.nav-fill.p-1.bg-transparent(role='tablist')
                             li.nav-item
@@ -55,10 +56,14 @@ block CONTENIDO
                 section.py-3
                     .row
                         .col-md-8.me-auto.text-left
-                            h5 Bienvenido, usuario #{datos.nombre}
-                            p Su numero de boleta es #{datos.boleta}
-                            p Pertenece a la carrera #{datos.programa}
-                            p Su correo asociado es #{datos.email}
+                            h5 Bienvenido, usuario #{usuario.datos.nombre}
+                            p Su numero de boleta es #{usuario.username}
+                            p Pertenece a la carrera #{usuario.datos.programa.carrera} 
+                            p Del #{usuario.datos.programa.carrera} #{usuario.datos.programa.semestre} semestre 
+                            p Su correo asociado es #{usuario.datos.email}
+                            p Su telefono de contacto #{usuario.datos.noTelefono}
+                            p Pertenece a los grupos #{usuario.grupos}
+
                 // ESTE COMPONETE ES DE PRUEBA
                 #COMPONENTE.container-fluid
                     h1 {{saludo}} 
@@ -113,7 +118,8 @@ block CONTENIDO
                                 td
                                     input.btn-danger(type='button' value='Eliminar' ng-click='delUsuario($index)')
                                 td
-                                    input.btn-link(type='button' value='Editar' ng-click='editUsuario($index)')                           
+                                    input.btn-link(type='button' value='Editar' ng-click='editUsuario($index)')  
+                                       
 block SCRIPTS
     script(src='../../assets/js/angular/A_Usuarios.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')
