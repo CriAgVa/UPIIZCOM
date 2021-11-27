@@ -32,99 +32,121 @@
                  });
         }
 
-        $scope.addUsuarioNuevo = function ( usuario ){
+        $scope.addUsuarioNuevo = function ( usr ){
             var arreglo_integrantes = new Array(); // = $scope.grupo.integrantes.split(",");
             var arreglo_grupos = new Array();
             var arreglo_grupos_og = new Array();
 
             var grupo = $scope.grupo;
-            var usuario;
 
-            $http.get("/usuario/nu"+$scope.searchResult[usuario]._id)
+            var usuario = {};
+
+            var terminado = new Array();
+            terminado[0] = false;
+            terminado[1] = false;
+
+            $http.get("/usuario/nu"+$scope.searchResult[usr]._id)
                  .then(function(respuesta){
-                     console.log("respuesta")
-                     console.log(respuesta);
-                     usuario = respuesta.data;
-                     
-                    if (usuario.grupos == ""){
-                        console.log("usuario sin grupos");
-                        arreglo_grupos[0] = grupo._id;
+                     usuario = respuesta.data; 
+                    console.log("USUARIO")
+                     console.log(usuario)
+                     console.log("GRUPO")
+                     console.log(grupo)
 
-                        console.log(usuario);
-                        usuario.grupos = arreglo_grupos;
+                     console.log((grupo.integrantes.indexOf(usuario._id)))
+                    if(grupo.integrantes.indexOf(usuario._id) > -1){ 
+                        terminado[0] = false;
                     }else{
-                        console.log("usuario con grupos");
-
-                        arreglo_grupos = usuario.grupos;
-                        arreglo_grupos_og = usuario.grupos;
-
-                        console.log("ARROG");
-                        console.log(arreglo_grupos_og);
-
-                        console.log(arreglo_grupos);
-                        arreglo_grupos.push(grupo._id);
-                        
-                        
-                        usuario.grupos = arreglo_grupos;
+                        if (usuario.grupos == ""){
+                            console.log("usuario sin grupos");
+                            arreglo_grupos.push( grupo._id);                 
+                            usuario.grupos = arreglo_grupos;
+                            terminado[0] = true;
+                        }else{
+                            console.log("usuario con grupos");
+                            arreglo_grupos = usuario.grupos;
+                            arreglo_grupos_og = usuario.grupos;
+                            arreglo_grupos.push(grupo._id);
+                            usuario.grupos = arreglo_grupos; 
+                            terminado[0]=true;
+                        }
                     }
-                    if ($scope.grupo.integrantes == ""){
+
+                    
+                    if (grupo.integrantes == ""){
                         console.log("grupo sin integrantes");
-                        arreglo_integrantes[0] = usuario._id;
-
+                        arreglo_integrantes.push(usuario._id);
+                        grupo.integrantes = grupo.integrantes.split(",");
                         grupo.integrantes = arreglo_integrantes;
-                        console.log(arreglo_integrantes);
+                        grupo.noIntegrantes = 1;
+                        terminado[1] = true;
                     }else{
-                        var bandera;
-
+                        /*
                         console.log("grupo con integrantes");
-                        var arrIntAux = new Array;
-                        arreglo_integrantes = grupo.integrantes.split(",");
-                        arrIntAux.push(arreglo_integrantes);
-
+                        var bandera;
+                        var arrIntAux = new Array();
+                        console.log(arreglo_integrantes);
+                        arreglo_integrantes.push(grupo.integrantes);
+                        console.log(arreglo_integrantes);
+                        arrIntAux = arreglo_integrantes;
+                        console.log(arrIntAux)
+                        console.log(arrIntAux.length)
                         for(var i = 0; i < arrIntAux.length; i++){
-                            if (arrIntAux[0][i] == usuario._id){
+                            if (arrIntAux[i] == usuario._id){
+                                console.log("TRUE");
                                 bandera = true;
+                                break;
                             } else {
+                                console.log("FALSE");
                                 bandera = false;
                             }
                         }
 
                         if (bandera == true ){
                             console.log("el usuario ya pertenece a este grupo");
-                            
-                            console.log("ARROG");
-                            console.log(arreglo_grupos_og);
-
-                            grupo.integrantes = arreglo_integrantes;
-                            usuario.grupos = arreglo_grupos_og;
+                            terminado[0]=false;
+                            terminado[1]=false;
                         }else{
                             console.log("usuario nuevo");
-                            console.log(usuario.grupos);
                             arreglo_integrantes.push( usuario._id );
-
                             grupo.integrantes = arreglo_integrantes;
                             grupo.noIntegrantes = grupo.noIntegrantes+1;
-
-                            console.log(grupo.noIntegrantes);
-                            usuario.grupos = arreglo_grupos;
+                            terminado[1]=false;
                         }
-                    }
 
-                    console.log($scope.grupo)
-                    console.log(respuesta.data)
+                        */
+                        console.log("grupo con integrantes");
+                        arreglo_integrantes.push(usuario._id);
+                        if(typeof(grupo.integrantes) == "string"){
+                            var arrAux = grupo.integrantes.split(",");
+                            for (var i = 0; i < arrAux.length; i++){
+                                arreglo_integrantes.push( arrAux[i] );
+                            }
+                        }else{
+                            for (var i = 0; i < grupo.integrantes.length; i++){
+                                arreglo_integrantes.push( grupo.integrantes[i] );
+                            }
+                        }
+                        
+                        grupo.integrantes = arreglo_integrantes;
+                        console.log(grupo.noIntegrantes);
+                        grupo.noIntegrantes = grupo.noIntegrantes+1;
+                        terminado[1]=true;
+                    }
                     
-                 }).then(function (respuesta){
-                    $http.put("/grupo/"+grupo._id, grupo )
-                        .then(function(respuesta){
-                            console.log(respuesta);
-                    });
-                            
-                    $http.put("/usuario/"+usuario._id, usuario)
-                        .then(function(respuesta){
-                            console.log(respuesta);
-                    }); 
-                 });  
-                 
+                    if (terminado[0] == true && terminado[1] == true){     
+                        console.log("ENTRE")
+                        $http.put("/usuario/"+usuario._id, usuario)
+                            .then(function(respuesta){
+                                console.log(respuesta);
+                        });
+                        $http.put("/grupo/"+grupo._id, grupo )
+                            .then(function(respuesta){
+                                console.log(respuesta);
+                        });
+                    }
+                 }); 
+                 //$window.location.reload();      
         }
 
         $scope.borrarGrupo = function(id){
