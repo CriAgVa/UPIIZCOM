@@ -1,10 +1,10 @@
+require("dotenv").config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require("express-session"); //Para manejo de sesiones
 var logger = require('morgan');
-
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://127.0.0.1/UPIIZCOM");
 
@@ -48,6 +48,8 @@ app.use('/grupos', gruposRouter);
 app.use('/grupo', grupoRouter);
 app.use('/usuario', usuarioRouter);
 
+app.use(require('./routes/index'));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -64,4 +66,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+app.listen(3001, function(){
+  console.log('Servidor escuchando en', this.address().port);
+});
 module.exports = app;

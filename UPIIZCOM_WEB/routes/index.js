@@ -7,6 +7,34 @@ var mongoose = require("mongoose");
 
 var sesion = new Object();
 
+const webpush = require("../webpush");
+let pushSubscripton;
+
+router.post("/subscription", async (req, res) => {
+  pushSubscripton = req.body;
+  console.log(pushSubscripton);
+
+  // Respuesta del servidor
+  res.status(201).json();
+});
+
+router.post("/new-message", async (req, res) => {
+  const { message } = req.body;
+  const { title } = req.body;
+  // Payload Notification
+  const payload = JSON.stringify({
+    title,
+    message 
+  });
+  res.status(200).json();
+  try {
+    await webpush.sendNotification(pushSubscripton, payload);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
 /* GET home page. */
 router.get('/login', function(req, res, next) {
   res.render('login', { title: 'Express', color: 'blue' });
@@ -86,6 +114,10 @@ router.get('/grupos', manejador_sesiones(), function(req, res, next) {
 
 router.get('/nuevoGrupo', manejador_sesiones(), function(req, res, next) {
   res.render("grupos/nuevoGrupo.jade", {datos: sesion, title: "Creacion grupo"} );
+});
+
+router.get('/nuevaNotificacion', manejador_sesiones(), function(req, res, next) {
+  res.render("notificacion/nuevaNotificacion.jade", {datos: sesion, title: "Gestor de Notificaciones"} );
 });
 
 router.get('/editarGrupo/:id', manejador_sesiones(), function(req, res, next) {
