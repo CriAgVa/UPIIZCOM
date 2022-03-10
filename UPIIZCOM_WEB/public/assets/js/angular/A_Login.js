@@ -19,6 +19,12 @@
                }); 
       }
 
+      $scope.myFunction = function(){
+        const boleta = document.querySelector('#boleta');
+        //Sacamos de algun tipo de input
+        Android.showToast(JSON.stringify(boleta.value));
+      }
+
       
     });  
 })();

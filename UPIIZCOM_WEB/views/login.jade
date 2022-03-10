@@ -4,6 +4,7 @@ block SCRIPTS
     //- script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js')
     //- script(src="../assets/js/A_Validaciones.js"); 
     script(src="../assets/js/angular/A_login.js") 
+
     
 
 block CONTENIDO_GENERAL
@@ -28,7 +29,7 @@ block CONTENIDO_GENERAL
                                 
                                 form.text-start(ng-controller='LoginCtrl' name='myForm' novalidate='')
                                     .mb-3
-                                        input.form-control(type='text' placeholder='Boleta' aria-label='Usuario' ng-model='username' name='usuario' required='')
+                                        input#boleta.form-control(type='text' placeholder='Boleta' aria-label='Usuario' ng-model='username' name='usuario' required='')
                                         span(style='color:red' ng-show='myForm.usuario.$dirty && myForm.usuario.$invalid')
                                         span(ng-show='myForm.usuario.$error.required') El usuario es requerido
                                     .mb-3
@@ -39,7 +40,7 @@ block CONTENIDO_GENERAL
                                         input#rememberMe.form-check-input(type='checkbox')
                                         label.form-check-label(for='rememberMe') Recuérdame
                                     .text-center
-                                        button.btn.bg-gradient-info.w-100.my-3.mb-2(type='button' ng-click="makeLogin()") Iniciar sesión
+                                        button.btn.bg-gradient-info.w-100.my-3.mb-2(type='button' ng-click="makeLogin(); myFunction();") Iniciar sesión
                             .text-center.pt-3.pb-1
                                 p.text-xs
                                     | ¿Olvidaste tu contraseña?
@@ -49,7 +50,8 @@ block CONTENIDO_GENERAL
  
 
         //- script(src='../assets/js/login.js')
-        iframe(src='../bases/footer.html' scrolling='no' noresize='noresize' width='100%')                                          
+        iframe(src='../bases/footer.html' scrolling='no' noresize='noresize' width='100%')
+        script(src="../assets/js/angular/A_AndroidTests.js")                                           
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/bootstrap.min.js')
         script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/perfect-scrollbar.min.js')
