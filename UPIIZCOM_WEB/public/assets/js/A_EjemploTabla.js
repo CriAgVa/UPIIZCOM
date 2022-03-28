@@ -13,6 +13,7 @@
 
         //////////////////////////////////////////////////////////Notificaciones funciones
         $scope.successSubscription = async function(){
+
             //Las llaves se generan una vez por proyecto, intentar no mover que no sé desuscribir
             const PUBLIC_VAPID_KEY = "BAJsV1r7TlO6xgRYruDPqcZaXg1k0kY56bVnymq4uUg9Gsf7XS6qYYjtisRDcFhhJWBmBVJd9fkOnDGjSrqpgFM";
             //funcion para construccion del mensaje
@@ -28,6 +29,9 @@
             }
             return outputArray;
             }
+
+ 
+
             /////////////////////////////Inicio de la funcion de suscripcion persé
                 // Service Worker
                 console.log("Registering a Service worker");
@@ -57,7 +61,7 @@
 
                 await fetch('/new-message', {
                 method: 'POST',
-                body: JSON.stringify({message: 'Prueba de suscripcion', title:'Estás suscrito' }),
+                body: JSON.stringify({message: 'Inicio correcto', title:'Bienvenido' }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -66,9 +70,9 @@
 
                 
             // Detectamos errores
-            if ("serviceWorker" in navigator) {
-                subscription().catch(err => console.log(err));
-            }
+            //if ("serviceWorker" in navigator) {
+           //     subscription().catch(err => console.log(err));
+          //  }
   
          }
 
@@ -94,6 +98,19 @@
             }
             
         }
+
+        $scope.unSuscribe = async function(){
+            navigator.serviceWorker.ready.then(function(reg) {
+                reg.pushManager.getSubscription().then(function(subscription) {
+                  subscription.unsubscribe().then(function(successful) {
+                    // You've successfully unsubscribed
+                  }).catch(function(e) {
+                    // Unsubscribing failed
+                  })
+                })
+              });
+              console.log("Desuscrito");
+         }
 ///////////////////////////////////////////////////Fin de funciones de notificaciones
 
         $scope.ocultaMuestra = function(){

@@ -56,13 +56,9 @@ block CONTENIDO
                 section.py-3
                     .row
                         .col-md-8.me-auto.text-left
-                            h5 Bienvenido, usuario #{usuario.datos.nombre}
-                            p Su numero de boleta es #{usuario.username}
-                            p Pertenece a la carrera #{usuario.datos.programa.carrera} 
-                            p Del #{usuario.datos.programa.carrera} #{usuario.datos.programa.semestre} semestre 
-                            p Su correo asociado es #{usuario.datos.email}
-                            p Su telefono de contacto #{usuario.datos.noTelefono}
-                            p Pertenece a los grupos #{usuario.grupos}
+                            h5 Bienvenido, usuario #{datos.nombre}
+                            p Su numero de boleta es #{datos.boleta}
+                            p Su correo asociado es #{datos.email}
 
                 // ESTE COMPONETE ES DE PRUEBA
                 #COMPONENTE.container-fluid
