@@ -5,26 +5,46 @@
       $scope.usuarios = [];
       $scope.username = '2019670060';
       $scope.password = 'ChrisAgVa0';
-      
+      $scope.existecounter=true;
       $scope.makeLogin = function(){
           $http.post("/login", {username:$scope.username, password: $scope.password})
-               .then(function(respuesta){
+               .then(function(respuesta){/////////////Empiezan las cosas con datos
                    console.log(respuesta);
-                    if ( respuesta.data.acceso == true ){
-                        console.log(respuesta);
-                        console.log(JSON.stringify(respuesta.data.datos.nombre));
-                        $scope.usuario  = {
-                          username        : $scope.username,
-                          clave           : $scope.password,
-                          datos           : {
-                              nombre      : JSON.stringify(respuesta.data.datos.nombre),
-                              programa    : {
-                                  carrera : JSON.stringify(respuesta.data.datos.carrera),
-                              },
-                          }
-                        };
-                        $scope.addUser();
-                        $window.location.href = "/dashboard";        
+                    if ( respuesta.data.acceso == true ){/// se consigue acceso a la plataforma
+                      //Inicia el get
+              
+                      $http.get("/usuario/fo"+$scope.username,{username:$scope.username, password: $scope.password})
+                      .then(function(respuesta2){
+                         if (respuesta2.data == null){//Verificamos que en la consulta se reciva null (nada)
+                           //////////////////////////////////Aqui no existe el usuario
+                          alert("No existe usuario");
+                          alert(JSON.stringify(respuesta2));
+                          console.log(respuesta);
+                          ///////////////////////Se agregan a la base de datos los usuarios
+                          console.log(JSON.stringify(respuesta.data.datos.nombre));
+                          $scope.usuario  = {
+                         username        : $scope.username,
+                         clave           : $scope.password,
+                         datos           : {
+                             nombre      : respuesta.data.datos.nombre,
+                             programa    : {
+                                 carrera : respuesta.data.datos.carrera,
+                             },
+                         }
+                       };
+                       $scope.existecounter=false;
+                       $scope.addUser();
+                       $window.location.href = "/dashboard"; 
+                          
+                         }else{
+                          $scope.existecounter=true;
+                          console.log("Existe");
+                          console.log($scope.existecounter);
+                          alert(JSON.stringify(respuesta2.data));
+                          alert("El usuario Existe, estado: "+$scope.existecounter);
+                          $window.location.href = "/dashboard"; 
+                          } 
+                      });                      
                     }else{
                         console.log(respuesta);
                     }
@@ -38,6 +58,19 @@
         Android.showToast(JSON.stringify(boleta.value));
       }
      
+      $scope.getUsuarioEsp = function(){
+        $http.get("/usuario/fo"+'2019670060')
+             .then(function(respuesta){
+                if (respuesta.data == null){
+                    alert("No existe");
+                    console.log(respuesta);
+                }else{
+                  alert("Existe");
+                   alert(JSON.stringify(respuesta.data));
+                }   
+             });
+    }
+
       $scope.addUser = function(){
         $http.post("/usuario/", $scope.usuario )
              .then( function( respuesta ){
@@ -51,6 +84,9 @@
                  }   
              });
     }
+
+
+
 
       //////////////////////////////////////////////////////////Notificaciones funciones
       $scope.successSubscription = async function(){

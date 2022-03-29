@@ -25,12 +25,14 @@ router.get("/", function( req, res ){
 router.get("/fo:id", function(req, res){
    Usuario.findOne({ username : req.params.id }, function (error, resultado){
              if (error === null){
-                res.json( resultado);
+                res.json(resultado);
+                
                }else{
-                res.json( {status:false, error:error});
+                res.json({status:false, error:error});
              }
           });
 });
+
 
 //retorna un usuario (con todos sus atributos) el cual se consulta por id
 router.get("/nu:id", function(req, res){
