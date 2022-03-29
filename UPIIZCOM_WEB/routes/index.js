@@ -41,7 +41,7 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/dashboard', manejador_sesiones(), function(req, res, next) {
-  res.render('index', {datos: sesion, title: 'Timeline' });
+  res.render('index', {datos: req.session, title: 'Timeline' });
 });
 
 router.post("/login", function(req, res, next){
@@ -66,13 +66,6 @@ router.post("/login", function(req, res, next){
         _SESSION.CARRERA = respuesta.data.datos.Carrera;
         console.log(_SESSION);
         res.json({"acceso": true, datos : { nombre: _SESSION.NOMBRE, carrera: _SESSION.CARRERA }})
-        sesion = {
-          nombre  : req.session.NOMBRE,
-          boleta  : req.session.BOLETA, 
-          programa: req.session.CARRERA,
-          semestre: req.session.SEMESTRE,
-          email   : req.session.EMAIL
-        };
         /*
         {{usuario.tipo}}
         {{usuario.username}}
@@ -109,15 +102,30 @@ router.get('/navbar', manejador_sesiones(), function(req, res, next) {
 });
 
 router.get('/grupos', manejador_sesiones(), function(req, res, next) {
-  res.render("grupos/vistaGrupos.jade", {datos: sesion, title: "Grupos"} );
+  res.render("grupos/vistaGrupos.jade", {datos: req.session, title: "Grupos"} );
+});
+
+router.get('/directorio', manejador_sesiones(), function(re, res, next){
+  res.render("chat/directorio", {datos: req.session, title: "Mensajes"});
+});
+
+/* GET home page. */
+router.get('/chat', manejador_sesiones(), function(req, res, next) {
+  res.render('chat/directorio', { title: 'MongoChat', datos: req.session });
+});
+
+/* GET home page. */
+router.get('/chat/s:sala', manejador_sesiones(),function(req, res, next) {
+  var sala = req.params.sala;
+  res.render('chat/chat', { title: 'Sala '+sala, datos: req.session, sala: sala });
 });
 
 router.get('/nuevoGrupo', manejador_sesiones(), function(req, res, next) {
-  res.render("grupos/nuevoGrupo.jade", {datos: sesion, title: "Creacion grupo"} );
+  res.render("grupos/nuevoGrupo.jade", {datos: req.session, title: "Creacion grupo"} );
 });
 
 router.get('/nuevaNotificacion', manejador_sesiones(), function(req, res, next) {
-  res.render("notificacion/nuevaNotificacion.jade", {datos: sesion, title: "Gestor de Notificaciones"} );
+  res.render("notificacion/nuevaNotificacion.jade", {datos: req.session, title: "Gestor de Notificaciones"} );
 });
 
 router.get('/editarGrupo/:id', manejador_sesiones(), function(req, res, next) {
@@ -128,7 +136,7 @@ router.get('/editarGrupo/:id', manejador_sesiones(), function(req, res, next) {
       .exec( function (error , resultado ){
           console.log(resultado);
           if ( error === null ){
-            res.render("grupos/editarGrupo", {datos: sesion, numero: id, grupo: resultado, title: "Edicion grupo"} );
+            res.render("grupos/editarGrupo", {datos: req.session, numero: id, grupo: resultado, title: "Edicion grupo"} );
           }else{
             res.json( { status: false , error : error } );
           }
@@ -146,7 +154,7 @@ router.get('/anadirMiembros/:id', manejador_sesiones(), function(req, res, next)
           console.log(resultado.integrantes);
           if ( error === null ){
             console.log(resultado);
-            res.render("grupos/anadirMiembros", {datos: sesion, numero: id, grupo: resultado, title: "Edicion grupo"} );
+            res.render("grupos/anadirMiembros", {datos: req.session, numero: id, grupo: resultado, title: "Edicion grupo"} );
           }else{
             res.json( { status: false , error : error } );
           }
@@ -162,7 +170,7 @@ console.log(req.params.id)
   Grupo.findOne({_id : id})
        .exec(function (error, resultado){
         if(error === null){
-          res.render("grupos/perfilGrupo", {datos: sesion, grupo: resultado, numero: id, title: "Grupos"} );
+          res.render("grupos/perfilGrupo", {datos: req.session, grupo: resultado, numero: id, title: "Grupos"} );
         }else{
           alert("Ocurrio un error")
         }
@@ -177,7 +185,7 @@ router.get('/perfil', manejador_sesiones(), function(req, res, next) {
          .exec( function (error, resultado){
             if (error === null){
               console.log(resultado)
-              res.render("perfil/verPerfil", {datos: sesion, title: "Perfil", usuario: resultado} );
+              res.render("perfil/verPerfil", {datos: req.session, title: "Perfil", usuario: resultado} );
             }else{
               res.json( {status:false, error:error});
             }

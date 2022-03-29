@@ -8,6 +8,7 @@
         $scope.registro_activo = -1;
         $scope.mostrar = 0;
         $scope.mostrar1 = 1;
+        $scope.nombre;
 
         $scope.grupos = [];
 
@@ -137,6 +138,21 @@
             $scope.searchResult = {};
         }
     
+        //funcion para redireccionar enviando el indice de la sala
+        $scope.selectSala = function(num, num2){
+            var boleta = $scope.usuarios[num].username;
+            var nombre = $scope.usuarios[num].datos.nombre;
+            
+            var sala; 
+            if (boleta < num2){
+                sala = boleta + "." + num2;
+            }else{
+                sala = num2 + "." + boleta;
+            }
+
+            $window.location.href = '/chat/s'+sala;
+        }
+
         //$scope.getBoletas();
         $scope.getUsuario();
     });

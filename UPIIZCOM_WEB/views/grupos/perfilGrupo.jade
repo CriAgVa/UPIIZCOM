@@ -1,7 +1,7 @@
 extends ../layout
 
 block CONTENIDO
-    div(ng-controller='TablaCtrl' ng-init=" id='#{grupo._id}' ")
+    div(ng-controller='TablaCtrl' ng-init=" id='#{grupo._id}'; nombre='#{grupo.nombre}'")
         h6 Bienvenido al grupo #{grupo.nombre}
         p es de tipo #{grupo.tipo} y su descripcion es #{grupo.descripcion}.
         p El grupo tiene actualmente #{grupo.noIntegrantes} 
@@ -12,6 +12,7 @@ block CONTENIDO
                     th Nombre 
                 tr(ng-repeat="m in miembros")
                     td {{m}}
+        button.btn.btn-icon.btn-3.btn-primary(ng-click="selectSala( nombre )") Enviar mensaje al grupo
 
 block SCRIPTS
     script(src='../assets/js/A_EjemploTabla.js')

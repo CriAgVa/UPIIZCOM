@@ -1,0 +1,54 @@
+#messages{
+    height:300px;
+    background: white;
+    overflow-y: scroll;
+  }
+  
+  .chat-message {
+    border: 1px solid #ddd;
+    padding: 8px 0px 8px 0px;
+    background: #F2F3F4;
+    margin: 4px;
+  }
+  
+  .chat-text{
+    padding-top: 4px;
+    padding-bottom: 2px;
+    padding-left: 15px;
+    font-size: 12px;
+  }
+  
+  .chat-name{
+    padding-left: 8px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .chat-time{
+    padding-right: 8px;
+    text-align: right;
+    font-size: 8px ;
+    font-style: italic;
+    color: #626567;
+  }
+  
+  .bdcolor{
+    border-color: #909497;
+    border-radius: 0%;
+  }
+  
+  .chat-file{
+    padding-top: 4px;
+    padding-bottom: 2px;
+    padding-left: 15px;
+    font-size: 12px;
+  }
+  
+  .c-icon{
+    display: inline-block;
+  }
+  
+  .c-file{
+    display: inline-block;
+    margin: 4px
+  }

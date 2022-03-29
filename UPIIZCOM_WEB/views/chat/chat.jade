@@ -1,0 +1,32 @@
+extends ../layout 
+block CONTENIDO
+    input#datos(type="text" value="#{sala}" style="visibility:hidden") 
+    input#boleta(type="text" value="#{datos.BOLETA}" style="visibility:hidden")
+    input#nombre(type="text" value="#{datos.NOMBRE}" style="visibility:hidden")
+    .container.contp 
+        .row(ng-controller="ChatCtrl") 
+            .col-md-6.offset-md-3.col-sm-12 
+                h1.text-center #{title}
+                div(id="status") 
+                div(id="chat")
+                    //input.form-control.bdcolor(type="text" id="username" placeholder="Enter name...")
+                    br
+                    .card.bdcolor 
+                        .card-block(id="messages")
+                    br
+                    textarea.form-control.bdcolor(id="textarea" placeholder="Enter message...")
+                    br
+                button.btn.btn-primary(ng-click="envioArchivo()") Adjuntar Archivo
+                div(ng-show="envio")
+                    form(action="/files/msg" method="POST" enctype="multipart/form-data")
+                        input(type="file" name="upload" id="upldFile")
+                        //input(type="submit" value="Upload" id="updtButton")
+                        input(type="submit" value="Upload" id="upldButton")
+    block scripts    
+        script(src='https://cdn.socket.io/4.4.1/socket.io.min.js' integrity='sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H' crossorigin='anonymous')
+        script(src="/socket.io/socket.io.js")
+        //script(src="../javascripts/client.js")
+        //script(src='/javascripts/angular/A_chat.js') 
+        script(src="../assets/js/client.js")
+        script(src="../assets/js/angular/A_Chat.js")
+                           

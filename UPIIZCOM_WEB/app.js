@@ -28,6 +28,8 @@ var usersRouter = require('./routes/users');
 var gruposRouter = require('./routes/vista_grupos');
 var grupoRouter = require('./routes/grupos');
 var usuarioRouter = require('./routes/usuarios');
+var chatsRouter = require('./routes/chats');
+var filesRouter = require('./routes/uploads');
 
 var app = express();
 
@@ -47,6 +49,8 @@ app.use('/users', usersRouter);
 app.use('/grupos', gruposRouter);
 app.use('/grupo', grupoRouter);
 app.use('/usuario', usuarioRouter);
+app.use('/chats', chatsRouter);
+app.use('/files', filesRouter);
 
 app.use(require('./routes/index'));
 

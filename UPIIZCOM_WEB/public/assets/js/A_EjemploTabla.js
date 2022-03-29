@@ -434,6 +434,10 @@
             $scope.searchResult = {};
         }
 
+        $scope.selectSala = function(name){
+            $window.location.href = '/chat/s'+name;
+        };
+
         $scope.getGrupo();
     });
 
