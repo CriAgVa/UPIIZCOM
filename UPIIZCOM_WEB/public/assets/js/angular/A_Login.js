@@ -6,30 +6,40 @@
       $scope.username = '2019670060';
       $scope.password = 'ChrisAgVa0';
       
+      /////Funcion para el logueo
       $scope.makeLogin = function(){
-          $http.post("/login", {username:$scope.username, password: $scope.password})
-               .then(function(respuesta){
-                   console.log(respuesta);
-                    if ( respuesta.data.acceso == true ){
-                        console.log(respuesta);
-                        console.log(JSON.stringify(respuesta.data.datos.nombre));
+        $http.post("/login", {username:$scope.username, password: $scope.password})
+             .then(function(respuesta){/////////////Empiezan las cosas con datos para la respuesta desde la pagina
+                 console.log(respuesta);
+                  if ( respuesta.data.acceso == true ){/// Existen los datos en gesco
+                    /////////////////////////////////////Inicia el get para sacar los datos dada la boleta
+                    $http.get("/usuario/fo"+$scope.username,{username:$scope.username, password: $scope.password})//Esta linea checa la existencia del usuario en la bd
+                    .then(function(respuesta2){////Si el resultado da nulo agregamos los datos del usuario logueado
+                       if (respuesta2.data == null){//Verificamos que en la consulta se reciva null (nada)
                         $scope.usuario  = {
-                          username        : $scope.username,
-                          clave           : $scope.password,
-                          datos           : {
-                              nombre      : JSON.stringify(respuesta.data.datos.nombre),
-                              programa    : {
-                                  carrera : JSON.stringify(respuesta.data.datos.carrera),
-                              },
-                          }
-                        };
-                        $scope.addUser();
-                        $window.location.href = "/dashboard";        
-                    }else{
-                        console.log(respuesta);
-                    }
-               }); 
-      }
+                       username        : respuesta.data.datos.boleta,
+                       clave           : $scope.password,
+                       datos           : {
+                           email       : respuesta.data.datos.mail,
+                           nombre      : respuesta.data.datos.nombre,
+                           programa    : {
+                               carrera : respuesta.data.datos.carrera,
+                           },
+                       }
+                     };
+                     $scope.addUser();
+                     $window.location.href = "/dashboard"; 
+                     
+                       }else{///En cualquier otro caso tenemos acceso directo a la plataforma
+                        $window.location.href = "/dashboard"; 
+                        
+                        } 
+                    });                      
+                  }else{////Los datos de logueo no existen en GESCO
+                      console.log(respuesta);
+                  }
+             }); 
+    }
 
 
       $scope.myFunction = function(){
@@ -102,7 +112,7 @@
 
             await fetch('/new-message', {
             method: 'POST',
-            body: JSON.stringify({message: 'Inicio correcto', title:'Bienvenido' }),
+            body: JSON.stringify({message: 'Inicio correcto', title:'Notificaciones Activas' }),
             headers: {
                 'Content-Type': 'application/json'
             }

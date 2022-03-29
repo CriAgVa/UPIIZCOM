@@ -65,7 +65,7 @@ router.post("/login", function(req, res, next){
         _SESSION.TOKEN  = respuesta.data.datos.token;
         _SESSION.CARRERA = respuesta.data.datos.Carrera;
         console.log(_SESSION);
-        res.json({"acceso": true, datos : { nombre: _SESSION.NOMBRE, carrera: _SESSION.CARRERA }})
+        res.json({"acceso": true, datos : { nombre: _SESSION.NOMBRE, boleta:_SESSION.BOLETA, carrera: _SESSION.CARRERA, mail:_SESSION.EMAIL }})
         /*
         {{usuario.tipo}}
         {{usuario.username}}
