@@ -145,6 +145,10 @@ router.get('/nuevaNotificacion', manejador_sesiones(), function(req, res, next) 
   res.render("notificacion/nuevaNotificacion.jade", {datos: req.session, title: "Gestor de Notificaciones"} );
 });
 
+router.get('/FAQ', manejador_sesiones(), function(req, res, next) {
+  res.render("FAQ/FAQ.jade", {datos: req.session, title: "Gestor de Notificaciones"} );
+});
+
 router.get('/editarGrupo/:id', manejador_sesiones(), function(req, res, next) {
   id = req.params.id;
   //Utilizando un Modelo

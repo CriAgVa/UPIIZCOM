@@ -1,0 +1,276 @@
+extends ../layout
+
+block CONTENIDO
+    h1.titulo Preguntas Frecuentes
+      #categorias.categorias
+        .categoria.activa(data-categoria='noticias')
+          svg#Layer_1(version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 512 512' style='enable-background:new 0 0 512 512;' xml:space='preserve')
+            g
+              g
+                path(d='M503.847,281.546c4.504,0,8.153-3.649,8.153-8.153V164.688c0-23.676-19.262-42.938-42.938-42.938h-61.418V69.028\
+                c0-4.504-3.649-8.153-8.153-8.153H8.153C3.649,60.875,0,64.524,0,69.028v247.847c0,4.504,3.649,8.153,8.153,8.153\
+                c4.504,0,8.153-3.649,8.153-8.153V207.626h375.032v182.309v0.859c0,17.348,7.36,33.009,19.121,44.025H60.331\
+                c-24.276,0-44.026-19.75-44.026-44.026v-30.437c0-4.504-3.649-8.153-8.153-8.153c-4.504,0-8.153,3.649-8.153,8.153v30.437\
+                c0,33.267,27.064,60.331,60.331,60.331h391.338c0,0,0.001,0,0.002,0c0.003,0,0.008,0,0.011,0c15.929,0,30.911-6.126,42.287-17.313\
+                C505.596,422.377,512,407.1,512,390.794v-73.919c0-4.504-3.649-8.153-8.153-8.153s-8.153,3.649-8.153,8.153v73.919\
+                c0,11.899-4.673,23.048-13.158,31.392c-8.392,8.255-19.469,12.712-31.247,12.624c-1.701-0.014-3.401-0.13-5.088-0.342\
+                c-21.651-2.765-38.558-21.811-38.558-44.532v-60.56h26.633c4.504,0,8.153-3.649,8.153-8.153V164.688\
+                c0-14.686,11.947-26.633,26.633-26.633s26.633,11.947,26.633,26.633v108.705C495.694,277.896,499.344,281.546,503.847,281.546z\
+                M391.338,191.321H16.306V77.18h375.032V191.321z M426.123,164.688V313.07h-18.48V138.055h27.759\
+                C429.595,145.38,426.123,154.636,426.123,164.688z')
+            g
+              g
+                path(d='M112.51,95.66c-4.504,0-8.153,3.649-8.153,8.153v38.836L66.521,98.507c-4.824-5.627-14.343-2.088-14.343,5.306v60.875\
+                c0,4.504,3.649,8.153,8.153,8.153c4.504,0,8.153-3.649,8.153-8.153v-38.836l37.836,44.141c4.829,5.634,14.343,2.081,14.343-5.306\
+                v-60.875C120.662,99.309,117.013,95.66,112.51,95.66z')
+            g
+              g
+                path(d='M182.081,156.535h-35.329v-18.48h17.936c4.504,0,8.153-3.649,8.153-8.153s-3.649-8.153-8.153-8.153h-17.936v-9.783h35.329\
+                c4.504,0,8.153-3.649,8.153-8.153s-3.649-8.153-8.153-8.153h-43.482c-4.504,0-8.153,3.649-8.153,8.153v60.875\
+                c0,4.504,3.649,8.153,8.153,8.153h43.482c4.504,0,8.153-3.649,8.153-8.153C190.234,160.184,186.584,156.535,182.081,156.535z')
+            g
+              g
+                path(d='M279.981,95.974c-4.329-1.242-8.843,1.269-10.078,5.598l-10.842,37.943l-8.536-21.339\
+                c-1.239-3.096-4.236-5.125-7.57-5.125s-6.331,2.029-7.57,5.125l-8.536,21.339l-10.842-37.943c-1.237-4.33-5.753-6.84-10.078-5.598\
+                c-4.329,1.237-6.836,5.749-5.598,10.078l17.393,60.875c0.958,3.352,3.941,5.724,7.422,5.903c3.5,0.195,6.691-1.877,7.987-5.115\
+                l9.823-24.558l9.823,24.558c1.244,3.107,4.249,5.125,7.568,5.125c0.139,0,0.278-0.003,0.419-0.011\
+                c3.482-0.178,6.465-2.55,7.422-5.903l17.393-60.875C286.818,101.724,284.31,97.212,279.981,95.974z')
+            g
+              g
+                path(d='M347.312,130.446h-35.329v-18.48h35.329c4.504,0,8.153-3.649,8.153-8.153s-3.649-8.153-8.153-8.153H303.83\
+                c-4.504,0-8.153,3.649-8.153,8.153v34.786c0,4.504,3.649,8.153,8.153,8.153h35.329v9.783H303.83c-4.504,0-8.153,3.649-8.153,8.153\
+                c0,4.504,3.649,8.153,8.153,8.153h43.482c4.504,0,8.153-3.649,8.153-8.153v-26.089\
+                C355.465,134.095,351.816,130.446,347.312,130.446z')
+            g
+              g
+                path(d='M164.688,226.106H60.331c-4.504,0-8.153,3.649-8.153,8.153v86.964c0,4.504,3.649,8.153,8.153,8.153h104.357\
+                c4.504,0,8.153-3.649,8.153-8.153v-86.964C172.841,229.755,169.192,226.106,164.688,226.106z M156.535,313.07H68.484v-70.658\
+                h88.051V313.07z')
+            g
+              g
+                path(d='M347.312,269.588h-121.75c-4.504,0-8.153,3.649-8.153,8.153c0,4.504,3.649,8.153,8.153,8.153h121.75\
+                c4.504,0,8.153-3.649,8.153-8.153C355.465,273.237,351.816,269.588,347.312,269.588z')
+            g
+              g
+                path(d='M347.312,226.106h-121.75c-4.504,0-8.153,3.649-8.153,8.153s3.649,8.153,8.153,8.153h121.75\
+                c4.504,0,8.153-3.649,8.153-8.153S351.816,226.106,347.312,226.106z')
+            g
+              g
+                path(d='M347.312,313.07h-121.75c-4.504,0-8.153,3.649-8.153,8.153s3.649,8.153,8.153,8.153h121.75\
+                c4.504,0,8.153-3.649,8.153-8.153S351.816,313.07,347.312,313.07z')
+            g
+              g
+                path(d='M347.312,356.552h-121.75c-4.504,0-8.153,3.649-8.153,8.153s3.649,8.153,8.153,8.153h121.75\
+                c4.504,0,8.153-3.649,8.153-8.153S351.816,356.552,347.312,356.552z')
+            g
+              g
+                path(d='M173.384,356.552H51.635c-4.504,0-8.153,3.649-8.153,8.153s3.649,8.153,8.153,8.153h121.749\
+                c4.504,0,8.153-3.649,8.153-8.153S177.888,356.552,173.384,356.552z')
+            g
+              g
+                path(d='M173.384,400.034H51.635c-4.504,0-8.153,3.649-8.153,8.153c0,4.504,3.649,8.153,8.153,8.153h121.749\
+                c4.504,0,8.153-3.649,8.153-8.153C181.537,403.683,177.888,400.034,173.384,400.034z')
+            g
+              g
+                path(d='M347.312,400.034h-121.75c-4.504,0-8.153,3.649-8.153,8.153c0,4.504,3.649,8.153,8.153,8.153h121.75\
+                c4.504,0,8.153-3.649,8.153-8.153C355.465,403.683,351.816,400.034,347.312,400.034z')
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+          p Noticias
+        .categoria(data-categoria='app')
+          svg#Capa_1(version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 24.637 24.637' style='enable-background:new 0 0 24.637 24.637;' xml:space='preserve')
+            g
+              path(d='M18.537,6.945H1.432C0.641,6.945,0,7.582,0,8.369v14.262c0,0.785,0.641,1.426,1.432,1.426h17.105\
+              c0.785,0,1.426-0.641,1.426-1.426V8.369C19.963,7.582,19.322,6.945,18.537,6.945z M6.817,8.016c0.395,0,0.712,0.318,0.712,0.713\
+              c0,0.393-0.317,0.713-0.712,0.713c-0.392,0-0.71-0.32-0.71-0.713C6.107,8.334,6.426,8.016,6.817,8.016z M4.639,8.016\
+              c0.391,0,0.71,0.318,0.71,0.713c0,0.393-0.319,0.713-0.71,0.713c-0.397,0-0.717-0.32-0.717-0.713\
+              C3.922,8.334,4.241,8.016,4.639,8.016z M2.494,8.016c0.396,0,0.715,0.318,0.715,0.713c0,0.393-0.318,0.713-0.715,0.713\
+              c-0.39,0-0.709-0.32-0.709-0.713C1.785,8.334,2.104,8.016,2.494,8.016z M18.537,22.631H1.432V10.527h17.105\
+              C18.537,10.527,18.537,22.631,18.537,22.631z M18.537,9.101H8.559V8.387h9.979L18.537,9.101L18.537,9.101z')
+              path(d='M23.209,0.58H6.102c-0.79,0-1.426,0.637-1.426,1.426v4.133h1.426V4.162h17.107v12.104h-2.483v1.426h2.483\
+              c0.786,0,1.428-0.641,1.428-1.426V2.006C24.637,1.217,23.995,0.58,23.209,0.58z M7.17,3.076c-0.394,0-0.711-0.316-0.711-0.711\
+              c0-0.398,0.317-0.713,0.711-0.713c0.393,0,0.713,0.314,0.713,0.713C7.883,2.76,7.562,3.076,7.17,3.076z M9.309,3.076\
+              c-0.396,0-0.713-0.316-0.713-0.711c0-0.398,0.316-0.713,0.713-0.713c0.394,0,0.714,0.314,0.714,0.713\
+              C10.022,2.76,9.702,3.076,9.309,3.076z M11.494,3.076c-0.396,0-0.717-0.316-0.717-0.711c0-0.398,0.32-0.713,0.717-0.713\
+              c0.389,0,0.707,0.314,0.707,0.713C12.201,2.76,11.883,3.076,11.494,3.076z M23.209,2.734h-9.98V2.019h9.98V2.734z')
+              g
+              g
+              g
+              g
+              g
+              g
+              g
+              g
+              g
+              g
+              g
+              g
+              g
+              g
+              g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+            g
+          p Aplicación
+        .categoria(data-categoria='seguridad')
+          svg(viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill-rule='evenodd' clip-rule='evenodd')
+            path(d='M12 0c-3.371 2.866-5.484 3-9 3v11.535c0 4.603 3.203 5.804 9 9.465 5.797-3.661 9-4.862 9-9.465v-11.535c-3.516 0-5.629-.134-9-3zm0 1.292c2.942 2.31 5.12 2.655 8 2.701v10.542c0 3.891-2.638 4.943-8 8.284-5.375-3.35-8-4.414-8-8.284v-10.542c2.88-.046 5.058-.391 8-2.701zm5 7.739l-5.992 6.623-3.672-3.931.701-.683 3.008 3.184 5.227-5.878.728.685z')
+          p Seguridad
+        .categoria(data-categoria='cuenta')
+          svg(viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill-rule='evenodd' clip-rule='evenodd')
+            path(d='M9.484 15.696l-.711-.696-2.552 2.607-1.539-1.452-.698.709 2.25 2.136 3.25-3.304zm0-5l-.711-.696-2.552 2.607-1.539-1.452-.698.709 2.25 2.136 3.25-3.304zm0-5l-.711-.696-2.552 2.607-1.539-1.452-.698.709 2.25 2.136 3.25-3.304zm10.516 11.304h-8v1h8v-1zm0-5h-8v1h8v-1zm0-5h-8v1h8v-1zm4-5h-24v20h24v-20zm-1 19h-22v-18h22v18z')
+          p Cuenta
+      .preguntas
+        // Preguntas Noticias
+        .contenedor-preguntas.activo(data-categoria='noticias')
+          .contenedor-pregunta
+            p.pregunta
+              | ¿Quién puede publicar noticias? 
+              img(src='../assets/img/suma.svg' alt='Abrir Respuesta')
+            p.respuesta
+              | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.adipisicing elit.
+          .contenedor-pregunta
+            p.pregunta
+              | ¿Cuáles noticias puedo ver? 
+              img(src='../assets/img/suma.svg' alt='Abrir Respuesta')
+            p.respuesta
+              | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.
+        // Preguntas Generales
+        .contenedor-preguntas(data-categoria='app')
+          .contenedor-pregunta
+            p.pregunta
+              | ¿Cómo cerrar sesión? 
+              img(src='../assets/img/suma.svg' alt='Abrir Respuesta')
+            p.respuesta
+              | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.
+          .contenedor-pregunta
+            p.pregunta
+              | ¿Cómo puedo crear un grupo? 
+              img(src='../assets/img/suma.svg' alt='Abrir Respuesta')
+            p.respuesta
+              | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.
+        // Preguntas Seguridad
+        .contenedor-preguntas(data-categoria='seguridad')
+          .contenedor-pregunta
+            p.pregunta
+              | ¿Como puedo saber si son confiables? 
+              img(src='../assets/img/suma.svg' alt='Abrir Respuesta')
+            p.respuesta
+              | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.
+          .contenedor-pregunta
+            p.pregunta
+              | ¿Que pasa con mis datos personales? 
+              img(src='../assets/img/suma.svg' alt='Abrir Respuesta')
+            p.respuesta
+              | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.
+        // Preguntas Cuenta
+        .contenedor-preguntas(data-categoria='cuenta')
+          .contenedor-pregunta
+            p.pregunta
+              | ¿Cómo puedo ver los datos de mi cuenta? 
+              img(src='../assets/img/suma.svg' alt='Abrir Respuesta')
+            p.respuesta
+              | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.
+          .contenedor-pregunta
+            p.pregunta
+              | ¿Como puedo cambiar mi contraseña? 
+              img(src='../assets/img/suma.svg' alt='Abrir Respuesta')
+            p.respuesta
+              | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.adipisicing elit. Voluptatum laborum porro voluptates, sequi aliquam mollitia! Nostrum eius iure sapiente, voluptates soluta adipisci, perferendis voluptatibus eligendi vel saepe harum. Consectetur, doloribus.
+block SCRIPTS     
+    script(src='../assets/js/categorias.js')
+    script(src='../assets/js/preguntasFrecuentes.js')           
+    script(src='../assets/js/A_EjemploTabla.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/bootstrap.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/perfect-scrollbar.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/smooth-scrollbar.min.js')
+    //script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/choices.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/dropzone.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/quill.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/multistep-form.js')
+    script.
+        if (document.getElementById('edit-deschiption')) {
+            var quill = new Quill('#edit-deschiption', {
+                theme: 'snow' 
+            });
+        };
+
+        if (document.getElementById('choices-category')) {
+            var element = document.getElementById('choices-category');
+            const example = new Choices(element, {
+                searchEnabled: false
+            });
+        };
+
+        if (document.getElementById('choices-sizes')) {
+            var element = document.getElementById('choices-sizes');
+            const example = new Choices(element, {
+                searchEnabled: false
+            });
+        };
+
+        if (document.getElementById('choices-currency')) {
+            var element = document.getElementById('choices-currency');
+            const example = new Choices(element, {
+                searchEnabled: false
+            });
+        };
+
+        if (document.getElementById('choices-tags')) {
+            var tags = document.getElementById('choices-tags');
+            const examples = new Choices(tags, {
+                removeItemButton: true
+            });
+            examples.setChoices(
+                [{
+                    value: 'One',
+                    label: 'Expired',
+                    disabled: true
+                }, {
+                    value: 'Two',
+                    label: 'Out of Stock',
+                    selected: true
+                }],
+                'value',
+                'label',
+                false,
+            );
+        }
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/dragula/dragula.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/jkanban/jkanban.js')
+    script.
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    script(async='' defer='' src='https://buttons.github.io/buttons.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/soft-ui-dashboard.min.js?v=1.0.4')
