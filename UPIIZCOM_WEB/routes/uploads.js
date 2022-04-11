@@ -29,7 +29,7 @@ router.post('/', function(req, res){
    //https://www.section.io/engineering-education/uploading-files-using-formidable-nodejs/
    var form = new formidable.IncomingForm();
    //definition of the form options
-   const uploadFolder ='E:\\Capacitacionnode\\Capacitacion\\mongochat\\uploads';
+   const uploadFolder ='E:\\NewStuff\\Escuela\\8vo Semestre\\Ejercicios\\Espiral5\\Archivos';
    form.multiples = true;
    form.options.maxFileSize = 50 * 1024 * 1024;
    form.options.keepExtensions = true;
@@ -61,7 +61,7 @@ router.post('/msg', function(req, res){
     //https://www.section.io/engineering-education/uploading-files-using-formidable-nodejs/
     var form = new formidable.IncomingForm();
     //definition of the form options
-    const uploadFolder ='E:\\Capacitacionnode\\Capacitacion\\mongochat\\uploads';
+    const uploadFolder ='E:\\NewStuff\\Escuela\\8vo Semestre\\Ejercicios\\Espiral5\\Archivos';
     form.multiples = true;
     form.options.maxFileSize = 50 * 1024 * 1024;
     form.options.keepExtensions = true;

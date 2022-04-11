@@ -21,6 +21,7 @@
         }
 
         $scope.addUser = function(){
+            alert(JSON.stringify($scope.usuario));
             $http.post("/usuario/", $scope.usuario )
                  .then( function( respuesta ){
                      if (respuesta.data.error != undefined){
@@ -151,6 +152,11 @@
             }
 
             $window.location.href = '/chat/s'+sala;
+        }
+
+        $scope.selectSalaForo = function(){
+            sala='Prueba';
+            $window.location.href = '/foro/s'+sala;
         }
 
         //$scope.getBoletas();

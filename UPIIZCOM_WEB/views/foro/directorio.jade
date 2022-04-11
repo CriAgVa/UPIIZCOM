@@ -1,0 +1,33 @@
+extends ../layout
+
+block CONTENIDO
+    a(href="foro/nuevoForo")
+        button.btn.btn-icon.btn-3.btn-primary(ng-click="selectSalaForo()") Crear Nuevo Foro
+
+    .container-fluid.py-4(ng-controller='ForoCtrl')
+        .row
+            .col-12
+                .card.mb-4 
+                    .card-header.pb-0 
+                        h6 {{saludo}} 
+                    .card-body.px-0.pt-0.pb-2 
+                        .table-responsive.p-0
+                            table(.table.align-items-center.mb-0)
+                                thead
+                                    tr 
+                                        th.text-uppercase.text-secondary.text-xxs.font-weight-bolder.opacity-7 Foro
+                                        th.text-uppercase.text-secondary.text-xxs.font-weight-bolder.opacity-7 Descripcion
+                                        tr 
+                                tbody
+                                    tr(ng-repeat='u in salas') 
+                                        td {{u.sala}}
+                                        td {{u.descripcion}}
+                                        td 
+                                            button.btn.btn-icon.btn-3.btn-primary(ng-click="selectSalaForo($index)") Entrar a Foro 
+block SCRIPTS
+    //script(src='../../assets/js/angular/A_Usuarios.js')
+    script(src='../../assets/js/angular/A_Foro.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/bootstrap.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/perfect-scrollbar.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/smooth-scrollbar.min.js')

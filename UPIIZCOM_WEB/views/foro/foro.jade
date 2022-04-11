@@ -1,0 +1,65 @@
+extends ../layout 
+block CONTENIDO
+    .container-fluid.py-4(ng-controller='ForoCtrl')
+        .row
+            .col-12
+                .card.mb-4 
+                    .card-header.pb-0 
+                        h6 {{saludo}} 
+                    .card-body.px-0.pt-0.pb-2 
+                        .table-responsive.p-0
+                            table(.table.align-items-center.mb-0)
+                                thead
+                                    tr 
+                                        th.text-uppercase.text-secondary.text-xxs.font-weight-bolder.opacity-7  
+                                        button.btn.btn-primary(ng-click="getForoEsp('#{sala}')") Aver
+                                        tr 
+                                tbody
+                                    tr(ng-repeat='u in resultforo ') 
+                                        td Nombre de sala: 
+                                        td   
+                                        td {{u.sala}}
+                                    tr(ng-repeat='u in resultforo ') 
+                                        td Descripcion: 
+                                        td   
+                                        td {{u.descripcion}}
+                                    tr(ng-repeat='u in resultforo ') 
+                                        td Tipo de sala: 
+                                        td   
+                                        td {{u.tipo}}
+                                    tr(ng-repeat='u in resultforo ') 
+                                        td Contenido: 
+                                        td  
+                                        td {{u.texto}}
+
+
+    input#datos(type="text" value="#{sala}" style="visibility:hidden") 
+    input#boleta(type="text" value="#{datos.BOLETA}" style="visibility:hidden")
+    input#nombre(type="text" value="#{datos.NOMBRE}" style="visibility:hidden")
+    .container.contp 
+        .row(ng-controller="ChatCtrl") 
+            .col-md-6.offset-md-3.col-sm-12 
+                h4.text-left  Comentarios
+                div(id="status") 
+                div(id="chat")
+                    br
+                    .card.bdcolor 
+                        .card-block(id="messages")
+                    br
+                    textarea.form-control.bdcolor(id="textarea" placeholder="Enter message...")
+                    br
+                button.btn.btn-primary(ng-click="envioArchivo()") Adjuntar Archivo
+                div(ng-show="envio")
+                    form(action="/files/msg" method="POST" enctype="multipart/form-data")
+                        input(type="file" name="upload" id="upldFile")
+                        //input(type="submit" value="Upload" id="updtButton")
+                        input(type="submit" value="Upload" id="upldButton")
+    block scripts    
+        script(src='https://cdn.socket.io/4.4.1/socket.io.min.js' integrity='sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H' crossorigin='anonymous')
+        script(src="/socket.io/socket.io.js")
+        script(src="../assets/js/client.js")
+        script(src="../assets/js/angular/A_Chat.js")
+        script(src='../../assets/js/angular/A_Foro.js')
+        script.
+         {getForoEsp('#{sala}')}
+                           

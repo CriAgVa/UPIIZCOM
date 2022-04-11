@@ -1,0 +1,118 @@
+extends ../layout
+
+
+block CONTENIDO
+            .container-fluid.py-4(ng-controller='ForoCtrl')
+                section.py-3
+                    .row
+                        .col-md-8.me-auto.text-left
+
+                // ESTE COMPONETE ES DE PRUEBA
+                #COMPONENTE.container-fluid
+                    h1 {{saludo}} 
+                    
+                    table.table()
+                        tbody
+                            tr
+                                th Sala
+                                th Tipo
+                                th Descripcion
+                                th Texto
+                            tr
+                                td
+                                    input(type='text' ng-model='foro.sala')
+                                td
+                                    input(type='text' ng-model='foro.tipo')
+                                td
+                                    input(type='text' ng-model='foro.descripcion')
+                                td
+                                    input(type='text' ng-model='foro.texto')
+                                td
+                                    input.btn-dark(type='button' value='Agregar' ng-click='addForo()')
+                                td
+                                    input.btn-info(type='button' value='Actualizar' ng-click='updateForo()') 
+ 
+                            tr(ng-repeat='u in salas')
+                                td  {{u.sala}} 
+                                td  {{u.tipo}}
+                                td  {{u.descripcion}}
+                                td  {{u.texto}}
+                                td
+                                    input.btn-danger(type='button' value='Eliminar' ng-click='delForo($index)') 
+                                td
+                                    input.btn-link(type='button' value='Editar' ng-click='editForo($index)')    
+
+                                // <td> <img src="{{g.imagen}}"/> </td>
+      
+block SCRIPTS
+    //script(src='../../assets/js/angular/A_Usuarios.js')
+    script(src='../../assets/js/angular/A_Foro.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/bootstrap.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/perfect-scrollbar.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/smooth-scrollbar.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/choices.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/dropzone.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/quill.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/multistep-form.js')
+    script.
+        if (document.getElementById('edit-deschiption')) {
+            var quill = new Quill('#edit-deschiption', {
+                theme: 'snow' 
+            });
+        };
+
+        if (document.getElementById('choices-category')) {
+            var element = document.getElementById('choices-category');
+            const example = new Choices(element, {
+                searchEnabled: false
+            });
+        };
+
+        if (document.getElementById('choices-sizes')) {
+            var element = document.getElementById('choices-sizes');
+            const example = new Choices(element, {
+                searchEnabled: false
+            });
+        };
+
+        if (document.getElementById('choices-currency')) {
+            var element = document.getElementById('choices-currency');
+            const example = new Choices(element, {
+                searchEnabled: false
+            });
+        };
+
+        if (document.getElementById('choices-tags')) {
+            var tags = document.getElementById('choices-tags');
+            const examples = new Choices(tags, {
+                removeItemButton: true
+            });
+            examples.setChoices(
+                [{
+                    value: 'One',
+                    label: 'Expired',
+                    disabled: true
+                }, {
+                    value: 'Two',
+                    label: 'Out of Stock',
+                    selected: true
+                }],
+                'value',
+                'label',
+                false,
+            );
+        }
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/dragula/dragula.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/jkanban/jkanban.js')
+    script.
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    script(async='' defer='' src='https://buttons.github.io/buttons.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/soft-ui-dashboard.min.js?v=1.0.4')
+    

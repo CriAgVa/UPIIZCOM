@@ -120,6 +120,23 @@ router.get('/chat/s:sala', manejador_sesiones(),function(req, res, next) {
   res.render('chat/chat', { title: 'Sala '+sala, datos: req.session, sala: sala });
 });
 
+/* GET home page. */
+router.get('/foro', manejador_sesiones(), function(req, res, next) {
+  res.render('foro/directorio', { title: 'MongoChat', datos: req.session });
+});
+
+/* GET home page. */
+router.get('/foro/s:sala', manejador_sesiones(),function(req, res, next) {
+  var sala = req.params.sala;
+  res.render('foro/foro', { title: 'Sala '+sala, datos: req.session, sala: sala });
+});
+
+/* GET home page. */
+router.get('/foro/nuevoForo', manejador_sesiones(),function(req, res, next) {
+  var sala = req.params.sala;
+  res.render('foro/nuevoForo', { title: 'Sala '+sala, datos: req.session, sala: sala });
+});
+
 router.get('/nuevoGrupo', manejador_sesiones(), function(req, res, next) {
   res.render("grupos/nuevoGrupo.jade", {datos: req.session, title: "Creacion grupo"} );
 });
