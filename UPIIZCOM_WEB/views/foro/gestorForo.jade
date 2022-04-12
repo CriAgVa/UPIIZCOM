@@ -28,9 +28,9 @@ block CONTENIDO
                                 td
                                     input(type='text' ng-model='foro.texto')
                                 td
-                                    input.btn-dark(type='button' value='Agregar' ng-click='addForo()')
+                                    button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar' ng-click='addForo()') Agregar
                                 td
-                                    input.btn-info(type='button' value='Actualizar' ng-click='updateForo()') 
+                                    button.btn.bg-gradient-secondary.ms-auto.mb-0(type='button' value='Actualizar' ng-click='updateForo()') Actualizar
  
                             tr(ng-repeat='u in salas')
                                 td  {{u.sala}} 
@@ -38,12 +38,13 @@ block CONTENIDO
                                 td  {{u.descripcion}}
                                 td  {{u.texto}}
                                 td
-                                    input.btn-danger(type='button' value='Eliminar' ng-click='delForo($index)') 
+                                    button.btn.bg-gradient-primary.ms-auto.mb-0(type='button' value='Eliminar' ng-click='delForo($index)') Eliminar
                                 td
-                                    input.btn-link(type='button' value='Editar' ng-click='editForo($index)')    
+                                    button.btn.bg-gradient-secondary.ms-auto.mb-0(type='button' value='Editar' ng-click='editForo($index)') Editar   
 
                                 // <td> <img src="{{g.imagen}}"/> </td>
-      
+            a(href="/foro")                    
+                button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar' ng-click='addForo()') Regresar
 block SCRIPTS
     //script(src='../../assets/js/angular/A_Usuarios.js')
     script(src='../../assets/js/angular/A_Foro.js')

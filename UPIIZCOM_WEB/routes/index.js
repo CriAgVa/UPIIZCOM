@@ -132,9 +132,15 @@ router.get('/foro/s:sala', manejador_sesiones(),function(req, res, next) {
 });
 
 /* GET home page. */
-router.get('/foro/nuevoForo', manejador_sesiones(),function(req, res, next) {
+router.get('/foro/gestorForo', manejador_sesiones(),function(req, res, next) {
   var sala = req.params.sala;
-  res.render('foro/nuevoForo', { title:'Gestor de Foros', datos: req.session, sala: sala });
+  res.render('foro/gestorForo', { title:'Gestor de Foros', datos: req.session, sala: sala });
+});
+
+/* GET home page. */
+router.get('/foro/creacionForo', manejador_sesiones(),function(req, res, next) {
+  var sala = req.params.sala;
+  res.render('foro/creacionForo', { title:'Creacion de Foro', datos: req.session, sala: sala });
 });
 
 router.get('/nuevoGrupo', manejador_sesiones(), function(req, res, next) {
