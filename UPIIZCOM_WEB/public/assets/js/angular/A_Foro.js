@@ -31,7 +31,7 @@
         }
 
         $scope.selectSalaForo = function(newforo){
-            alert( $scope.salas[newforo].sala);
+            //alert( $scope.salas[newforo].sala);
             sala=$scope.salas[newforo].sala;
             $window.location.href = '/foro/s'+sala;
         }
@@ -67,8 +67,6 @@
                    console.log(respuesta)
                }else{
                   $scope.resultforo = respuesta.data;
-                  alert(JSON.stringify(dato));
-                  alert(JSON.stringify(respuesta.data));
                }   
             });
         }

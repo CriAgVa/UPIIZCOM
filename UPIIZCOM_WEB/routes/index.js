@@ -122,7 +122,7 @@ router.get('/chat/s:sala', manejador_sesiones(),function(req, res, next) {
 
 /* GET home page. */
 router.get('/foro', manejador_sesiones(), function(req, res, next) {
-  res.render('foro/directorio', { title: 'MongoChat', datos: req.session });
+  res.render('foro/directorio', { title: 'Menú  de Foros', datos: req.session });
 });
 
 /* GET home page. */
@@ -134,7 +134,7 @@ router.get('/foro/s:sala', manejador_sesiones(),function(req, res, next) {
 /* GET home page. */
 router.get('/foro/nuevoForo', manejador_sesiones(),function(req, res, next) {
   var sala = req.params.sala;
-  res.render('foro/nuevoForo', { title: 'Sala '+sala, datos: req.session, sala: sala });
+  res.render('foro/nuevoForo', { title:'Gestor de Foros', datos: req.session, sala: sala });
 });
 
 router.get('/nuevoGrupo', manejador_sesiones(), function(req, res, next) {
@@ -146,7 +146,7 @@ router.get('/nuevaNotificacion', manejador_sesiones(), function(req, res, next) 
 });
 
 router.get('/FAQ', manejador_sesiones(), function(req, res, next) {
-  res.render("FAQ/FAQ.jade", {datos: req.session, title: "Gestor de Notificaciones"} );
+  res.render("FAQ/FAQ.jade", {datos: req.session, title: "FAQ"} );
 });
 
 router.get('/editarGrupo/:id', manejador_sesiones(), function(req, res, next) {
