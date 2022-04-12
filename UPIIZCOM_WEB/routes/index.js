@@ -192,6 +192,10 @@ router.get('/perfil', manejador_sesiones(), function(req, res, next) {
     });
 });
 
+router.get('/calendario', function(req, res, next) {
+  res.render("calendario/calendario.jade", {datos: req.session, title: "Calendario"} );
+});
+
 router.get("/logout", function(req, res){
   var _SESSION = req.session;
   _SESSION.ACTIVA = false;

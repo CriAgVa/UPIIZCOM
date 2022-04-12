@@ -52,3 +52,20 @@
     display: inline-block;
     margin: 4px
   }
+
+  .contenedor{
+    position:relative;
+  }
+
+  .c-calendar{
+    z-index: 0;
+  }
+
+  #eventoN{
+    position:absolute;
+    width: 80%;
+    height: 60%;
+    background-color: #626567;
+    margin: auto;
+    z-index: 1;
+  }
