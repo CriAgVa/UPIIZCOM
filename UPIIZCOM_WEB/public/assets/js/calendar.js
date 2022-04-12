@@ -11,6 +11,17 @@ if (day < 10){
 var currentDate = year + "-" + month + "-" + day;
 
 var evento = document.getElementById("eventoN");
+var fechaI = document.getElementById("fechaInicio");
+
+var endDate = document.getElementById("fechaFin");
+var title = document.getElementById("name");
+var description = document.getElementById("desc"); 
+var type = document.getElementById("type");
+var group = document.getElementById("group");
+
+function hide(HideID){
+    HideID.style.display = "none";
+}
 
 var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
     customButtons: {
@@ -22,12 +33,15 @@ var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
         }
     },
     dateClick: function(info){
-        alert('Clicked on: '+info.dateStr)
+        var year = info.dateStr[0] + info.dateStr[1] + info.dateStr[2] + info.dateStr[3];
+        var month = info.dateStr[5] + info.dateStr[6];
+        var day = info.dateStr[8] +  info.dateStr[9];
         if(evento.style.display === "none"){
             evento.style.display = "block";
         }else{
             evento.style.display = "none";
         }
+        fechaI.value = year + "-" + month + "-"+day;
     },
     locale: 'es-Mx',
     contentHeight: 'auto',
@@ -40,6 +54,11 @@ var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
     selectable: true,
     editable: true,
     initialDate: currentDate,
+    eventSources:[
+        {
+            url: '/events/calendar/'
+        }
+    ],
     events: [{
             title: 'Call with Dave',
             start: '2020-11-18',
@@ -95,6 +114,89 @@ var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
     },
 });
 calendar.render();
+
+function newEvent(){
+    var e;
+    
+    if(type.value == "Global"){
+        e = {
+            title: title.value,
+            start: fechaI.value,
+            end: endDate.value,
+            extendedProps: {
+                type: type.value,
+                description: description.value
+                
+            },
+            className: 'bg-gradient-success'
+        }
+    }else if (type.value == "Grupal"){
+        e = {
+            title: title.value,
+            start: fechaI.value,
+            end: endDate.value,
+            extendedProps: {
+                type: type.value,
+                group: group.value,
+                description: description.value
+                
+            },
+            className: 'bg-gradient-info'
+        }
+        
+    }else{
+        e = {
+            title: title.value,
+            start: fechaI.value,
+            end: endDate.value,
+            extendedProps: {
+                type: type.value,
+                description: description.value
+            },
+            className: 'bg-gradient-primary'
+        }
+    }
+    
+    var xml = new XMLHttpRequest();
+    var xml2 = new XMLHttpRequest();
+
+    xml.open("POST", "/events", true);
+    xml2.open("POST", "/events/calendar/", true);
+
+    xml.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xml2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+
+    xml.onreadystatechange = function(){
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200){
+            console.log("success")
+        }
+    }
+
+    xml2.onreadystatechange = function(){
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200){
+            console.log("success")
+        }
+    }
+
+    xml.send("nombre="+e.title+
+             "&inicio="+e.start+
+             "&fin="+e.end+
+             "&tipo="+e.extendedProps.type+
+             "&descripcion="+e.extendedProps.description+
+             "&grupo="+e.extendedProps.group);
+
+    xml2.send("title="+e.title+
+    "&start="+e.start+
+    "&end="+e.end+
+    "&type="+e.extendedProps.type+
+    "&description="+e.extendedProps.description+
+    "&group="+e.extendedProps.group+
+    "&className="+e.className);       
+     
+    calendar.addEvent(e);
+    
+}
+
 var ctx1 = document.getElementById("chart-line-1").getContext("2d");
 var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
 gradientStroke1.addColorStop(1, 'rgba(255,255,255,0.3)');

@@ -63,9 +63,15 @@
 
   #eventoN{
     position:absolute;
-    width: 80%;
-    height: 60%;
-    background-color: #626567;
-    margin: auto;
+    width: 100%;
+    height: auto;
     z-index: 1;
+  }
+
+  #rightCl{
+    float: right;
+  }
+
+  #leftCl{
+    overflow: hidden;
   }

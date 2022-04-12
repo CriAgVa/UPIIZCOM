@@ -30,6 +30,7 @@ var grupoRouter = require('./routes/grupos');
 var usuarioRouter = require('./routes/usuarios');
 var chatsRouter = require('./routes/chats');
 var filesRouter = require('./routes/uploads');
+var eventsRouter = require('./routes/events');
 
 var app = express();
 
@@ -51,6 +52,7 @@ app.use('/grupo', grupoRouter);
 app.use('/usuario', usuarioRouter);
 app.use('/chats', chatsRouter);
 app.use('/files', filesRouter);
+app.use('/events', eventsRouter);
 
 app.use(require('./routes/index'));
 
