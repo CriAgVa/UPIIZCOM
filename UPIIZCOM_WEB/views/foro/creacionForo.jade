@@ -19,15 +19,15 @@ block CONTENIDO
                                     .multisteps-form__content
                                         .row.mt-3
                                             .col-12.col-sm-6
-                                                label Nombre 
+                                                label Nombre *(No editable)
                                                 input.multisteps-form__input.form-control(type='text' placeholder='Nombre' ng-model='foro.sala')
                                             .col-12.col-sm-6.mt-3.mt-sm-0
-                                                label Tipo
+                                                label Tipo *(No editable)
                                                 select#choices-category.form-control(name='choices-category' ng-model='foro.tipo')
                                                     option(value='Institucional' selected='') Institucional
                                                     option(value='Administrativo') Administrativo 
                                                     option(value='Social') Social       
-                                        .row
+                                        .row.mt-3
                                             .col-sm-12
                                                 label Contenido
                                                 input.multisteps-form__input.form-control(type="text"  placeholder='Contenido' ng-model='foro.texto')
@@ -37,6 +37,8 @@ block CONTENIDO
                                                 p.form-text.text-muted.text-xs.ms-1.d-inline (opcional)
                                                 input.multisteps-form__input.form-control(type="text"  placeholder='Descripcion' ng-model='foro.descripcion')
                                         .button-row.d-flex.mt-4
+                                            a(href="/foro")                    
+                                                button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar') Regresar
                                             button.btn.bg-gradient-dark.ms-auto.mb-0.js-btn-next(type='button' title='Next') Siguiente
                                 .card.multisteps-form__panel.p-3.border-radius-xl.bg-white(data-animation='FadeIn')
                                     h5.font-weight-bolder Imagen
@@ -47,9 +49,10 @@ block CONTENIDO
                                                 #productImg.form-control.dropzone(action='https://demos.creative-tim.com/file-upload' ng-model = 'grupo.imagen')
                                         .button-row.d-flex.mt-4
                                             button.btn.bg-gradient-secondary.mb-0.js-btn-prev(type='button' title='Prev') Volver
-                                        .button-row.d-flex.mt-4
-                                            a(href="/foro")
-                                                button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar' ng-click='addForo()') Terminar
+                                    .button-row.d-flex.mt-4
+                                        a(href="/foro")                    
+                                            button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar' ng-click='addForo()') Finalizar
+
 block SCRIPTS
     //script(src='../assets/js/A_EjemploTabla.js')
     script(src='../../assets/js/angular/A_Foro.js')

@@ -1,14 +1,16 @@
 extends ../layout 
 block CONTENIDO
+    a(href="/foro")                    
+        button.btn.bg-gradient-primary.ms-auto.mb-0(type='button' value='Agregar' ng-click='addForo()') Regresar
+
     .container-fluid.py-4(ng-controller='ForoCtrl' ng-init="getForoEsp('#{sala}')" )
         .row
             .col-12
                 .card.mb-4 
                     .card-header.pb-0 
-                        h2(ng-repeat='u in resultforo ') Foro {{u.sala}}
-                        h4(ng-repeat='u in resultforo ') Descripcion: {{u.descripcion}}
+                        h4(ng-repeat='u in resultforo ') Foro: {{u.sala}}
                         h6(ng-repeat='u in resultforo ') Contenido: {{u.texto}}
-                        h8(ng-repeat='u in resultforo ') Tipo de Sala: {{u.tipo}}
+                        h8(ng-repeat='u in resultforo ') Descripcion: {{u.descripcion}} / Tipo de Sala: {{u.tipo}}
                     .card-body.px-0.pt-0.pb-2 
 
 

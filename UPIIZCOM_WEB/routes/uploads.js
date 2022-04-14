@@ -96,7 +96,7 @@ router.post('/msg', function(req, res){
 router.get('/download/:id', function(req, res){
     Archivo.findOne({nombreOriginal : req.params.id},
         function(err, reslt){
-            var file = 'E://Capacitacionnode//Capacitacion//mongochat//uploads//'+reslt.nombreNuevo;
+            var file = 'E://NewStuff//Escuela//8vo Semestre//Ejercicios//Espiral5//Archivos//'+reslt.nombreNuevo;
             
             res.download(file)
             
