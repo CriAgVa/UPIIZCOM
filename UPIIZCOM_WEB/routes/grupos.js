@@ -21,7 +21,7 @@ router.get("/", function( req, res ){
 });
 
 router.get("/ppl:id", function( req, res ){
-   Grupo.findOne({ _id : req.params.id })
+   Grupo.findOne({ _id : req.params.id },{integrantes:1})
         .populate('integrantes')
         .exec( function (error , resultado ){
             if ( error === null ){
@@ -34,7 +34,7 @@ router.get("/ppl:id", function( req, res ){
 });
 
 router.get("/id:id", function( req, res ){
-   Grupo.findOne({ _id : {$regex : req.params.id}},{nombre:1, _id:1})
+   Grupo.findOne({ _id : req.params.id},{nombre:1, _id:0})
         .exec( function (error , resultado ){
             if ( error === null ){
                res.json( resultado );
@@ -99,6 +99,25 @@ router.put("/agg/:id", function(req, res){
          res.json( { status: false , error : error } );
       }   
    }]);   
+});
+
+router.get("/int:id", function( req, res ){
+   Grupo.findOne({ _id : req.params.id },{integrantes:1, _id:0})
+        .populate('integrantes')
+        .exec( function (error , resultado ){
+            if ( error === null ){
+               //console.log(resultado.integrantes)
+               var integrantes = [];
+               var array = Array.from(resultado.integrantes.values())
+               for(var i = 0 ; i < array.length ; i++){
+                  integrantes[i] = array[i].username;
+               }
+               console.log(integrantes)
+               res.json( integrantes );
+            }else{
+               res.json( { status: false , error : error } );
+            }
+        });
 });
 
 module.exports = router;

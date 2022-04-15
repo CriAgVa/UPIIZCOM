@@ -9,7 +9,10 @@ var EventoSchema = new Schema({
     },
     tipo            : {type:String},
     grupo           : {type:String},
-    descripcion     : {type:String}
+    descripcion     : {type:String},
+    participantes   : [{
+        usuario : {type:String}
+    }]
   });
 
   const Evento = mongoose.model("M_Evento", EventoSchema, "Evento");

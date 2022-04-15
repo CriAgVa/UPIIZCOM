@@ -11,6 +11,8 @@
         $scope.integrantes;
         $scope.miembros = [];
 
+        $scope.id_grupo = {};
+
         //////////////////////////////////////////////////////////Notificaciones funciones
         $scope.successSubscription = async function(){
 

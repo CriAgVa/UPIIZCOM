@@ -2,6 +2,7 @@ extends ../layout
 
 block CONTENIDO
     .container-fluid.py-4(ng-controller="CalendarCtrl")
+        p #{datos.BOLETA}
         .row
             .col-xl-9
                 .card.card-calendar.contenedor
@@ -27,9 +28,9 @@ block CONTENIDO
                                                     option(value='Global') Global 
                                                     option(value='Personal') Personal
                                         .row.mt-3(ng-show="tipo == 'Grupal'")
-                                            label Grupo
-                                                select.form-control(name='choices-category' id="group")
-                                                    option(ng-repeat="grupo in grupos" selected='') {{grupo.nombre}}
+                                            label Grupo {{id_grupo}}
+                                                select.form-control(name='choices-category' id="group" ng-model='id_grupo')
+                                                    option(ng-repeat="grupo in grupos" selected='' value="{{grupo._id}}") {{grupo.nombre}}
                                         .row.mt-3
                                             .col-12.col-sm-6
                                                 label Fecha de inicio

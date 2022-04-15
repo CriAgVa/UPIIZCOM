@@ -101,7 +101,7 @@ router.get('/navbar', manejador_sesiones(), function(req, res, next) {
   res.render('navbar', { title: 'Express'});
 });
 
-router.get('/grupos', manejador_sesiones(), function(req, res, next) {
+router.get('/verGrupos', manejador_sesiones(), function(req, res, next) {
   res.render("grupos/vistaGrupos.jade", {datos: req.session, title: "Grupos"} );
 });
 
@@ -192,7 +192,8 @@ router.get('/perfil', manejador_sesiones(), function(req, res, next) {
     });
 });
 
-router.get('/calendario', function(req, res, next) {
+router.get('/calendario', manejador_sesiones(), function(req, res, next) {
+  console.log(req.session)
   res.render("calendario/calendario.jade", {datos: req.session, title: "Calendario"} );
 });
 
