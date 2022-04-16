@@ -28,6 +28,7 @@ router.get("/calendar/", function(req, res){
      });
 });
 
+//es necesario arreglar el $or, para desplegar los eventos globales asi como los eventos a los cuales esta inscrito el usuario
 router.get("/calendar2/usr:usr", function(req, res){
    EventoCalendar.find({ $or:[ {extendedProps: {type: "Global"}} , {extendedProps: {creator: req.params.usr}}, {extendedProps:{participants: req.params.usr }} ] })
       .exec( function (error , resultado ){
