@@ -12,7 +12,8 @@ var EventoSchema = new Schema({
     descripcion     : {type:String},
     participantes   : [{
         usuario : {type:String}
-    }]
+    }],
+    creador         : {type:String}
   });
 
   const Evento = mongoose.model("M_Evento", EventoSchema, "Evento");

@@ -2,7 +2,7 @@ extends ../layout
 
 block CONTENIDO
     .container-fluid.py-4(ng-controller="CalendarCtrl")
-        p #{datos.BOLETA}
+        input(type="text" value="#{datos.BOLETA}" ng-show="false" id="username")
         .row
             .col-xl-9
                 .card.card-calendar.contenedor
@@ -45,7 +45,7 @@ block CONTENIDO
                                                 input.multisteps-form__input.form-control(type="text"  placeholder='Descripcion' ng-model = 'grupo.descripcion' id="desc")
                                         .button-row.d-flex.mt-4
                                             button.btn.bg-gradient-dark.ms-auto.mb-0.js-btn-next(type='button' onclick="newEvent()") Registrar
-            {{tipo}}
+
             .col-xl-3
                 .row
                     .col-xl-12.col-md-6.mt-xl-0.mt-4

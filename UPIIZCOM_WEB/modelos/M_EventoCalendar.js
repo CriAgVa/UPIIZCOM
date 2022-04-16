@@ -8,7 +8,9 @@ var EventoCalendarSchema = new Schema({
     extendedProps   :{
         type            : {type:String},
         group           : {type:String},
-        description     : {type:String}
+        description     : {type:String},
+        creator         : {type:String},
+        participants    : [ {type:String} ]
     },
     className       :{type:String}
   });

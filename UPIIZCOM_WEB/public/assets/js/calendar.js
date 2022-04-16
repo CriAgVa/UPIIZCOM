@@ -19,6 +19,8 @@ var description = document.getElementById("desc");
 var type = document.getElementById("type");
 var group = document.getElementById("group");
 
+var boleta = document.getElementById("username");
+
 function hide(HideID){
     HideID.style.display = "none";
 }
@@ -118,6 +120,7 @@ calendar.render();
 function newEvent(){
     var e;
     var ready_status = false;
+    var intgrnts = [];
     //console.log(group.value)
 
     if(type.value == "Global"){
@@ -127,38 +130,47 @@ function newEvent(){
             end: endDate.value,
             extendedProps: {
                 type: type.value,
-                description: description.value
-                
+                description: description.value,
+                creator: boleta.value
             },
             className: 'bg-gradient-success'
         }
+        registrarEvento(e);
+                            registrarEventoCalendario(e);
     }else if (type.value == "Grupal"){
         var xmlGET = new XMLHttpRequest();
         xmlGET.open('GET', '/grupo/id'+group.value, true);
+        xmlGET.responseType = 'json'
         xmlGET.onreadystatechange = function(){
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200){
-                var group_name = xmlGET.response.substring(xmlGET.response.indexOf(":")+2, xmlGET.responseText.length-2);
-                    /***e = {
-                        title: title.value,
-                        start: fechaI.value,
-                        end: endDate.value,
-                        extendedProps: {
-                            type: type.value,
-                            group: group_name,
-                            description: description.value
-                        },
-                        className: 'bg-gradient-info'
-                    }*/
-                    obtenerIntegrantes()
-                /***
-                 * Viernes 15 de abril
-                 * se obtiene el nombre de grupo mediante el id y los integrantes del grupo 
-                 * queda pendiente enviar los integrantes del grupo como participantes https://developer.mozilla.org/es/docs/Web/API/DOMParser) del evento
-                 * y determinar los participantes del tipo de evento global (todos los usuarios) y 
-                 * del tipo de evento personal (solo el creador del evento)
-                 * Queda pendiente ademas, optimizar el codigo y mejorar la eficiencia de las funciones usadas para 
-                 * publicar nuevos eventos en la base de datos
-                 */
+                var group_name = xmlGET.response.nombre;
+                var xmlGETParticipantes = new XMLHttpRequest();
+                xmlGETParticipantes.open('GET', '/grupo/int'+group.value, true);
+                xmlGETParticipantes.responseType = 'json';
+                xmlGETParticipantes.onreadystatechange = function(){
+                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200){
+                        xmlGETParticipantes.response.forEach(element => {
+                            intgrnts.push(element) ;
+                            
+                        });
+                            e = {
+                                title: title.value,
+                                start: fechaI.value,
+                                end: endDate.value,
+                                extendedProps: {
+                                    type: type.value,
+                                    group: group_name,
+                                    description: description.value,
+                                    participants: intgrnts,
+                                    creator: boleta.value
+                                },
+                                className: 'bg-gradient-info'
+                            }
+                            registrarEvento(e);
+                            registrarEventoCalendario(e);
+                    }
+                }
+                xmlGETParticipantes.send()
             }
         }
         
@@ -170,26 +182,15 @@ function newEvent(){
             end: endDate.value,
             extendedProps: {
                 type: type.value,
-                description: description.value
+                description: description.value,
+                participants: boleta.value,
+                creator: boleta.value
             },
             className: 'bg-gradient-primary'
         }
+        registrarEvento(e);
+        registrarEventoCalendario(e);
     }    
-}
-
-function obtenerIntegrantes(){
-    var xmlGETParticipantes = new XMLHttpRequest();
-    xmlGETParticipantes.open('GET', '/grupo/int'+group.value, true);
-    xmlGETParticipantes.onreadystatechange = function(){
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200){
-            console.log(xmlGETParticipantes.response[0])
-            //e.extendedProps.participantes = "";
-
-            //registrarEvento(e);
-            //registrarEventoCalendario(e);
-        }
-    }
-    xmlGETParticipantes.send()
 }
 
 function registrarEvento(e){
@@ -211,7 +212,8 @@ function registrarEvento(e){
             "&tipo="+e.extendedProps.type+
             "&descripcion="+e.extendedProps.description+
             "&grupo="+e.extendedProps.group+
-            "&participantes="+e.extendedProps.participants);
+            "&participantes="+e.extendedProps.participants+
+            "&creador="+e.extendedProps.creator);
 }
 
 function registrarEventoCalendario(e){
@@ -230,7 +232,9 @@ function registrarEventoCalendario(e){
         "&type="+e.extendedProps.type+
         "&description="+e.extendedProps.description+
         "&group="+e.extendedProps.group+
-        "&className="+e.className); 
+        "&className="+e.className+
+        "&participantes"+e.extendedProps.participants+
+        "&creador="+e.extendedProps.creator); 
         calendar.addEvent(e);  
 }
 
