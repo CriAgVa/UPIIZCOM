@@ -11,30 +11,27 @@ block CONTENIDO
                         h4(ng-repeat='u in resultforo ') Foro: {{u.sala}}
                         h6(ng-repeat='u in resultforo ') Contenido: {{u.texto}}
                         h8(ng-repeat='u in resultforo ') Descripcion: {{u.descripcion}} / Tipo de Sala: {{u.tipo}}
-                    .card-body.px-0.pt-0.pb-2 
-
+        img(ng-repeat='u in resultforo ' widht='150' height='150' src='{{u.imagen}}' alt='forum_image')
 
 
     input#datos(type="text" value="#{sala}" style="visibility:hidden") 
     input#boleta(type="text" value="#{datos.BOLETA}" style="visibility:hidden")
     input#nombre(type="text" value="#{datos.NOMBRE}" style="visibility:hidden")
     .container.contp 
-        .row(ng-controller="ChatCtrl") 
-                h4.text-left  Comentarios
-                div(id="status") 
-                div(id="chat")
-                    br
-                    .card.bdcolor 
-                        .card-block(id="messages")
-                    br
-                    textarea.form-control.bdcolor(id="textarea" placeholder="Comentar...")
-                    br
-                button.btn.btn-primary(ng-click="envioArchivo()") Adjuntar Archivo
-                div(ng-show="envio")
-                    form(action="/files/msg" method="POST" enctype="multipart/form-data")
-                        input(type="file" name="upload" id="upldFile")
-                        //input(type="submit" value="Upload" id="updtButton")
-                        input(type="submit" value="Upload" id="upldButton")
+        .row(ng-controller="ChatCtrl")
+            h4.text-left  Comentarios
+            div(id="status") 
+            div(id="chat")
+                br
+                .card.bdcolor 
+                    .card-block(id="messages")
+                br
+                textarea.form-control.bdcolor(id="textarea" placeholder="Comentar...")
+                br
+            div
+                form(action="/files/foro" method="POST" enctype="multipart/form-data")
+                    input(type="file" name="upload" id="upldFile")
+                    input(type="submit" value="Upload" id="upldButton")
     block scripts    
         script(src='https://cdn.socket.io/4.4.1/socket.io.min.js' integrity='sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H' crossorigin='anonymous')
         script(src="/socket.io/socket.io.js")

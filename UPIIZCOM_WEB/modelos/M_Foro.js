@@ -6,6 +6,7 @@ var ForoSchema = new Schema({
     tipo            : {type:String, default: "unknown"},
     descripcion          : {type:String, default:"unknown"},
     texto         : {type:String, default:"-"},
+    imagen         : {type:String, default:"/assets/img/foros/default_logo.png"},
     fecha           : {
         dia      : {type:Number, default:0},
         mes       : {type:Number, default:0},
