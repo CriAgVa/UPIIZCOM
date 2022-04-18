@@ -30,9 +30,8 @@ router.get("/calendar/", function(req, res){
 
 //es necesario arreglar el $or, para desplegar los eventos globales asi como los eventos a los cuales esta inscrito el usuario
 router.get("/calendar2/usr:usr", function(req, res){
-   EventoCalendar.find({ $or:[ {extendedProps: {type: "Global"}} , {extendedProps: {creator: req.params.usr}}, {extendedProps:{participants: req.params.usr }} ] })
+   EventoCalendar.find(  {$or : [ {'extendedProps.participants': req.params.usr }, {'extendedProps.type': "Global"}, {'extendedProps.creator': req.params.usr} ]})
       .exec( function (error , resultado ){
-         console.log
          if ( error === null ){
             res.json( resultado );
          }else{
@@ -97,18 +96,49 @@ router.post("/", function(req, res){
 
    evento.save(function (error , resultado ){   
       if ( error === null ){
-        res.json( resultado );
+        res.json( resultado._id );
       }else{
          res.json( { status: false , error : error } );
       }
    });
 });
 
+/*
+router.put("/updt:id", function(req, res){
+   Evento.findOneAndUpdate({_id:req.params.id}, {nombre: req.body.title, descripcion: req.body.description})
+         .exec
+});
+
+*/
+
+router.delete("/:id", function(req, res){
+   var id = req.params.id.substring(2);
+   Evento.deleteOne( {_id : id } , function(error, resultado){
+    if ( error === null ){
+       res.json( resultado );
+    }else{
+       res.json( { status: false , error : error } );
+    }
+   });
+ });
+
+ router.delete("/calendar/:id", function(req, res){
+   var id = req.params.id.substring(2);
+   EventoCalendar.deleteOne( {_id : id } , function(error, resultado){
+    if ( error === null ){
+       res.json( resultado );
+    }else{
+       res.json( { status: false , error : error } );
+    }
+   });
+ });
+
 router.post("/calendar/", function(req, res){
-   console.log(req.body)
+   //console.log(req.body)
    if(req.body.group == "undefined"){
       if (req.body.type == "Personal"){
          var evento = new EventoCalendar({
+            _id: req.body.id,
             title: req.body.title,
             start:  req.body.start,
             end: req.body.end,
@@ -122,6 +152,7 @@ router.post("/calendar/", function(req, res){
          });
       }else{
          var evento = new EventoCalendar({
+            _id: req.body.id,
             title: req.body.title,
             start:  req.body.start,
             end: req.body.end,
@@ -137,6 +168,7 @@ router.post("/calendar/", function(req, res){
    }else{
       var ptcpt = req.body.participantes.split(",");
       var evento = new EventoCalendar({
+         _id: req.body.id,
          title: req.body.title,
          start:  req.body.start,
          end: req.body.end,
@@ -151,14 +183,15 @@ router.post("/calendar/", function(req, res){
       });
    }
 
+   
     evento.save(function (error , resultado ){
-        
        if ( error === null ){
           res.json( resultado );
        }else{
           res.json( { status: false , error : error } );
        }
      });
+     
 });
 
 module.exports = router;

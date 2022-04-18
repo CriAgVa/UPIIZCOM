@@ -12,14 +12,23 @@ var currentDate = year + "-" + month + "-" + day;
 
 var evento = document.getElementById("eventoN");
 var fechaI = document.getElementById("fechaInicio");
-
+var fechaI_det = document.getElementById("fechaInicio_det");
+var evento_detalles = document.getElementById("evento_detalles")
 var endDate = document.getElementById("fechaFin");
+var endDate_det = document.getElementById("fechaFin_det")
 var title = document.getElementById("name");
+var title_det = document.getElementById("name_det")
 var description = document.getElementById("desc"); 
+var descripcion_det = document.getElementById("desc_det");
 var type = document.getElementById("type");
+var type_det = document.getElementById("type_det");
 var group = document.getElementById("group");
+var group_det = document.getElementById("group_det");
 
 var boleta = document.getElementById("username");
+
+var active_id;
+var creador_evento_activo;
 
 function hide(HideID){
     HideID.style.display = "none";
@@ -33,6 +42,21 @@ var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
                 calendar.today();
             }
         }
+    },
+    eventClick: function(info){
+        if(evento.style.display === "none"){
+            evento_detalles.style.display = "block";
+        }else{
+            evento_detalles.style.display = "none";
+        }
+        console.log(info.event)
+        title_det.value = info.event.title;
+        fechaI_det.value = info.event._instance.range.start;
+        endDate_det.value = info.event._instance.range.end;
+        descripcion_det.value = info.event.extendedProps.description;
+        type_det.value = info.event.extendedProps.type;
+        active_id = info.event.extendedProps._id;
+        creador_evento_activo = info.event.extendedProps.creator;
     },
     dateClick: function(info){
         var year = info.dateStr[0] + info.dateStr[1] + info.dateStr[2] + info.dateStr[3];
@@ -58,39 +82,8 @@ var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
     initialDate: currentDate,
     eventSources:[
         {
-            url: '/events/calendar/'
+            url: '/events/calendar2/usr'+boleta.value
         }
-    ],
-    events: [{
-            title: 'Call with Dave',
-            start: '2020-11-18',
-            end: '2020-11-18',
-            className: 'bg-gradient-danger'
-        },
-        {
-            title: 'Lunch meeting',
-            start: '2020-11-21',
-            end: '2020-11-22',
-            className: 'bg-gradient-warning'
-        },
-        {
-            title: 'All day conference',
-            start: '2020-11-29',
-            end: '2020-11-29',
-            className: 'bg-gradient-success'
-        },
-        {
-            title: 'Meeting with Mary',
-            start: '2020-12-01',
-            end: '2020-12-01',
-            className: 'bg-gradient-info'
-        },
-        {
-            title: 'Marketing event',
-            start: '2020-12-10',
-            end: '2020-12-10',
-            className: 'bg-gradient-primary'
-        },
     ],
     views: {
         month: {
@@ -117,9 +110,46 @@ var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
 });
 calendar.render();
 
+function editEvent(){
+    document.getElementById('name_det').removeAttribute('readonly');
+    document.getElementById('type_det').removeAttribute('readonly');
+    document.getElementById('fechaInicio_det').removeAttribute('readonly');
+    document.getElementById('fechaFin_det').removeAttribute('readonly');
+    document.getElementById('desc_det').removeAttribute('readonly');
+    var updt = document.getElementById('updt_event');
+    var dlt = document.getElementById('dlt_event');
+    dlt.style.display = "block"
+    updt.style.display = "block"
+}
+
+function deleteEvent(){
+    if (creador_evento_activo == boleta.value){
+        var xmlDEL = new XMLHttpRequest();
+        xmlDEL.open("DELETE", "/events/id"+active_id, true);
+
+        xmlDEL.onreadystatechange = function(){
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200){
+                
+            }
+        }
+        var xmlDEL2 = new XMLHttpRequest();
+                xmlDEL2.open("DELETE", "/events/calendar/id"+active_id, true);
+                xmlDEL2.onreadystatechange = function(){
+                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200){
+                        console.log("Eliminado con exito")
+                    }
+                }
+        xmlDEL2.send()
+
+        xmlDEL.send();
+    }else{
+        alert("Usted no es el creador de este evento, no puede eliminarlo")
+    }
+    document.location.reload(true);
+}
+
 function newEvent(){
     var e;
-    var ready_status = false;
     var intgrnts = [];
     //console.log(group.value)
 
@@ -136,7 +166,6 @@ function newEvent(){
             className: 'bg-gradient-success'
         }
         registrarEvento(e);
-                            registrarEventoCalendario(e);
     }else if (type.value == "Grupal"){
         var xmlGET = new XMLHttpRequest();
         xmlGET.open('GET', '/grupo/id'+group.value, true);
@@ -166,8 +195,8 @@ function newEvent(){
                                 },
                                 className: 'bg-gradient-info'
                             }
+                            console.log(e)
                             registrarEvento(e);
-                            registrarEventoCalendario(e);
                     }
                 }
                 xmlGETParticipantes.send()
@@ -189,7 +218,6 @@ function newEvent(){
             className: 'bg-gradient-primary'
         }
         registrarEvento(e);
-        registrarEventoCalendario(e);
     }    
 }
 
@@ -199,11 +227,34 @@ function registrarEvento(e){
     xml.open("POST", "/events", true);
     
     xml.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    XMLHttpRequest.responseType = 'json'
     
     xml.onreadystatechange = function(){
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200){
-            console.log("success")
-        }
+            var id = xml.response;
+ 
+            var xml2 = new XMLHttpRequest();
+            xml2.open("POST", "/events/calendar/", true);
+            xml2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+            xml2.onreadystatechange = function(){
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200){
+                    console.log("success")
+                    document.location.reload(true);
+                }
+            }
+    
+            xml2.send("title="+e.title+
+                "&start="+e.start+
+                "&end="+e.end+
+                "&type="+e.extendedProps.type+
+                "&description="+e.extendedProps.description+
+                "&group="+e.extendedProps.group+
+                "&className="+e.className+
+                "&participantes="+e.extendedProps.participants+
+                "&creador="+e.extendedProps.creator+
+                "&id="+id.substring(1, id.length-1)); 
+                calendar.addEvent(e);  
+                }
     }
 
     xml.send("nombre="+e.title+
@@ -233,7 +284,7 @@ function registrarEventoCalendario(e){
         "&description="+e.extendedProps.description+
         "&group="+e.extendedProps.group+
         "&className="+e.className+
-        "&participantes"+e.extendedProps.participants+
+        "&participantes="+e.extendedProps.participants+
         "&creador="+e.extendedProps.creator); 
         calendar.addEvent(e);  
 }

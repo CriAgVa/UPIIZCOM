@@ -28,7 +28,7 @@ block CONTENIDO
                                                     option(value='Global') Global 
                                                     option(value='Personal') Personal
                                         .row.mt-3(ng-show="tipo == 'Grupal'")
-                                            label Grupo {{id_grupo}}
+                                            label Grupo
                                                 select.form-control(name='choices-category' id="group" ng-model='id_grupo')
                                                     option(ng-repeat="grupo in grupos" selected='' value="{{grupo._id}}") {{grupo.nombre}}
                                         .row.mt-3
@@ -45,54 +45,35 @@ block CONTENIDO
                                                 input.multisteps-form__input.form-control(type="text"  placeholder='Descripcion' ng-model = 'grupo.descripcion' id="desc")
                                         .button-row.d-flex.mt-4
                                             button.btn.bg-gradient-dark.ms-auto.mb-0.js-btn-next(type='button' onclick="newEvent()") Registrar
-
-            .col-xl-3
-                .row
-                    .col-xl-12.col-md-6.mt-xl-0.mt-4
-                        .card
-                            .card-header.p-3.pb-0
-                                h6.mb-0 Próximos eventos
-                            .card-body.border-radius-lg.p-3
-                                .d-flex
-                                    div
-                                        .icon.icon-shape.bg-danger-soft.shadow.text-center.border-radius-md.shadow-none
-                                            i.ni.ni-money-coins.text-lg.text-danger.text-gradient.opacity-10(aria-hidden='true')
-                                    .ms-3
-                                        .numbers
-                                            h6.mb-1.text-dark.text-sm Cyber Week
-                                            span.text-sm 27 March 2021, at 12:30 PM
-                                .d-flex.mt-4
-                                    div
-                                        .icon.icon-shape.bg-primary-soft.shadow.text-center.border-radius-md.shadow-none
-                                            i.ni.ni-bell-55.text-lg.text-primary.text-gradient.opacity-10(aria-hidden='true')
-                                    .ms-3
-                                        .numbers
-                                            h6.mb-1.text-dark.text-sm Meeting with Marry
-                                            span.text-sm 24 March 2021, at 10:00 PM
-                                .d-flex.mt-4
-                                    div
-                                        .icon.icon-shape.bg-success-soft.shadow.text-center.border-radius-md.shadow-none
-                                            i.ni.ni-books.text-lg.text-success.text-gradient.opacity-10(aria-hidden='true')
-                                    .ms-3
-                                        .numbers
-                                            h6.mb-1.text-dark.text-sm Book Deposit Hall
-                                            span.text-sm 25 March 2021, at 9:30 AM
-                                .d-flex.mt-4
-                                    div
-                                        .icon.icon-shape.bg-warning-soft.shadow.text-center.border-radius-md.shadow-none
-                                            i.ni.ni-delivery-fast.text-lg.text-warning.text-gradient.opacity-10(aria-hidden='true')
-                                    .ms-3
-                                        .numbers
-                                            h6.mb-1.text-dark.text-sm Shipment Deal UK
-                                            span.text-sm 25 March 2021, at 2:00 PM
-                                .d-flex.mt-4
-                                    div
-                                        .icon.icon-shape.bg-info-soft.shadow.text-center.border-radius-md.shadow-none
-                                            i.ni.ni-palette.text-lg.text-info.text-gradient.opacity-10(aria-hidden='true')
-                                    .ms-3
-                                        .numbers
-                                            h6.mb-1.text-dark.text-sm Verify Dashboard Color Palette
-                                            span.text-sm 26 March 2021, at 9:00 AM
+                    .col-12.col-lg-8.m-auto(id="evento_detalles" style="display: none")
+                            form.multisteps-form__form.mb-8
+                                .card.multisteps-form__panel.p-3.border-radius-xl.bg-white.js-active(data-animation='FadeIn')
+                                    div(class="showHide" id="bar")
+                                        div(id="rightCl")
+                                            a(href="#" onclick="hide(evento_detalles)") x
+                                        div(id="leftCl")
+                                            h5.font-weight-bolder Información del Evento 
+                                    .multisteps-form__content
+                                        .row.mt-3
+                                            .col-12.col-sm-6
+                                                label Nombre
+                                                input.multisteps-form__input.form-control(id="name_det" readonly) 
+                                            .col-12.col-sm-6.mt-3.mt-sm-0
+                                                label Tipo
+                                                input.multisteps-form__input.form-control(id="type_det" readonly)
+                                        .row.mt-3
+                                            .col-12.col-sm-6
+                                                label Fecha de inicio
+                                                input.multisteps-form__input.form-control(id="fechaInicio_det" readonly)
+                                            .col-12.col-sm-6
+                                                label Fecha de fin
+                                                input.multisteps-form__input.form-control(id="fechaFin_det" readonly)
+                                        .row
+                                            .col-sm-12
+                                                label.mt-4 Descripción
+                                                input.multisteps-form__input.form-control(id="desc_det" readonly)
+                                        .button-row.d-flex.mt-4
+                                            button.btn.bg-gradient-dark.ms-auto.mb-0.js-btn-next(type='button' onclick="deleteEvent()" id="dlt_event") Eliminar
 block SCRIPTS
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/fullcalendar.min.js')
     script(src="../assets/js/calendar.js")
