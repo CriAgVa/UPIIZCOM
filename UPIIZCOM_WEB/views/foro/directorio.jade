@@ -1,0 +1,37 @@
+extends ../layout
+
+block CONTENIDO
+    a(href="foro/creacionForo")
+        button.btn.btn-icon.btn-3.btn-primary(ng-click="selectSalaForo()") Crear Nuevo Foro
+    .container-fluid.py-4(ng-controller='ForoCtrl')
+        .row
+            .col-12
+                .card.mb-4 
+                    .card-header.pb-0 
+                        h6 Selección de Foros
+                    .card-body.px-0.pt-0.pb-2 
+                        .table-responsive.p-0
+                            table(.table.align-items-center.mb-0)
+                                thead
+                                    tr 
+                                        th.text-uppercase.text-secondary.text-xxs.font-weight-bolder.opacity-7 Foro
+                                        th.text-uppercase.text-secondary.text-xxs.font-weight-bolder.opacity-7 Descripcion
+                                        th.text-uppercase.text-secondary.text-xxs.font-weight-bolder.opacity-7 Tipo
+                                        tr 
+                                tbody
+                                    tr(ng-repeat='u in salas') 
+                                        td(style='width:300px') {{u.sala}}
+                                        td(style='width:300px') {{u.descripcion}}
+                                        td(style='width:300px') {{u.tipo}}
+                                        td(style='width:300px')
+                                            button.btn.btn-icon.btn-3.btn-secondary(ng-click="selectSalaForo($index)") Entrar 
+    a(href="foro/gestorForo")
+        button.btn.btn-icon.btn-3.btn-dark(ng-click="selectSalaForo()") Gestionar Foros
+
+block SCRIPTS
+    //script(src='../../assets/js/angular/A_Usuarios.js')
+    script(src='../../assets/js/angular/A_Foro.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/bootstrap.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/perfect-scrollbar.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/smooth-scrollbar.min.js')

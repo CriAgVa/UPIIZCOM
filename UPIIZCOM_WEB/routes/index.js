@@ -128,6 +128,33 @@ router.get('/nuevaNotificacion', manejador_sesiones(), function(req, res, next) 
   res.render("notificacion/nuevaNotificacion.jade", {datos: req.session, title: "Gestor de Notificaciones"} );
 });
 
+router.get('/FAQ', manejador_sesiones(), function(req, res, next) {
+  res.render("FAQ/FAQ.jade", {datos: req.session, title: "FAQ"} );
+});
+
+/* GET home page. */
+router.get('/foro', manejador_sesiones(), function(req, res, next) {
+  res.render('foro/directorio', { title: 'Menú  de Foros', datos: req.session });
+});
+
+/* GET home page. */
+router.get('/foro/s:sala', manejador_sesiones(),function(req, res, next) {
+  var sala = req.params.sala;
+  res.render('foro/foro', { title: 'Sala '+sala, datos: req.session, sala: sala });
+});
+
+/* GET home page. */
+router.get('/foro/gestorForo', manejador_sesiones(),function(req, res, next) {
+  var sala = req.params.sala;
+  res.render('foro/gestorForo', { title:'Gestor de Foros', datos: req.session, sala: sala });
+});
+
+/* GET home page. */
+router.get('/foro/creacionForo', manejador_sesiones(),function(req, res, next) {
+  var sala = req.params.sala;
+  res.render('foro/creacionForo', { title:'Creacion de Foro', datos: req.session, sala: sala });
+});
+
 router.get('/editarGrupo/:id', manejador_sesiones(), function(req, res, next) {
   id = req.params.id;
   //Utilizando un Modelo

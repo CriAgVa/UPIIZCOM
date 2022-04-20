@@ -56,7 +56,7 @@ if (socket != undefined){
                 message.setAttribute('class', 'chat-message');
 
                 var text = document.createElement('div');
-                if(element.tipo == "msj"){
+                if(element.tipo == "cmnt"){
                     text.setAttribute('class', 'chat-text');
                     text.textContent = element.mensaje;
                 }else{
@@ -81,7 +81,8 @@ if (socket != undefined){
                         text.appendChild(text_content);
                         text.insertBefore(icon, text_content);
                     text.addEventListener('click', () => {
-                        window.location.href = "http://localhost:3000/files/downloadCHAT/"+mensaje;
+                        alert(mensaje);
+                        window.location.href = "http://localhost:3000/files/downloadCOMENT/"+mensaje;
                     });
                 }
 
@@ -197,7 +198,7 @@ if (socket != undefined){
                 minuto: date.getMinutes(),
                 segundo: date.getSeconds(),
                 sala: datos.value,
-                tipo: "msj"
+                tipo: "cmnt"
             });
             event.preventDefault();
         }
