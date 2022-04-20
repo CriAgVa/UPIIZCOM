@@ -1,4 +1,13 @@
 (function(){
+
+    var element = function(id){
+        return document.getElementById(id);
+    }
+    var res = element('inpResult');
+    var res2 = element('inpResult2');
+    var res3 = element('inpResult3');
+    var res4 = element('inpResult4');
+
     var app = angular.module("UPIIZCOM", []);
 
     app.controller("ForoCtrl", function($scope, $http, $window){
@@ -10,6 +19,8 @@
         $scope.envio = 0;
         $scope.sala;
         $scope.foro = {};
+        $scope.imagen;
+        $scope.preimagen;
 
         $scope.getSalas = function(){
             $http.get("/foros/room")
@@ -98,6 +109,38 @@
                         $scope.foro = {};
                      }   
                  });
+        }
+
+        $scope.dummy = function(){
+            alert('Entro');
+        }
+
+        $scope.preImg = function(){
+            alert(JSON.stringify("Funcion"+res.value));
+            $scope.preimagen= res.value;
+            return  res.value;
+        }
+        
+        $scope.despUrl = function(){
+            alert(JSON.stringify('0'));
+            return  res2.value;
+        }
+
+        $scope.imgID = function(dato){
+            $http.get("/files/r/"+dato)
+            .then(function(respuesta){
+               if (respuesta.data.error != undefined){
+                   alert("Ocurrió un error ");
+                   console.log(respuesta)
+               }else{
+                  $scope.imagen = respuesta.data;
+                  $scope.imagen = '/assets/img/general/'+$scope.imagen;
+                  console.log($scope.imagen);
+                  alert(res2.value);
+                  alert($scope.imagen);
+                  res2.value=$scope.imagen;
+               }   
+            });
         }
 
         $scope.editForo = function(id){

@@ -2,7 +2,10 @@ extends ../layout
 
 
 block CONTENIDO
-    .container-fluid.py-4(ng-controller='ForoCtrl')
+    input#datos(type="text" value="#{sala}" style="visibility:hidden") 
+    input#boleta(type="text" value="#{datos.BOLETA}" style="visibility:hidden")
+    input#nombre(type="text" value="#{datos.NOMBRE}" style="visibility:hidden")
+    .container-fluid.py-4(ng-controller='ForoCtrl' ng-init="getForoEsp('#{sala}')")
         .row
             .col-12
                 .multisteps-form
@@ -20,22 +23,22 @@ block CONTENIDO
                                         .row.mt-3
                                             .col-12.col-sm-6
                                                 label Nombre *(No editable)
-                                                input.multisteps-form__input.form-control(type='text' placeholder='Nombre' ng-model='foro.sala')
+                                                input.multisteps-form__input.form-control(type='text' placeholder='Nombre' ng-model='foro.sala' maxlength=50)
                                             .col-12.col-sm-6.mt-3.mt-sm-0
                                                 label Tipo *(No editable)
-                                                select#choices-category.form-control(name='choices-category' ng-model='foro.tipo')
-                                                    option(value='Institucional' selected='') Institucional
+                                                select#choices-category.form-control(name='choices-category' ng-init='foro.tipo="Institucional"' ng-model='foro.tipo')
+                                                    option(value='Institucional') Institucional
                                                     option(value='Administrativo') Administrativo 
                                                     option(value='Social') Social       
                                         .row.mt-3
                                             .col-sm-12
                                                 label Contenido
-                                                input.multisteps-form__input.form-control(type="text"  placeholder='Contenido' ng-model='foro.texto')
+                                                input.multisteps-form__input.form-control(type="text"  placeholder='Contenido' ng-model='foro.texto' maxlength=750)
                                         .row
                                             .col-sm-12
                                                 label.mt-4 Descripción
                                                 p.form-text.text-muted.text-xs.ms-1.d-inline (opcional)
-                                                input.multisteps-form__input.form-control(type="text"  placeholder='Descripcion' ng-model='foro.descripcion')
+                                                input.multisteps-form__input.form-control(type="text"  placeholder='Descripcion' ng-model='foro.descripcion' maxlength=150)
                                         .button-row.d-flex.mt-4
                                             a(href="/foro")                    
                                                 button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar') Regresar
@@ -45,16 +48,39 @@ block CONTENIDO
                                     .multisteps-form__content
                                         .row.mt-3
                                             .col-12
-                                                label Foto de perfil del grupo
-                                                #productImg.form-control.dropzone(action='https://demos.creative-tim.com/file-upload' ng-model = 'grupo.imagen')
+                                                label Imagen seleccionada}
+                                                input.multisteps-form__input.form-control(type='text'  id="inpResult3" ng-model='foro.preimagen' readonly)
+                                                input.multisteps-form__input.form-control(type='text'  id="inpResult" style="visibility:hidden" readonly)                                                
+                                                //h1 {{foro.preimagen}}
+                                        .row.mt-3
+                                            .col-12
+                                                label Directorio de la imagen
+                                                input.multisteps-form__input.form-control(type='text'  id="inpResult2"  readonly)
+                                                input.multisteps-form__input.form-control(type='text'  id="inpResult4" ng-model='foro.imagen'  style="visibility:hidden" readonly)
+                                        .button-row.d-flex.mt-4    
+                                            h6 Busca tu imagen al servidor previamente subida* (Eligiendo el archivo original)
+                                        .button-row.d-flex.mt-4  
+                                            button.btn.bg-gradient-primary.mb-0(type='button' id="btnResult" ng-click=('foro.preimagen=preImg();imgID(foro.preimagen);')) Busca imagen subida
                                         .button-row.d-flex.mt-4
-                                            button.btn.bg-gradient-secondary.mb-0.js-btn-prev(type='button' title='Prev') Volver
-                                    .button-row.d-flex.mt-4
+                                            //h8 {{foro.imagen}}
+                                        .button-row.d-flex.mt-4
+                                        button.btn.bg-gradient-dark.ms-auto.mb-0.js-btn-prev(type='button' title='Prev') Volver    
                                         a(href="/foro")                    
-                                            button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar' ng-click='addForo()') Finalizar
+                                            button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar' ng-click='foro.imagen=despUrl();addForo();') Finalizar
+        .container.py-4(ng-controller='ForoCtrl' ng-init="getForoEsp('#{sala}')")
+            .row
+                div
+                    h5 Sube tu imagen al servidor primero*
+                    form(action="/files/foro" method="POST" enctype="multipart/form-data")
+                        input(type="file" name="upload" id="upldFile" onchange="alert('hola');")
+                        input.btn.bg-gradient-primary.mb-0(type="submit" value="Upload" id="upldButton" onsubmit="alert('hola');")
 
 block SCRIPTS
-    //script(src='../assets/js/A_EjemploTabla.js')
+    script(src='https://cdn.socket.io/4.4.1/socket.io.min.js' integrity='sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H' crossorigin='anonymous')
+    script(src="/socket.io/socket.io.js")
+    script(src="../assets/js/clientforo.js")
+    script(src="../assets/js/angular/A_Chat.js")
+    script(src='../../assets/js/angular/A_Foro.js')
     script(src='../../assets/js/angular/A_Foro.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/bootstrap.min.js')
@@ -64,63 +90,7 @@ block SCRIPTS
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/dropzone.min.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/quill.min.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/multistep-form.js')
-    script.
-        if (document.getElementById('edit-deschiption')) {
-            var quill = new Quill('#edit-deschiption', {
-                theme: 'snow' 
-            });
-        };
-
-        if (document.getElementById('choices-category')) {
-            var element = document.getElementById('choices-category');
-            const example = new Choices(element, {
-                searchEnabled: false
-            });
-        };
-
-        if (document.getElementById('choices-sizes')) {
-            var element = document.getElementById('choices-sizes');
-            const example = new Choices(element, {
-                searchEnabled: false
-            });
-        };
-
-        if (document.getElementById('choices-currency')) {
-            var element = document.getElementById('choices-currency');
-            const example = new Choices(element, {
-                searchEnabled: false
-            });
-        };
-
-        if (document.getElementById('choices-tags')) {
-            var tags = document.getElementById('choices-tags');
-            const examples = new Choices(tags, {
-                removeItemButton: true
-            });
-            examples.setChoices(
-                [{
-                    value: 'One',
-                    label: 'Expired',
-                    disabled: true
-                }, {
-                    value: 'Two',
-                    label: 'Out of Stock',
-                    selected: true
-                }],
-                'value',
-                'label',
-                false,
-            );
-        }
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/dragula/dragula.min.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/jkanban/jkanban.js')
-    script.
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
     script(async='' defer='' src='https://buttons.github.io/buttons.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/soft-ui-dashboard.min.js?v=1.0.4')

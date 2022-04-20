@@ -61,7 +61,7 @@ router.post('/msg', function(req, res){
     //https://www.section.io/engineering-education/uploading-files-using-formidable-nodejs/
     var form = new formidable.IncomingForm();
     //definition of the form options
-    const uploadFolder ='E:\\NewStuff\\Escuela\\8vo Semestre\\Ejercicios\\Espiral5_v2\\UPIIZCOM\\UPIIZCOM_WEB\\public\\assets\\img\\mensajes';
+    const uploadFolder ='E:\\NewStuff\\Escuela\\8vo Semestre\\Ejercicios\\Espiral5_v2\\UPIIZCOM\\UPIIZCOM_WEB\\public\\assets\\img\\general';
     form.multiples = true;
     form.options.maxFileSize = 50 * 1024 * 1024;
     form.options.keepExtensions = true;
@@ -98,7 +98,7 @@ router.post('/foro', function(req, res){
     var form = new formidable.IncomingForm();
     //definition of the form options
     // 
-    const uploadFolder ='E:\\NewStuff\\Escuela\\8vo Semestre\\Ejercicios\\Espiral5_v2\\UPIIZCOM\\UPIIZCOM_WEB\\public\\assets\\img\\foros';
+    const uploadFolder ='E:\\NewStuff\\Escuela\\8vo Semestre\\Ejercicios\\Espiral5_v2\\UPIIZCOM\\UPIIZCOM_WEB\\public\\assets\\img\\general';
     form.multiples = true;
     form.options.maxFileSize = 50 * 1024 * 1024;
     form.options.keepExtensions = true;
@@ -130,15 +130,38 @@ router.post('/foro', function(req, res){
     });
 });
 
-router.get('/download/:id', function(req, res){
+
+router.get('/r/:id', function(req, res){
+    Archivo.findOne({nombreOriginal : req.params.id})
+    .exec(function(err, rslt){
+        if (err === null){
+            res.json(rslt.nombreNuevo);
+        }else{
+            res.json({status:false, error:err});
+        }
+   });
+
+
+});
+
+router.get('/downloadCHAT/:id', function(req, res){
     Archivo.findOne({nombreOriginal : req.params.id},
         function(err, reslt){
-            var file = 'E://NewStuff//Escuela//8vo Semestre//Ejercicios//Espiral5//Archivos//'+reslt.nombreNuevo;
-            
+            //var file = 'E://NewStuff//Escuela//8vo Semestre//Ejercicios//Espiral5//Archivos//'+reslt.nombreNuevo;
+            var file = 'E://NewStuff//Escuela//8vo Semestre//Ejercicios//Espiral5_v2//UPIIZCOM//UPIIZCOM_WEB//public//assets//img//general//'+reslt.nombreNuevo;
             res.download(file)
             
             
         });
-    
+});
+
+
+router.get('/downloadCOMENT/:id', function(req, res){
+    Archivo.findOne({nombreOriginal : req.params.id},
+            function(err, reslt){
+                //var file = 'E://NewStuff//Escuela//8vo Semestre//Ejercicios//Espiral5//Archivos//'+reslt.nombreNuevo;
+                var file = 'E://NewStuff//Escuela//8vo Semestre//Ejercicios//Espiral5_v2//UPIIZCOM//UPIIZCOM_WEB//public//assets//img//general//'+reslt.nombreNuevo;
+                res.download(file)    
+                });   
 });
 module.exports = router;

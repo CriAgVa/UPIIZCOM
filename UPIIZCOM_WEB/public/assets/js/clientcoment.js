@@ -81,7 +81,8 @@ if (socket != undefined){
                         text.appendChild(text_content);
                         text.insertBefore(icon, text_content);
                     text.addEventListener('click', () => {
-                        window.location.href = "http://localhost:3000/files/download/"+mensaje;
+                        alert(mensaje);
+                        window.location.href = "http://localhost:3000/files/downloadCOMENT/"+mensaje;
                     });
                 }
 

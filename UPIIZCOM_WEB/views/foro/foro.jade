@@ -11,7 +11,7 @@ block CONTENIDO
                         h4(ng-repeat='u in resultforo ') Foro: {{u.sala}}
                         h6(ng-repeat='u in resultforo ') Contenido: {{u.texto}}
                         h8(ng-repeat='u in resultforo ') Descripcion: {{u.descripcion}} / Tipo de Sala: {{u.tipo}}
-        img(ng-repeat='u in resultforo ' widht='150' height='150' src='{{u.imagen}}' alt='forum_image')
+        img(ng-repeat='u in resultforo ' widht='400' height='400' src='{{u.imagen}}' alt='forum_image')
 
 
     input#datos(type="text" value="#{sala}" style="visibility:hidden") 
