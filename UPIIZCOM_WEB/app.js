@@ -26,6 +26,7 @@ fs.readdirSync( __dirname + '/modelos' ).forEach(function( filename ){
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var forosRouter = require('./routes/foros');
+var noticiasRouter = require('./routes/noticias');
 var gruposRouter = require('./routes/vista_grupos');
 var grupoRouter = require('./routes/grupos');
 var usuarioRouter = require('./routes/usuarios');
@@ -49,6 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/foros', forosRouter);
+app.use('/noticias', noticiasRouter);
 app.use('/grupos', gruposRouter);
 app.use('/grupo', grupoRouter);
 app.use('/usuario', usuarioRouter);

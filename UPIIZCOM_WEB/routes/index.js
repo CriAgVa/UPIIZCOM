@@ -155,6 +155,29 @@ router.get('/foro/creacionForo', manejador_sesiones(),function(req, res, next) {
   res.render('foro/creacionForo', { title:'Creacion de Foro', datos: req.session, sala: sala });
 });
 
+/* GET home page. */
+router.get('/noticia', manejador_sesiones(), function(req, res, next) {
+  res.render('noticia/directorio', { title: 'Menú  de Noticias', datos: req.session });
+});
+
+/* GET home page. */
+router.get('/noticia/s:sala', manejador_sesiones(),function(req, res, next) {
+  var sala = req.params.sala;
+  res.render('noticia/noticia', { title: 'Sala '+sala, datos: req.session, sala: sala });
+});
+
+/* GET home page. */
+router.get('/noticia/gestorNoticia', manejador_sesiones(),function(req, res, next) {
+  var sala = req.params.sala;
+  res.render('noticia/gestorNoticia', { title:'Gestor de Noticias', datos: req.session, sala: sala });
+});
+
+/* GET home page. */
+router.get('/noticia/creacionNoticia', manejador_sesiones(),function(req, res, next) {
+  var sala = req.params.sala;
+  res.render('noticia/creacionNoticia', { title:'Creacion de Noticias', datos: req.session, sala: sala });
+});
+
 router.get('/editarGrupo/:id', manejador_sesiones(), function(req, res, next) {
   id = req.params.id;
   //Utilizando un Modelo

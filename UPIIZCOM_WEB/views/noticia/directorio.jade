@@ -1,0 +1,40 @@
+extends ../layout
+
+block CONTENIDO
+    a(href="noticia/creacionNoticia")
+        button.btn.btn-icon.btn-3.btn-primary(ng-click="selectSalaNoticia()") Crear Nueva Noticia
+    .container-fluid.py-4(ng-controller='NoticiaCtrl')
+        .row
+            .col-12
+                .card.mb-4 
+                    .card-header.pb-0 
+                        h6 Selección de Noticias
+                    .card-body.px-0.pt-0.pb-2 
+                        .table-responsive.p-0
+                            table(.table.align-items-center.mb-0)
+                                thead
+                                    tr 
+                                        th.text-uppercase.text-secondary.text-xxs.font-weight-bolder.opacity-7 Titulo de Noticia
+                                        th.text-uppercase.text-secondary.text-xxs.font-weight-bolder.opacity-7 Descripcion
+                                        th.text-uppercase.text-secondary.text-xxs.font-weight-bolder.opacity-7 Tipo
+                                        tr 
+                                tbody
+                                    .container-fluid.py-4(ng-repeat='u in salas') 
+                                        .row
+                                            .col-12
+                                                .card.mb-4 
+                                                    .card-header.pb-0 
+                                                        h4 Noticia: {{u.sala}}
+                                                        h6 Contenido: {{u.texto}}
+                                                        h8 Descripcion: {{u.descripcion}} / Tipo de Sala: {{u.tipo}}
+                                        img( widht='400' height='400' src='{{u.imagen}}' alt='forum_image')
+    a(href="noticia/gestorNoticia")
+        button.btn.btn-icon.btn-3.btn-dark(ng-click="selectSalaNoticia()") Gestionar Noticias
+
+block SCRIPTS
+    //script(src='../../assets/js/angular/A_Usuarios.js')
+    script(src='../../assets/js/angular/A_Noticia.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/bootstrap.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/perfect-scrollbar.min.js')
+    script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/smooth-scrollbar.min.js')
