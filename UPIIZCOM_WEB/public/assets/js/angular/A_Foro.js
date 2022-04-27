@@ -11,6 +11,9 @@
     var app = angular.module("UPIIZCOM", []);
 
     app.controller("ForoCtrl", function($scope, $http, $window){
+        $scope.imagenes = [];
+        $scope.imagenestemp;
+        $scope.imagenesUq = [];
         $scope.salas = [];
         $scope.resultforo = [];
         $scope.salasUq = [];
@@ -81,7 +84,24 @@
                }   
             });
         }
+        $scope.getImagenes = function(){
+            $http.get("/files")
+                 .then(function(respuesta){
+                    if (respuesta.data.error != undefined){
+                        alert("An error has occurred...");
+                    }else{
+                        $scope.imagenes = respuesta.data;
+                        var aux = [];
+                        for (var i = 0; i < $scope.imagenes.length; i++){
+                            aux[i] = $scope.imagenes[i].nombreOriginal;
+                        }
+                        const dataArr = new Set(aux);
 
+                        $scope.imagenesUq = [...dataArr];
+                        
+                    }
+                 });
+        }
 
         $window.onload = function(){
             $http.get("/foros/")
@@ -116,7 +136,7 @@
         }
 
         $scope.preImg = function(){
-            alert(JSON.stringify("Funcion"+res.value));
+            //alert(JSON.stringify("Funcion"+res.value));
             $scope.preimagen= res.value;
             return  res.value;
         }
@@ -131,6 +151,15 @@
         }
 
         $scope.imgID = function(dato){
+            if(dato=="")
+            {
+                  $scope.imagen = '/assets/img/general/default_logo.png';
+                  console.log($scope.imagen);
+                  //alert(res2.value);
+                  //alert($scope.imagen);
+                  alert("Imagen "+dato+" seleccionada")
+                  res2.value=$scope.imagen;
+            }else{
             $http.get("/files/r/"+dato)
             .then(function(respuesta){
                if (respuesta.data.error != undefined){
@@ -140,11 +169,14 @@
                   $scope.imagen = respuesta.data;
                   $scope.imagen = '/assets/img/general/'+$scope.imagen;
                   console.log($scope.imagen);
-                  alert(res2.value);
-                  alert($scope.imagen);
+                  //alert(res2.value);
+                  //alert($scope.imagen);
+                  alert("Imagen "+dato+" seleccionada")
                   res2.value=$scope.imagen;
                }   
             });
+        }
+        res2.value=$scope.imagen;
         }
 
         $scope.editForo = function(id){

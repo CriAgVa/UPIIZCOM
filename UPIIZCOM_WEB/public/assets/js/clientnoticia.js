@@ -62,19 +62,26 @@ if (socket != undefined){
         alert(nombreArchivo + "aaaa");
         var username = nombre.value + "(" + boleta.value + ")";
 
-        socket.emit('input', {
-            nombre: username,
-            mensaje: nombreArchivo,
-            dia: date.getDate(),
-            mes: date.getMonth() + 1,
-            year: date.getFullYear(),
-            hora: date.getHours(),
-            minuto: date.getMinutes(),
-            segundo: date.getSeconds(),
-            sala: datos.value,
-            tipo: tipoArchivo
-        });
-        res.value=nombreArchivo;
+        if(nombreArchivo=="")
+        {
+            alert("Archivo no seleccionado")
+        }
+        else{
+            socket.emit('input', {
+                nombre: username,
+                mensaje: nombreArchivo,
+                dia: date.getDate(),
+                mes: date.getMonth() + 1,
+                year: date.getFullYear(),
+                hora: date.getHours(),
+                minuto: date.getMinutes(),
+                segundo: date.getSeconds(),
+                sala: datos.value,
+                tipo: tipoArchivo
+            });
+            res.value=nombreArchivo;
+        }
+       
         //my_func('click'); 
     },true);
 

@@ -145,7 +145,7 @@
         }
 
         $scope.preImg = function(){
-            alert(JSON.stringify("Funcion"+res.value));
+            //alert(JSON.stringify("Funcion"+res.value));
             $scope.preimagen= res.value;
             return  res.value;
         }
@@ -164,8 +164,9 @@
             {
                   $scope.imagen = '/assets/img/general/default_logo.png';
                   console.log($scope.imagen);
-                  alert(res2.value);
-                  alert($scope.imagen);
+                  //alert(res2.value);
+                  //alert($scope.imagen);
+                  alert("Imagen "+dato+" seleccionada")
                   res2.value=$scope.imagen;
             }else{
             $http.get("/files/r/"+dato)
@@ -177,8 +178,9 @@
                   $scope.imagen = respuesta.data;
                   $scope.imagen = '/assets/img/general/'+$scope.imagen;
                   console.log($scope.imagen);
-                  alert(res2.value);
-                  alert($scope.imagen);
+                  //alert(res2.value);
+                  //alert($scope.imagen);
+                  alert("Imagen "+dato+" seleccionada")
                   res2.value=$scope.imagen;
                }   
             });

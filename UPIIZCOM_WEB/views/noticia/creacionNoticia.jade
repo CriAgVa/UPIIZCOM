@@ -47,28 +47,22 @@ block CONTENIDO
                                     h5.font-weight-bolder Imagen
                                     .multisteps-form__content
                                         .row.mt-3
+                                            h6 Busca tu imagen al servidor previamente subida* 
+                                            select#choices-category.form-control(class="form-control" ng-change="unitChanged()" ng-model="data.unit" )
+                                                option(ng-model="data.result" ng-selected="data.unit == item.nombreOriginal" ng-repeat="item in imagenes" ng-value="item.nombreOriginal") {{item.nombreOriginal}}
+                                            button.btn.bg-gradient-primary.mb-0(type='button' id="btnResult" ng-click=('imgID(data.unit);')) Confirma Imagen Subida   
                                             .col-12
-                                                label Imagen seleccionada}
-                                                input.multisteps-form__input.form-control(type='text'  id="inpResult3" ng-model='noticia.preimagen' readonly)
-                                                input.multisteps-form__input.form-control(type='text'  id="inpResult" style="visibility:hidden" readonly)                                                
+                                                //label Imagen seleccionada}
+                                                //input.multisteps-form__input.form-control(type='text'  id="inpResult3" style="visibility:hidden" ng-model='noticia.preimagen' readonly)
+                                                //input.multisteps-form__input.form-control(type='text'  id="inpResult" style="visibility:hidden" readonly)                                                
                                                 //h1 {{noticia.preimagen}}
                                         .row.mt-3
                                             .col-12
-                                                label Directorio de la imagen
-                                                input.multisteps-form__input.form-control(type='text'  id="inpResult2"  readonly)
-                                                input.multisteps-form__input.form-control(type='text'  id="inpResult4" ng-model='noticia.imagen'  style="visibility:hidden" readonly)
-                                        .button-row.d-flex.mt-4   
-                                            h6 Busca tu imagen al servidor previamente subida* (Eligiendo el archivo original)
+                                                //label Directorio de la imagen
+                                                input.multisteps-form__input.form-control(type='text'  id="inpResult2" style="visibility:hidden" readonly)
+                                                //input.multisteps-form__input.form-control(type='text'  id="inpResult4" ng-model='noticia.imagen'  style="visibility:hidden" readonly)
                                         .button-row.d-flex.mt-4  
-                                            button.btn.bg-gradient-primary.mb-0(type='button' id="btnResult" ng-click=('noticia.preimagen=preImg();imgID(noticia.preimagen);')) Busca imagen subida
-                                            
-                                            
-                                            select#choices-category.form-control(class="form-control" ng-change="unitChanged()" ng-model="data.unit" )
-                                                option(ng-model="data.result" ng-selected="data.unit == item.nombreOriginal" ng-repeat="item in imagenes" ng-value="item.nombreOriginal") {{item.nombreOriginal}}
-
-
-                                            button.btn.bg-gradient-primary.mb-0(type='button' id="btnResult" ng-click=('imgID(data.unit);')) Selecciona Imagen Subida
-                                        
+                                            //button.btn.bg-gradient-primary.mb-0(type='button' id="btnResult" ng-click=('noticia.preimagen=preImg();imgID(noticia.preimagen);')) Busca imagen subida
                                         .button-row.d-flex.mt-4
                                             //h8 {{noticia.imagen}}
                                         .button-row.d-flex.mt-4
