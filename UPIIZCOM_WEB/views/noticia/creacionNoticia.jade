@@ -29,7 +29,7 @@ block CONTENIDO
                                                 select#choices-category.form-control(name='choices-category' ng-init='noticia.tipo="Institucional"' ng-model='noticia.tipo')
                                                     option(value='Institucional') Institucional
                                                     option(value='Administrativo') Administrativo 
-                                                    option(value='Social') Social       
+                                                    option(value='Social') Social      
                                         .row.mt-3
                                             .col-sm-12
                                                 label Contenido
@@ -47,7 +47,7 @@ block CONTENIDO
                                     h5.font-weight-bolder Imagen
                                     .multisteps-form__content
                                         .row.mt-3
-                                            h6 Busca tu imagen al servidor previamente subida* 
+                                            h6 Selector de imagen previamente subida* 
                                             select#choices-category.form-control(class="form-control" ng-change="unitChanged()" ng-model="data.unit" )
                                                 option(ng-model="data.result" ng-selected="data.unit == item.nombreOriginal" ng-repeat="item in imagenes" ng-value="item.nombreOriginal") {{item.nombreOriginal}}
                                             button.btn.bg-gradient-primary.mb-0(type='button' id="btnResult" ng-click=('imgID(data.unit);')) Confirma Imagen Subida   
@@ -59,7 +59,7 @@ block CONTENIDO
                                         .row.mt-3
                                             .col-12
                                                 //label Directorio de la imagen
-                                                input.multisteps-form__input.form-control(type='text'  id="inpResult2" style="visibility:hidden" readonly)
+                                                input.multisteps-form__input.form-control(type='text'  id="inpResult2" readonly)
                                                 //input.multisteps-form__input.form-control(type='text'  id="inpResult4" ng-model='noticia.imagen'  style="visibility:hidden" readonly)
                                         .button-row.d-flex.mt-4  
                                             //button.btn.bg-gradient-primary.mb-0(type='button' id="btnResult" ng-click=('noticia.preimagen=preImg();imgID(noticia.preimagen);')) Busca imagen subida
@@ -74,8 +74,8 @@ block CONTENIDO
                 div
                     h5 Sube tu imagen al servidor primero*
                     form(action="/files/noticia" method="POST" enctype="multipart/form-data")
-                        input(type="file" name="upload" id="upldFile" onchange="alert('hola');")
-                        input.btn.bg-gradient-primary.mb-0(type="submit" value="Upload" id="upldButton" onsubmit="alert('hola');")
+                        input(type="file" name="upload" id="upldFile")
+                        input.btn.bg-gradient-primary.mb-0(type="submit" value="Upload" id="upldButton")
 
 block SCRIPTS
     script(src='https://cdn.socket.io/4.4.1/socket.io.min.js' integrity='sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H' crossorigin='anonymous')
@@ -83,12 +83,10 @@ block SCRIPTS
     script(src="../assets/js/clientnoticia.js")
     script(src="../assets/js/angular/A_Chat.js")
     script(src='../../assets/js/angular/A_Noticia.js')
-    script(src='../../assets/js/angular/A_Noticia.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/popper.min.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/core/bootstrap.min.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/perfect-scrollbar.min.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/smooth-scrollbar.min.js')
-    //script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/choices.min.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/dropzone.min.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/quill.min.js')
     script(src='https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/js/plugins/multistep-form.js')

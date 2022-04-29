@@ -51,38 +51,39 @@ if (socket != undefined){
 
     // Handle Upload
     form.addEventListener('click', function(){
-        
-        var nombreArchivo;
-        var tipoArchivo;
-        var aux = upld.files;
-        
-        nombreArchivo = aux[0].name;
-        tipoArchivo = aux[0].type;
+        if(upld.value=="")
+        {
+            alert("Archivo no seleccionado")
+            event.preventDefault();
+        }else{
+            alert("entra");
+            var nombreArchivo;
+            var tipoArchivo;
+            var aux = upld.files;
+            
+            nombreArchivo = aux[0].name;
+            tipoArchivo = aux[0].type;
+    
+            //alert(nombreArchivo);
+            var username = nombre.value + "(" + boleta.value + ")";
+    
+            socket.emit('input', {
+                nombre: username,
+                mensaje: nombreArchivo,
+                dia: date.getDate(),
+                mes: date.getMonth() + 1,
+                year: date.getFullYear(),
+                hora: date.getHours(),
+                minuto: date.getMinutes(),
+                segundo: date.getSeconds(),
+                sala: datos.value,
+                tipo: tipoArchivo
+            });
+            res.value=nombreArchivo;
+        }
 
-        alert(nombreArchivo);
-        var username = nombre.value + "(" + boleta.value + ")";
+    });
 
-        socket.emit('input', {
-            nombre: username,
-            mensaje: nombreArchivo,
-            dia: date.getDate(),
-            mes: date.getMonth() + 1,
-            year: date.getFullYear(),
-            hora: date.getHours(),
-            minuto: date.getMinutes(),
-            segundo: date.getSeconds(),
-            sala: datos.value,
-            tipo: tipoArchivo
-        });
-        res.value=nombreArchivo;
-        //my_func('click'); 
-    },true);
-
-    var my_func = function(event) {
-        alert("me and all my relatives are owned by China");
-        event.preventDefault();
-    };
-    /////en el upld
 
     upld.addEventListener('change', function(){
         var nombreArchivo;
@@ -104,16 +105,16 @@ if (socket != undefined){
 
     btnres.addEventListener('click', function(){
         var inputVal = document.getElementById("inpResult").value;
-        alert(inputVal);
+        //alert(inputVal);
         //res.value='nono';
-        alert(JSON.stringify(res));
+        //alert(JSON.stringify(res));
         console.log(res);
         console.log(inputVal);
 
     });
 
     form.addEventListener('submit', function(){
-        alert('submitio');
+        //alert('submitio');
 
     });
 

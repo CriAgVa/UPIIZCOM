@@ -51,22 +51,22 @@ if (socket != undefined){
 
     // Handle Upload
     form.addEventListener('click', function(){
-        
-        var nombreArchivo;
-        var tipoArchivo;
-        var aux = upld.files;
-        
-        nombreArchivo = aux[0].name;
-        tipoArchivo = aux[0].type;
-
-        alert(nombreArchivo + "aaaa");
-        var username = nombre.value + "(" + boleta.value + ")";
-
-        if(nombreArchivo=="")
+        if(upld.value=="")
         {
             alert("Archivo no seleccionado")
-        }
-        else{
+            event.preventDefault();
+        }else{
+            
+            var nombreArchivo;
+            var tipoArchivo;
+            var aux = upld.files;
+            
+            nombreArchivo = aux[0].name;
+            tipoArchivo = aux[0].type;
+    
+            //alert(nombreArchivo);
+            var username = nombre.value + "(" + boleta.value + ")";
+            alert("Archivo subido: "+ nombreArchivo);
             socket.emit('input', {
                 nombre: username,
                 mensaje: nombreArchivo,
@@ -81,15 +81,9 @@ if (socket != undefined){
             });
             res.value=nombreArchivo;
         }
-       
-        //my_func('click'); 
-    },true);
 
-    var my_func = function(event) {
-        alert("me and all my relatives are owned by China");
-        event.preventDefault();
-    };
-    /////en el upld
+    });
+
 
     upld.addEventListener('change', function(){
         var nombreArchivo;
@@ -111,16 +105,16 @@ if (socket != undefined){
 
     btnres.addEventListener('click', function(){
         var inputVal = document.getElementById("inpResult").value;
-        alert(inputVal);
+        //alert(inputVal);
         //res.value='nono';
-        alert(JSON.stringify(res));
+        //alert(JSON.stringify(res));
         console.log(res);
         console.log(inputVal);
 
     });
 
     form.addEventListener('submit', function(){
-        alert('submitio');
+        //alert('submitio');
 
     });
 

@@ -47,7 +47,6 @@ block CONTENIDO
                                     h5.font-weight-bolder Imagen
                                     .multisteps-form__content
                                         .row.mt-3
-                                            .col-12.col-sm-6
                                                 h6 Selector de imagen previamente subida* 
                                                 select#choices-category.form-control(class="form-control" ng-change="unitChanged()" ng-model="data.unit" )
                                                     option(ng-model="data.result" ng-selected="data.unit == item.nombreOriginal" ng-repeat="item in imagenes" ng-value="item.nombreOriginal") {{item.nombreOriginal}}
@@ -71,13 +70,14 @@ block CONTENIDO
                                         .button-row.d-flex.mt-4
                                         button.btn.bg-gradient-dark.ms-auto.mb-0.js-btn-prev(type='button' title='Prev') Volver    
                                         a(href="/foro")                    
-                                            button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar' ng-click='foro.imagen=despUrl();addForo();') Finalizar
-                                        .row
-                                            div
-                                                h5 Sube tu imagen al servidor primero*
-                                                form(action="/files/foro" method="POST" enctype="multipart/form-data")
-                                                    input(type="file" name="upload" id="upldFile" onchange="alert('hola');")
-                                                    input.btn.bg-gradient-primary.mb-0(type="submit" value="Upload" id="upldButton" onsubmit="alert('hola');")
+                                            button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar' ng-click='foro.imagen=despUrl();addForo();') Finalizar                                
+        .container.py-4(ng-controller='ForoCtrl' ng-init="getForoEsp('#{sala}')")
+            .row
+                div
+                    h5 Sube tu imagen al servidor primero*
+                    form(action="/files/foro" method="POST" enctype="multipart/form-data")
+                        input(type="file" name="upload" id="upldFile")
+                        input.btn.bg-gradient-primary.mb-0(type="submit" value="Upload" id="upldButton")
 
 block SCRIPTS
     script(src='https://cdn.socket.io/4.4.1/socket.io.min.js' integrity='sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H' crossorigin='anonymous')

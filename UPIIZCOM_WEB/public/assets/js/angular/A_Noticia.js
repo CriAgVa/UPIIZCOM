@@ -13,6 +13,7 @@
 
     app.controller("NoticiaCtrl", function($scope, $http, $window){
         $scope.imagenes = [];
+        $scope.imagenesaux = [];
         $scope.imagenestemp;
         $scope.imagenesUq = [];
         $scope.salas = [];
@@ -27,19 +28,23 @@
         $scope.preimagen;
 
         $scope.getSalas = function(){
-            $http.get("/noticias/room")
+            $http.get("/noticias")
                  .then(function(respuesta){
                     if (respuesta.data.error != undefined){
                         alert("An error has occurred...");
                     }else{
                         $scope.salas = respuesta.data;
+                        //alert($scope.salas)
                         var aux = [];
-                        for (var i = 0; i < $scope.salas.length; i++){
-                            aux[i] = $scope.salas[i].sala;
+                        i2=0;
+                        for (var i = $scope.salas.length-1; i >=0 ; i--){
+                            $scope.imagenesaux[i] = $scope.salas[i2];
+                            i2++;
                         }
-                        const dataArr = new Set(aux);
+                        //$scope.imagenesaux[0]=$scope.salas[1];
+                            console.log($scope.imagenesaux)
+                            console.log($scope.salas)
 
-                        $scope.salasUq = [...dataArr];
                         
                     }
                  });
@@ -51,6 +56,7 @@
                     if (respuesta.data.error != undefined){
                         alert("An error has occurred...");
                     }else{
+                        
                         $scope.imagenes = respuesta.data;
                         var aux = [];
                         for (var i = 0; i < $scope.imagenes.length; i++){
@@ -160,13 +166,13 @@
         }
 
         $scope.imgID = function(dato){
-            if(dato=="")
+            if(dato=="undefined")
             {
                   $scope.imagen = '/assets/img/general/default_logo.png';
                   console.log($scope.imagen);
                   //alert(res2.value);
                   //alert($scope.imagen);
-                  alert("Imagen "+dato+" seleccionada")
+                  alert("Imagen seleccionada: "+dato);
                   res2.value=$scope.imagen;
             }else{
             $http.get("/files/r/"+dato)
@@ -180,7 +186,7 @@
                   console.log($scope.imagen);
                   //alert(res2.value);
                   //alert($scope.imagen);
-                  alert("Imagen "+dato+" seleccionada")
+                  alert("Imagen seleccionada: "+dato);
                   res2.value=$scope.imagen;
                }   
             });

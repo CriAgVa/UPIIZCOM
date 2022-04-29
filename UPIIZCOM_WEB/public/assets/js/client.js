@@ -155,6 +155,11 @@ if (socket != undefined){
 
     // Handle Upload
     form.addEventListener('click', function(){
+        if(upld.value=="")
+        {
+            alert("Archivo no seleccionado")
+            event.preventDefault();
+        }else{
         var nombreArchivo;
         var tipoArchivo;
         var aux = upld.files;
@@ -178,6 +183,7 @@ if (socket != undefined){
             sala: datos.value,
             tipo: tipoArchivo
         });
+    }
     });
 
 

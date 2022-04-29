@@ -21,7 +21,6 @@ router.post("/", function( req, res ){
 
 router.get("/", function(req, res){
     Noticia.find({})
-        .sort({sala : 1})
         .exec( function(err, reslt){
             if(err === null){
                 res.json(reslt);
@@ -46,7 +45,6 @@ router.get("/s:sala", function(req, res){
 
 router.get("/room", function(req, res){
     Noticia.find({}, {sala:1, _id:0})
-    .sort({sala : 1})
     .exec( function(err, reslt){
         if(err === null){
             res.json(reslt);

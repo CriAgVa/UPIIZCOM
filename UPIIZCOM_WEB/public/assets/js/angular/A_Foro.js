@@ -31,6 +31,7 @@
                     if (respuesta.data.error != undefined){
                         alert("An error has occurred...");
                     }else{
+                        
                         $scope.salas = respuesta.data;
                         var aux = [];
                         for (var i = 0; i < $scope.salas.length; i++){
@@ -151,13 +152,13 @@
         }
 
         $scope.imgID = function(dato){
-            if(dato=="")
+            if(dato=="undefined")
             {
                   $scope.imagen = '/assets/img/general/default_logo.png';
                   console.log($scope.imagen);
                   //alert(res2.value);
                   //alert($scope.imagen);
-                  alert("Imagen "+dato+" seleccionada")
+                  alert("Imagen seleccionada: "+dato);
                   res2.value=$scope.imagen;
             }else{
             $http.get("/files/r/"+dato)
@@ -171,7 +172,7 @@
                   console.log($scope.imagen);
                   //alert(res2.value);
                   //alert($scope.imagen);
-                  alert("Imagen "+dato+" seleccionada")
+                  alert("Imagen seleccionada: "+dato);
                   res2.value=$scope.imagen;
                }   
             });
