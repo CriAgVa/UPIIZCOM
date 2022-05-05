@@ -152,7 +152,7 @@
         }
 
         $scope.imgID = function(dato){
-            if(dato=="undefined")
+            if(dato=="undefined" || dato==null)
             {
                   $scope.imagen = '/assets/img/general/default_logo.png';
                   console.log($scope.imagen);

@@ -1,4 +1,10 @@
 (function(){
+    var element = function(id){
+        return document.getElementById(id);
+    }
+    var res = element('inpResult');
+    var res2 = element('inpResult2');
+
     var app = angular.module("UPIIZCOM", []);
 
     app.controller("TablaCtrl", function( $scope, $http , $window){
@@ -10,8 +16,77 @@
         $scope.searchResult;
         $scope.integrantes;
         $scope.miembros = [];
-
         $scope.id_grupo = {};
+        $scope.imagen;
+        $scope.imagenes = [];
+        $scope.imagenesaux = [];
+        $scope.imagenestemp;
+        $scope.imagenesUq = [];
+//////////////////////// imagenes en el grupo
+        $scope.getImagenes = function(){
+            $http.get("/files")
+                .then(function(respuesta){
+                    if (respuesta.data.error != undefined){
+                        alert("An error has occurred...");
+                    }else{
+                        
+                        $scope.imagenes = respuesta.data;
+                        var aux = [];
+                        for (var i = 0; i < $scope.imagenes.length; i++){
+                            aux[i] = $scope.imagenes[i].nombreOriginal;
+                        }
+                        const dataArr = new Set(aux);
+                        
+                        $scope.imagenesUq = [...dataArr];
+                        
+                    }
+                });
+        }
+        
+
+        $scope.preImg = function(){
+            //alert(JSON.stringify("Funcion"+res.value));
+            $scope.preimagen= res.value;
+            return  res.value;
+        }
+        
+        $scope.despUrl = function(){
+            if(res2.value=='')
+            {
+            res2.value='/assets/img/general/default_logo.png';
+            }
+            return  res2.value;
+            
+        }
+
+        $scope.imgID = function(dato){
+            if(dato=="undefined" || dato==null)
+            {
+                  $scope.imagen = '/assets/img/general/default_logo.png';
+                  console.log($scope.imagen);
+                  //alert(res2.value);
+                  //alert($scope.imagen);
+                  alert("Imagen seleccionada: "+dato);
+                  res2.value=$scope.imagen;
+            }else{
+            $http.get("/files/r/"+dato)
+            .then(function(respuesta){
+               if (respuesta.data.error != undefined){
+                   alert("Ocurrió un error ");
+                   console.log(respuesta)
+               }else{
+                  $scope.imagen = respuesta.data;
+                  $scope.imagen = '/assets/img/general/'+$scope.imagen;
+                  console.log($scope.imagen);
+                  //alert(res2.value);
+                  //alert($scope.imagen);
+                  alert("Imagen seleccionada: "+dato);
+                  res2.value=$scope.imagen;
+               }   
+            });
+        }
+        res2.value=$scope.imagen;
+        }
 
         //////////////////////////////////////////////////////////Notificaciones funciones
         $scope.successSubscription = async function(){

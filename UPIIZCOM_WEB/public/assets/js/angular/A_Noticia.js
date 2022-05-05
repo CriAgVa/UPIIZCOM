@@ -5,10 +5,7 @@
     }
     var res = element('inpResult');
     var res2 = element('inpResult2');
-    var res3 = element('inpResult3');
-    var res4 = element('inpResult4');
     //var opc = element('option');
-    var select = element('select1');
     var app = angular.module("UPIIZCOM", []);
 
     app.controller("NoticiaCtrl", function($scope, $http, $window){
@@ -166,7 +163,7 @@
         }
 
         $scope.imgID = function(dato){
-            if(dato=="undefined")
+            if(dato=="undefined" || dato==null)
             {
                   $scope.imagen = '/assets/img/general/default_logo.png';
                   console.log($scope.imagen);
