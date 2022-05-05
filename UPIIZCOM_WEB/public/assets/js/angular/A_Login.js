@@ -1,4 +1,5 @@
 (function(){
+
     var app = angular.module("UPIIZCOM", []);
 
     app.controller("LoginCtrl", function( $scope, $http, $window ){
@@ -9,7 +10,8 @@
       /////Funcion para el logueo
       $scope.makeLogin = function(){
         $http.post("/login", {username:$scope.username, password: $scope.password})
-             .then(function(respuesta){/////////////Empiezan las cosas con datos para la respuesta desde la pagina
+             .then(function(respuesta){//
+              ///////////Empiezan las cosas con datos para la respuesta desde la pagina
                  console.log(respuesta);
                   if ( respuesta.data.acceso == true ){/// Existen los datos en gesco
                     /////////////////////////////////////Inicia el get para sacar los datos dada la boleta
@@ -36,7 +38,11 @@
                         } 
                     });                      
                   }else{////Los datos de logueo no existen en GESCO
-                      console.log(respuesta);
+                    const formulario = document.getElementById('login');  
+                    formulario.reset();
+                    console.log(respuesta);
+                      console.log("datos incorrectos");
+
                   }
              }); 
     }
@@ -166,3 +172,4 @@
       
     });  
 })();
+
