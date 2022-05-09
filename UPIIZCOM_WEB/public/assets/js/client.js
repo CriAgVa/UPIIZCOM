@@ -5,7 +5,6 @@ var element = function(id){
 //get elements
 var Mstatus = element('status');
 var messages = element('messages');
-//var username = element('username');
 var textarea = element('textarea');
 var date = new Date();
 var room = element('sala');

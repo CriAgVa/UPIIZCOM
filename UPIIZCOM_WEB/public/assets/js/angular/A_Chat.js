@@ -4,7 +4,6 @@
     app.controller("ChatCtrl", function($scope, $http, $window){
         $scope.salas = [];
         $scope.salasUq = [];
-        $scope.chat = [];
         $scope.saludo = "Sala de Chats";
         $scope.envio = 0;
         $scope.sala;
@@ -21,7 +20,6 @@
                             aux[i] = $scope.salas[i].sala;
                         }
                         const dataArr = new Set(aux);
-
                         $scope.salasUq = [...dataArr];
                         
                     }

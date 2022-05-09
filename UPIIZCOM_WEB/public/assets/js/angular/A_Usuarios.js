@@ -45,17 +45,11 @@
         }
 
         $scope.delUsuario = function(id){
-            //[ 3, 4, 5, 6 ,6 , 8, 9, 0 ]  splice(2,4)  ::  [ 3, 4, 6,  0 ]         
-            //[ 3, 4, 5, 6 ,6 , 8, 9, 0 ]  splice(5,1)  ::  [ 3, 4, 5, 6 ,6 , 9, 0 ]
-            //[ [{}, {},{} ] , {} , {} , {}]
-            // a[0][1].nombre
-            //alert($scope.grupos[id]._id + $scope.grupos[id].nombre)
             $http.delete("/usuario/" + $scope.usuarios[id]._id)
                  .then(function(respuesta){
                     if (respuesta.data.error != undefined){
                         alert("Ocurrió un error");
                     }else{
-                       //$scope.grupos = respuesta.data;
                        $scope.usuarios.splice( id, 1);
                     }   
                  });
@@ -80,27 +74,12 @@
                  });
         }
 
-        /*
-        $scope.getBoletas = function(){
-            $http.get("/usuario/blt"+"")
-                 .then(function(respuesta){
-                if (respuesta.data.error != undefined){
-                    alert("Ocurrió un error ");
-                    console.log(respuesta);
-                }else{
-                   console.log(respuesta);
-                }   
-             });
-        } 
-        */
-
         $window.onload = function(idx){
             $scope.getGrupos = function(){
                 $http.get("/grupo/id"+idx)
                  .then(function(respuesta){
                     if (respuesta.data.error != undefined){
                         console.log(respuesta);
-                        //$scope.grupos = respuesta;
                     }else{
                         console.log(respuesta);
                     }
@@ -108,11 +87,9 @@
             }  
         }
 
-            // Fetch data
         $scope.fetchUsers = function(){   
             var searchText_len = $scope.searchText.trim().length;
 
-            // Check search text length
             if(searchText_len > 0){
             $http.get("/usuario/blt"+searchText)
                 .then(function successCallback(respuesta){
@@ -123,7 +100,6 @@
                 }         
         }
 
-        // Set value to search box
         $scope.setValue = function(index,$event){
             $scope.searchText = $scope.searchResult[index].name;
             $scope.searchResult = {};
@@ -138,7 +114,6 @@
             $scope.searchResult = {};
         }
     
-        //funcion para redireccionar enviando el indice de la sala
         $scope.selectSala = function(num, num2){
             var boleta = $scope.usuarios[num].username;
             var nombre = $scope.usuarios[num].datos.nombre;
@@ -153,7 +128,6 @@
             $window.location.href = '/chat/s'+sala;
         }
 
-        //$scope.getBoletas();
         $scope.getUsuario();
     });
 
