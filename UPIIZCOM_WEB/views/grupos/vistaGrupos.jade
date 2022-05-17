@@ -32,9 +32,9 @@ block CONTENIDO
                                     th  
                                 tr
                                     td
-                                        input(type='text' ng-model='grupo.nombre')
+                                        input(type='text' ng-model='grupo.nombre' onkeypress="return alfanumerico(event)" onpaste="return false")
                                     td
-                                        input(type='text' ng-model='grupo.descripcion')
+                                        input(type='text' ng-model='grupo.descripcion' onkeypress="return alfanumerico(event)" onpaste="return false")
                                     td
                                         input(type='number' ng-model='grupo.noIntegrantes')
                                     td

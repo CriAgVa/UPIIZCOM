@@ -23,9 +23,9 @@ block CONTENIDO
                                 td
                                     input(type='text' ng-model='foro.tipo' readonly)
                                 td
-                                    input(type='text' ng-model='foro.descripcion')
+                                    input(type='text' ng-model='foro.descripcion' onkeypress="return alfanumerico(event)" onpaste="return false")
                                 td
-                                    input(type='text' ng-model='foro.texto' )
+                                    input(type='text' ng-model='foro.texto' onkeypress="return alfanumerico(event)" onpaste="return false")
                                 td
                                     button.btn.bg-gradient-secondary.ms-auto.mb-0(type='button' value='Actualizar' ng-click='updateForo()') Actualizar
  

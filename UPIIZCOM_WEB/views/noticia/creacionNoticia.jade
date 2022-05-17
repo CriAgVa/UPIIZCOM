@@ -23,7 +23,7 @@ block CONTENIDO
                                         .row.mt-3
                                             .col-12.col-sm-6
                                                 label Nombre *(No editable)
-                                                input.multisteps-form__input.form-control(type='text' placeholder='Nombre' ng-model='noticia.sala' maxlength=50)
+                                                input.multisteps-form__input.form-control(type='text' placeholder='Nombre' ng-model='noticia.sala' onkeypress="return alfanumerico(event)" onpaste="return false" maxlength=50)
                                             .col-12.col-sm-6.mt-3.mt-sm-0
                                                 label Tipo *(No editable)
                                                 select#choices-category.form-control(name='choices-category' ng-init='noticia.tipo="Institucional"' ng-model='noticia.tipo')
@@ -33,12 +33,12 @@ block CONTENIDO
                                         .row.mt-3
                                             .col-sm-12
                                                 label Contenido
-                                                input.multisteps-form__input.form-control(type="text"  placeholder='Contenido' ng-model='noticia.texto' maxlength=750)
+                                                input.multisteps-form__input.form-control(type="text"  placeholder='Contenido' ng-model='noticia.texto' onkeypress="return alfanumerico(event)" onpaste="return false" maxlength=750)
                                         .row
                                             .col-sm-12
                                                 label.mt-4 Descripción
                                                 p.form-text.text-muted.text-xs.ms-1.d-inline (opcional)
-                                                input.multisteps-form__input.form-control(type="text"  placeholder='Descripcion' ng-model='noticia.descripcion' maxlength=150)
+                                                input.multisteps-form__input.form-control(type="text"  placeholder='Descripcion' ng-model='noticia.descripcion' onkeypress="return alfanumerico(event)" onpaste="return false" maxlength=150)
                                         .button-row.d-flex.mt-4
                                             a(href="/noticia")                    
                                                 button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar') Regresar

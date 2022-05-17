@@ -23,7 +23,7 @@ block CONTENIDO
                                         .row.mt-3
                                             .col-12.col-sm-6
                                                 label Nombre *(No editable)
-                                                input.multisteps-form__input.form-control(type='text' placeholder='Nombre' ng-model='foro.sala' maxlength=50)
+                                                input.multisteps-form__input.form-control(type='text' placeholder='Nombre' ng-model='foro.sala' maxlength=50 onkeypress="return alfanumerico(event)" onpaste="return false")
                                             .col-12.col-sm-6.mt-3.mt-sm-0
                                                 label Tipo *(No editable)
                                                 select#choices-category.form-control(name='choices-category' ng-init='foro.tipo="Institucional"' ng-model='foro.tipo')
@@ -33,12 +33,12 @@ block CONTENIDO
                                         .row.mt-3
                                             .col-sm-12
                                                 label Contenido
-                                                input.multisteps-form__input.form-control(type="text"  placeholder='Contenido' ng-model='foro.texto' maxlength=750)
+                                                input.multisteps-form__input.form-control(type="text"  placeholder='Contenido' ng-model='foro.texto' maxlength=750 onkeypress="return alfanumerico(event)" onpaste="return false")
                                         .row
                                             .col-sm-12
                                                 label.mt-4 Descripción
                                                 p.form-text.text-muted.text-xs.ms-1.d-inline (opcional)
-                                                input.multisteps-form__input.form-control(type="text"  placeholder='Descripcion' ng-model='foro.descripcion' maxlength=150)
+                                                input.multisteps-form__input.form-control(type="text"  placeholder='Descripcion' ng-model='foro.descripcion' maxlength=150 onkeypress="return alfanumerico(event)" onpaste="return false")
                                         .button-row.d-flex.mt-4
                                             a(href="/foro")                    
                                                 button.btn.bg-gradient-dark.ms-auto.mb-0(type='button' value='Agregar') Regresar

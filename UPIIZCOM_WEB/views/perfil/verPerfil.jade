@@ -80,22 +80,22 @@ block CONTENIDO
                                 th  
                             tr
                                 td
-                                    input(type='text' ng-model='usuario.tipo')
+                                    input(type='text' ng-model='usuario.tipo' onkeypress="return alfanumerico(event)" onpaste="return false")
                                 td
-                                    input(type='text' ng-model='usuario.username')
+                                    input(type='text' ng-model='usuario.username' onkeypress="return alfanumerico(event)" onpaste="return false")
                                 td
-                                    input(type='text' ng-model='usuario.clave')
+                                    input(type='text' ng-model='usuario.clave' onkeypress="return alfanumerico(event)" onpaste="return false")
                                 td
-                                    input(type='text' ng-model='usuario.datos.nombre')
+                                    input(type='text' ng-model='usuario.datos.nombre' onkeypress="return alfanumerico(event)" onpaste="return false")
                                 td
-                                    input(type='text' ng-model='usuario.datos.email')
+                                    input(type='text' ng-model='usuario.datos.email' onkeypress="return alfanumerico(event)" onpaste="return false")
                             tr       
                                 td
-                                    input(type='text' ng-model='usuario.datos.noTelefono')
+                                    input(type='text' ng-model='usuario.datos.noTelefono' onkeypress="return alfanumerico(event)" onpaste="return false")
                                 td
-                                    input(type='text' ng-model='usuario.datos.programa.carrera')
+                                    input(type='text' ng-model='usuario.datos.programa.carrera' onkeypress="return alfanumerico(event)" onpaste="return false")
                                 td
-                                    input(type='text' ng-model='usuario.datos.programa.semestre')
+                                    input(type='text' ng-model='usuario.datos.programa.semestre' onkeypress="return alfanumerico(event)" onpaste="return false")
                                 td
                                     input.btn-dark(type='button' value='Agregar' ng-click='addUser()')
                                 td

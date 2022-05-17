@@ -20,7 +20,7 @@ block CONTENIDO
                                         .row.mt-3
                                             .col-12.col-sm-6
                                                 label Nombre
-                                                input.multisteps-form__input.form-control(type='text' placeholder='Nombre' id="name")
+                                                input.multisteps-form__input.form-control(type='text' placeholder='Nombre' id="name" onkeypress="return alfanumerico(event)" onpaste="return false")
                                             .col-12.col-sm-6.mt-3.mt-sm-0
                                                 label Tipo
                                                 select.form-control(name='choices-category' ng-model='tipo' id="type")
@@ -42,7 +42,7 @@ block CONTENIDO
                                             .col-sm-12
                                                 label.mt-4 Descripción
                                                 p.form-text.text-muted.text-xs.ms-1.d-inline (opcional)
-                                                input.multisteps-form__input.form-control(type="text"  placeholder='Descripcion' ng-model = 'grupo.descripcion' id="desc")
+                                                input.multisteps-form__input.form-control(type="text"  placeholder='Descripcion' ng-model = 'grupo.descripcion' id="desc" onkeypress="return alfanumerico(event)" onpaste="return false")
                                         .button-row.d-flex.mt-4
                                             button.btn.bg-gradient-dark.ms-auto.mb-0.js-btn-next(type='button' onclick="newEvent()") Registrar
                     .col-12.col-lg-8.m-auto(id="evento_detalles" style="display: none")
