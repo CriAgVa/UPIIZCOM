@@ -69,7 +69,7 @@ block CONTENIDO
                                             .row.mt-3
                                                 .containerAutoBox(ng-click='containerClicked()')
                                                     label Boleta
-                                                    input.multisteps-form__input.form-control(type='text' id='boleta' placeholder='Enter text' ng-keyup='fetchUsers()' ng-click='searchboxClicked($event)' ng-model='searchText')
+                                                    input.multisteps-form__input.form-control(type='text' id='boleta' placeholder='Enter text' ng-keyup='fetchUsers()' ng-click='searchboxClicked($event)' ng-model='searchText' onkeypress="return alfanumerico(event)" onpaste="return false")
                                                     ul(id='searchResult')
                                                         li(ng-click='setValue($index,$event)' ng-repeat="result in searchResult" )
                                                             a(href="#", ng-click="addUsuarioNuevo($index)")   
